@@ -74,6 +74,14 @@ class ConfirmActivity: AppCompatActivity() {
 
         }
 
+        var prefragment: Fragment? = null
+        val fm = supportFragmentManager
+        prefragment = NecroticFragment()
+        val ft: FragmentTransaction = fm.beginTransaction()
+        ft.replace(R.id.simpleFrameLayout, prefragment)
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+        ft.commit()
+
         /*necrotic.setOnClickListener{
             val intent = Intent(this, CanvasActivity::class.java)
             this.startActivity(intent)

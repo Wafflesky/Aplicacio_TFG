@@ -1,12 +1,15 @@
 package com.example.aplicacio
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.graphics.BlendMode.Companion.Color
 import androidx.core.view.get
+import org.bytedeco.libfreenect2.Frame.Color
 
 class AddNewInfoActivity: AppCompatActivity() {
 
@@ -20,6 +23,7 @@ class AddNewInfoActivity: AppCompatActivity() {
 
 
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_patient_info)
@@ -57,11 +61,16 @@ class AddNewInfoActivity: AppCompatActivity() {
 
         if(ageInput.text != null){
             confirmButton.setOnClickListener{
-                age = ageInput.text.toString().toIntOrNull()!!
-                bitmapSingleton.storeAge(age)
-                bitmapSingleton.storeGender(selectedGender)
-                val intent = Intent(this, ResultActivity::class.java)
-                this.startActivity(intent)
+                if(ageInput.text.toString().equals("")){
+                    ageInput.setBackgroundColor(R.color.Button_Red)
+                }
+                else {
+                    age = ageInput.text.toString().toInt()
+                    bitmapSingleton.storeAge(age)
+                    bitmapSingleton.storeGender(selectedGender)
+                    val intent = Intent(this, ResultActivity::class.java)
+                    this.startActivity(intent)
+                }
 
             }
         }
