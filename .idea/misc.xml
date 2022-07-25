@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.191" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/app/src/main/res/drawable/ic_launcher_background.xml" value="0.191" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/app/src/main/res/layout/activity_add_patient_info.xml" value="0.365625" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/app/src/main/res/layout/activity_addinfo.xml" value="0.365625" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/app/src/main/res/layout/activity_canvas.xml" value="0.5" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/app/src/main/res/layout/activity_confirm.xml" value="0.33" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/app/src/main/res/layout/activity_image.xml" value="0.22" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/app/src/main/res/layout/activity_result.xml" value="0.33" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/app/src/main/res/layout/activity_user.xml" value="0.17806484295845998" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/app/src/main/res/layout/activity_userinfo.xml" value="0.33" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/app/src/main/res/layout/activity_userlist.xml" value="0.17755825734549138" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/app/src/main/res/layout/content_main.xml" value="0.276268115942029" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/app/src/main/res/layout/fragment_grain.xml" value="0.2971014492753623" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/app/src/main/res/layout/fragment_home.xml" value="0.23020833333333332" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/app/src/main/res/layout/fragment_image_slide.xml" value="0.1" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/app/src/main/res/layout/fragment_infected.xml" value="0.2971014492753623" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/app/src/main/res/layout/fragment_necrotic.xml" value="0.2971014492753623" />
+        <entry key="..\:/Users/alexq/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_spinner_item.xml" value="0.338768115942029" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">Aplicacio</string>
+    <string name="imageText">Vols Utilitzar aquesta imatge per a la segmentació?</string>
+    <string name="Cancel">Cancel·lar</string>
+    <string name="Confirm">Confirmar</string>
+    <string name="clear_canvas">Clear Canvas</string>
+    <string name="dadesPersonals">Dades Personals</string>
+    <string name="Patient">Patient XXXX</string>
+    <string name="Age">Edat:</string>
+    <string name="Gender">Sexe:</string>
+    <string name="region_data">Dades de la Ferida</string>
+    <string name="region">Regio de la Ferida:</string>
+    <string name="perimeter">Perimetre de la Ferida:</string>
+    <string name="bruise_necro">Perimetre de la regió necrotica:</string>
+    <string name="bruise_grain">Perimetre regió granulosa:</string>
+    <string name="bruise_inf">Perimetre regió infectada:</string>
+    <string name="images">Images</string>
+    <string name="Repeat">Vols repetir alguna?</string>
+    <string name="existing">Pacient Existent</string>
+    <string name="necrotic">Necrotica</string>
+    <string name="grain">Granulosa</string>
+    <string name="infected">Infectada</string>
+    <string name="segmentation">Segmentar Foto Existent</string>
+    <string name="foto">Fer una Foto</string>
+    <string name="dades">Dades de Pacients</string>
+    <string name="HomeFragment">Home Fragment</string>
+    <string name="ImageFragment">Image</string>
+    <string name="UserFragment">User</string>
+    <string name="ResultFragment">Result</string>
+    <string name="CanvasFragment">Canvas</string>
+    <string name="UserDataFragment">User Data</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="BruiseInfo">Informació de la Ferida</string>
+    <string name="age">Edat</string>
+    <string name="gender">Sexe</string>
+    <string name="regio">Regió</string>
+    <string name="descripci_ferida">Descripció Ferida</string>
+
+    <string-array name="CanvasMode">
+        <item>Necrotica</item>
+        <item>Granulosa</item>
+        <item>Infectada</item>
+    </string-array>
+    <string-array name="Genders">
+        <item>Home</item>
+        <item>Dona</item>
+        <item>Altres</item>
+    </string-array>
+
+
+</resources>

@@ -1,0 +1,146 @@
+ @SuppressLint("DrawAllocation")
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        Canvas BackCanvas = new Canvas(bmp_Copy);
+
+        BackCanvas.drawBitmap(bmp_Copy,0f,0f,null);
+        canvas.drawBitmap(bmp_Copy,0f,0f,mPaint);
+        //canvas.drawPath(pathNou,redPaint);
+        //Canvas endCanvas = new Canvas(output);
+
+        if(isPaint){
+            freePaint.setStyle(Paint.Style.STROKE);
+            freePaint.setStrokeWidth(50f);
+            //canvas.drawBitmap(bmp_Copy,0f,0f,freePaint);
+            //canvas.drawPath(paintPath,freePaint);
+        }
+        else{
+            mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+            mPaint.setStrokeWidth(10f);
+            //canvas.drawBitmap(bmp_Copy,0f,0f,mPaint);
+            //canvas.drawPath(mPath,mPaint);
+        }
+            /*
+            if(mask){
+                canvas.drawPath(pathNou,bluePaint);
+            }
+            */
+        //canvas.drawPath(paintPath, freePaint);
+        //canvas.drawPath(mPath, mPaint);
+        //pintar end differents modes provoca un canvi de el que s'esta pintant. Seria millor mirar
+        // d'aplicar diferents paints o algo, fer la recerca per si es pot pintar un mateix espai amb diferents paints
+
+
+        //Sembla molt important pintar les coses aqui, fer un flag que em fagi la mascara aqui?
+        //if(mask){
+
+        //mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        //mPaint.setStyle(Paint.Style.STROKE);
+        //mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+
+        //mPath.setFillType(Path.FillType.INVERSE_EVEN_ODD);
+            /*
+                endCanvas.drawBitmap(bmp_Copy,0f,0f,null);
+                endCanvas.drawPath(mPath,mPaint);
+                endCanvas.drawPath(paintPath,freePaint);
+                canvas.drawPath(pathNou,mPaint);
+
+
+                canvas.drawBitmap(output,0f,0f,null);
+*/
+
+
+        //}
+            /*
+            if(mask){
+                //mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+                switch(paintMode){
+                    case 1:
+                        redPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+                        break;
+                    case 2:
+                        greenPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+                        break;
+                    case 3:
+                        bluePaint.setStyle(Paint.Style.FILL_AND_STROKE);
+                        break;
+                    case 4:
+                        erasePaint.setStyle(Paint.Style.STROKE);
+                }
+            }
+            else{
+                mPaint.setStyle(Paint.Style.STROKE);
+            }
+            */
+
+        //else{
+            /*
+            mPaint.setStyle(Paint.Style.STROKE);
+            mPaint.setXfermode(null);
+            int halfx = (int) width / 3;
+            int halfy = (int) height / 3;
+            canvas.drawBitmap(bmp_Copy, 0, 0, null);
+             */
+
+            /*
+            //if(!erase) {
+
+                switch (paintMode) {
+
+                    case 1:
+                        //Canvas grain = new Canvas();
+                        //redPaint = mPaint;
+
+                        //redPaint.setARGB(100, 255, 0, 0);
+                        canvas.drawPath(redPath, mPaint);
+
+                        break;
+                    case 2:
+                        //Canvas necro = new Canvas();
+                        //mPaint.setARGB(100, 0, 255, 0);
+                        canvas.drawPath(greenPath, mPaint);
+                        break;
+                    case 3:
+                        //Canvas infec = new Canvas();
+                        //mPaint.setARGB(100, 0, 0, 255);
+                        canvas.drawPath(bluePath, mPaint);
+                        break;
+
+                }
+
+                */
+
+        //canvas.drawPath(redPath,redPaint);
+        //canvas.drawPath(greenPath,greenPaint);
+        //canvas.drawPath(bluePath,bluePaint);
+
+            /*
+                if(paintMode == 4){
+                    erasePaint.setStyle(Paint.Style.STROKE);
+                    erasePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+                    canvas.drawPath(redPath,erasePaint);
+                }
+
+                */
+        //}
+        //else{
+
+        //mPaint.setARGB(0,0,0,0);
+        //mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+
+        //}
+
+
+        //canvas.drawPath(mPath, mPaint);
+        //canvas.drawPath(paintPath,freePaint);
+
+        //canvas.setBitmap(bmp_Paint);
+        // draw the mPath with the mPaint on the canvas when onDraw
+
+        //tempCanvas.drawBitmap(tmp, 0, 0, mPaint);
+        //}
+
+
+        //Mirar si aqui puc mostrar un opencV fet
+    }
