@@ -69,7 +69,9 @@ class ConfirmActivity: AppCompatActivity() {
         }
         cancelButton.setOnClickListener {
 
-            val intent = Intent(this, ResultActivity::class.java)
+
+            val intent = Intent(this, UserActivity::class.java)
+            intent.putExtra("existing", true)
             this.startActivity(intent)
 
         }

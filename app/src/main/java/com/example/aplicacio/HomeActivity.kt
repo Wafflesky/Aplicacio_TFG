@@ -76,7 +76,7 @@ class HomeActivity : AppCompatActivity() {
             }
             */
 
-            val intent = Intent(this, UserDataActivity::class.java)
+            val intent = Intent(this, UserActivity::class.java)
             this.startActivity(intent)
 
         }
@@ -151,6 +151,8 @@ class HomeActivity : AppCompatActivity() {
             val bitmap = imageUri?.let { getCapturedImage(it) }
             if (bitmap != null) {
                 bitmapSingleton.storeBitmap(bitmap)
+                bitmapSingleton.storeWidth(bitmap.width)
+                bitmapSingleton.storeHeight(bitmap.height)
             }
             val intent = Intent(this, ImageActivity::class.java)
             this.startActivity(intent)
@@ -163,19 +165,15 @@ class HomeActivity : AppCompatActivity() {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             bitmapSingleton.storeBitmap(imageBitmap)
+            bitmapSingleton.storeWidth(imageBitmap.width)
+            bitmapSingleton.storeHeight(imageBitmap.height)
             val intent = Intent(this, ImageActivity::class.java)
             this.startActivity(intent)
             //imageView.setImageBitmap(imageBitmap)
             //markButtonEnable(button3)
             //markButtonEnable(button4)
         }
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            val imageBitmap = data?.extras?.get("data") as Bitmap
-            bitmapSingleton.storeBitmap(imageBitmap)
-            val intent = Intent(this, ImageActivity::class.java)
-            this.startActivity(intent)
-            //imageView.setImageBitmap(imageBitmap)
-        }
+
 
     }
 }

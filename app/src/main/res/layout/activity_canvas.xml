@@ -50,6 +50,8 @@
         app:layout_constraintHorizontal_bias="0.437"
         app:layout_constraintStart_toEndOf="@+id/button1"
         android:textAlignment="center"
+        android:backgroundTint="@color/Button_Grey"
+        android:background="@color/Button_Red"
         tools:ignore="MissingConstraints" />
 
 

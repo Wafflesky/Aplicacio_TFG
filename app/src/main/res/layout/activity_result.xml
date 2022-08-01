@@ -30,7 +30,7 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        app:layout_constraintTop_toBottomOf="@+id/grid"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -188,51 +188,17 @@
         app:layout_constraintTop_toBottomOf="@+id/personal_gender"
         tools:ignore="MissingConstraints" />
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="364dp"
-        android:layout_height="158dp"
-        android:layout_marginTop="16dp"
+    <GridView
+        android:id="@+id/grid"
+        android:layout_width="0dp"
+        android:layout_height="165dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/images"
-        tools:ignore="MissingConstraints">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.gridlayout.widget.GridLayout
-                android:id="@+id/grid"
-                android:layout_width="wrap_content"
-                android:layout_height="165dp"
-                tools:ignore="MissingClass">
-
-                <ImageView
-                    android:id="@+id/Necro"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="TODO"
-                    tools:srcCompat="@tools:sample/avatars" />
-
-                <ImageView
-                    android:id="@+id/Grain"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="TODO"
-                    tools:srcCompat="@tools:sample/avatars" />
-
-                <ImageView
-                    android:id="@+id/Infec"
-                    android:layout_width="wrap_content"
-                    android:layout_height="129dp"
-                    android:contentDescription="TODO"
-                    app:srcCompat="@drawable/ic_launcher_background" />
-
-            </androidx.gridlayout.widget.GridLayout>
-        </LinearLayout>
-    </ScrollView>
+        android:numColumns="3"
+        tools:ignore="MissingClass" />
 
     <View
         android:id="@+id/divider5"

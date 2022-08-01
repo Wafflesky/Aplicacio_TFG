@@ -7,9 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.graphics.BlendMode.Companion.Color
-import androidx.core.view.get
-import org.bytedeco.libfreenect2.Frame.Color
+import com.google.firebase.database.FirebaseDatabase
+
 
 class AddNewInfoActivity: AppCompatActivity() {
 
@@ -18,7 +17,7 @@ class AddNewInfoActivity: AppCompatActivity() {
     private lateinit var ageInput: EditText
     private lateinit var gender: Spinner
     private lateinit var selectedGender: String
-    private lateinit var region: Spinner
+    private lateinit var region: EditText
     private lateinit var confirmButton: Button
 
 
@@ -27,6 +26,13 @@ class AddNewInfoActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_patient_info)
+
+        // Write a message to the database
+        // Write a message to the database
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("message")
+
+        myRef.setValue("Hello, World!")
 
         val inflater =
             LayoutInflater.from(this) // or (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -66,8 +72,8 @@ class AddNewInfoActivity: AppCompatActivity() {
                 }
                 else {
                     age = ageInput.text.toString().toInt()
-                    bitmapSingleton.storeAge(age)
-                    bitmapSingleton.storeGender(selectedGender)
+                    //bitmapSingleton.storeAge(age)
+                    //bitmapSingleton.storeGender(selectedGender)
                     val intent = Intent(this, ResultActivity::class.java)
                     this.startActivity(intent)
                 }

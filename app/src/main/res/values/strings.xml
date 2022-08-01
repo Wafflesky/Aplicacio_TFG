@@ -36,6 +36,11 @@
     <string name="gender">Sexe</string>
     <string name="regio">Regió</string>
     <string name="descripci_ferida">Descripció Ferida</string>
+    <string name="DoB">Data Naixement:</string>
+    <string name="DoB_placeholder">Date Placeholder</string>
+    <string name="nhc">NHC:</string>
+    <string name="nhc_placeholder">NHC Placeholder</string>
+    <string name="bruise_region">Bruise Region</string>
 
     <string-array name="CanvasMode">
         <item>Necrotica</item>

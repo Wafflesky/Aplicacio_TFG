@@ -190,12 +190,15 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextNumber"
         tools:ignore="MissingConstraints" />
 
-    <Spinner
+    <EditText
         android:id="@+id/spinnerBruise"
         android:layout_width="244dp"
-        android:layout_height="31dp"
+        android:layout_height="41dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="28dp"
+        android:autofillHints=""
+        android:ems="8"
+        android:hint="@string/bruise_region"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
         tools:ignore="MissingConstraints" />

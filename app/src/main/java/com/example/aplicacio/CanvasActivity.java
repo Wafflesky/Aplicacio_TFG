@@ -2,6 +2,7 @@ package com.example.aplicacio;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+
+import com.google.firebase.database.collection.LLRBNode;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
@@ -51,6 +54,7 @@ public class CanvasActivity extends Activity implements AdapterView.OnItemSelect
 
         customCanvas = (CanvasView) findViewById(R.id.signature_canvas);
         spinner = findViewById(R.id.spinner);
+        spinner.setBackgroundColor(Color.RED);
 
         spinner.setOnItemSelectedListener(this);
 
@@ -71,6 +75,8 @@ public class CanvasActivity extends Activity implements AdapterView.OnItemSelect
         // Set the ArrayAdapter (ad) data on the
         // Spinner which binds data to spinner
         spinner.setAdapter(ad);
+
+
         System.out.println(modes);
 
     }
@@ -109,6 +115,19 @@ public class CanvasActivity extends Activity implements AdapterView.OnItemSelect
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         System.out.println(modes[position]);
         customCanvas.changeMode(modes[position]);
+        switch(position){
+
+            case 1:
+                spinner.setBackgroundColor(Color.RED);
+                break;
+            case 2:
+                spinner.setBackgroundColor(Color.GREEN);
+                break;
+            case 3:
+                spinner.setBackgroundColor(Color.BLUE);
+                break;
+
+        }
 
     }
 

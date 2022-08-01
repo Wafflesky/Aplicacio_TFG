@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "326664461929",
+    "project_id": "alex-tfg",
+    "storage_bucket": "alex-tfg.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326664461929:android:1eeb5c3faf453490210cf8",
+        "android_client_info": {
+          "package_name": "com.example.aplicacio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "326664461929-tmmja1fle80rqu251g8qeh7pl7m45to2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmjTH-99VhHSfVpifJmk42knkd-VqfQho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "326664461929-tmmja1fle80rqu251g8qeh7pl7m45to2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

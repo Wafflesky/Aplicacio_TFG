@@ -8,6 +8,8 @@ object bitmapSingleton{
         println("Singleton class invoked.")
     }
 
+    private lateinit var originalWidth: Number
+    private lateinit var originalHeight: Number
     private lateinit var bitmap: Bitmap
     private lateinit var result: Bitmap
     private lateinit var grain: Bitmap
@@ -45,6 +47,14 @@ object bitmapSingleton{
         this.gender = gender
     }
 
+    fun storeWidth(originalWidth: Number){
+        this.originalWidth = originalWidth
+    }
+
+    fun storeHeight(originalHeight: Number){
+        this.originalHeight = originalHeight
+    }
+
     fun storeLocation(location: String){
 
         this.location = location
@@ -76,7 +86,7 @@ object bitmapSingleton{
         return this.age
     }
 
-    fun getgGender(): String{
+    fun getGender(): String{
 
         return this.gender
 
@@ -85,6 +95,17 @@ object bitmapSingleton{
     fun getLocation(): String{
 
         return this.location
+
+    }
+
+    fun getWidth(): Number{
+
+        return this.originalWidth
+
+    }
+    fun getHeight(): Number{
+
+        return this.originalHeight
 
     }
 
