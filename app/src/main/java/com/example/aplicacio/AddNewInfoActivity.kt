@@ -41,7 +41,6 @@ class AddNewInfoActivity: AppCompatActivity() {
 
         patient = findViewById(R.id.patient3)
         ageInput = findViewById(R.id.editTextNumber)
-        gender = findViewById(R.id.spinnerAge)
         val stringGenders = resources.getStringArray(R.array.Genders)
         val adapter = ArrayAdapter(
             this,
