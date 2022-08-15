@@ -422,6 +422,7 @@
             tools:ignore="MissingConstraints">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/bruiseDesc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/descripci_ferida" />
@@ -613,6 +614,7 @@
             tools:ignore="MissingConstraints">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/patologies"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/patologies_del_pacient" />

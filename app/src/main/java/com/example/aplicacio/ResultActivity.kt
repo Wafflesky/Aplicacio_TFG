@@ -47,11 +47,11 @@ class ResultActivity : AppCompatActivity() {
         //val originalHeight = bitmapSingleton.getHeight()
 
         confirmButton = findViewById(R.id.Confirm_info_button)
-        patient = findViewById(R.id.patient)
-        age = findViewById(R.id.personal_age)
-        gender = findViewById(R.id.personal_gender)
+        //patient = findViewById(R.id.patient)
+        //age = findViewById(R.id.personal_age)
+        //gender = findViewById(R.id.personal_gender)
 
-        gridView = findViewById(R.id.grid)
+        //gridView = findViewById(R.id.grid)
 
 
         necroticBitmap = bitmapSingleton.getNecroticBitmap()
@@ -74,9 +74,9 @@ class ResultActivity : AppCompatActivity() {
         patientAge = 67
         patiengGender = "Female"
 
-        patient.setText("Patient 0001")
-        age.setText(patientAge.toString())
-        gender.setText(patiengGender)
+        //patient.setText("Patient 0001")
+        //age.setText(patientAge.toString())
+        //gender.setText(patiengGender)
 
         val images = mutableListOf<Bitmap>()
         images.add(necroticBitmap)
@@ -89,18 +89,18 @@ class ResultActivity : AppCompatActivity() {
         val courseAdapter = GridAdapter(images, context = this)
 
         // on below line we are setting adapter to our grid view.
-        gridView.adapter = courseAdapter
+        //gridView.adapter = courseAdapter
 
         // on below line we are adding on item
         // click listener for our grid view.
-        gridView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+        //gridView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
             // inside on click method we are simply displaying
             // a toast message with course name.
             //Toast.makeText(
                 //applicationContext, images[position].courseName + " selected",
                 //Toast.LENGTH_SHORT
             //).show()
-        }
+        //}
 
 
         confirmButton.setOnClickListener{

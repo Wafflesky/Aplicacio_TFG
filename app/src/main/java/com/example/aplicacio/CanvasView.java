@@ -233,12 +233,15 @@ public class CanvasView extends View{
             switch(paintMode){
                 case "Necrotica":
                     redPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+                    mask = false;
                     break;
                 case "Granulosa":
                     greenPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+                    mask = false;
                     break;
                 case "Infectada":
                     bluePaint.setStyle(Paint.Style.FILL_AND_STROKE);
+                    mask = false;
                     break;
                     /*
                 case 4:
@@ -414,6 +417,15 @@ public class CanvasView extends View{
         Canvas blueCanvas = new Canvas(blueBitmap);
 
 
+
+        Paint newRedPaint = redPaint;
+        Paint newGreenPaint = greenPaint;
+        Paint newBluePaint = bluePaint;
+
+        Path newRedPath = redPath;
+        Path newGreenPath = greenPath;
+        Path newBluePath = bluePath;
+
         //freePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OVER));
         //freePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
         //mPaint.setStyle(Paint.Style.STROKE);
@@ -449,9 +461,17 @@ public class CanvasView extends View{
         redCanvas.drawBitmap(bmp_Copy,0f,0f,null);
         greenCanvas.drawBitmap(bmp_Copy,0f,0f,null);
         blueCanvas.drawBitmap(bmp_Copy,0f,0f,null);
-        redCanvas.drawPath(redPath,redPaint);
-        greenCanvas.drawPath(greenPath,greenPaint);
-        blueCanvas.drawPath(bluePath,bluePaint);
+
+        newRedPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));//TODO: Aixi em marco el que es important
+        newRedPath.setFillType(Path.FillType.INVERSE_WINDING);//TODO: Aixi em marco el que es important
+        newGreenPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));//TODO: Aixi em marco el que es important
+        newGreenPath.setFillType(Path.FillType.INVERSE_WINDING);//TODO: Aixi em marco el que es important
+        newBluePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));//TODO: Aixi em marco el que es important
+        newBluePath.setFillType(Path.FillType.INVERSE_WINDING);//TODO: Aixi em marco el que es important
+
+        redCanvas.drawPath(newRedPath,newRedPaint);
+        greenCanvas.drawPath(newGreenPath,newGreenPaint);
+        blueCanvas.drawPath(newBluePath,newBluePaint);
         //endCanvas.drawPath(paintPath,freePaint);
         //endCanvas.drawPath(mPath,freePaint);
         //endCanvas.drawPath(mPath,mPaint);//TODO: Aixi em marco el que es important
@@ -460,6 +480,8 @@ public class CanvasView extends View{
         //endCanvas.drawPath(paintPath,freePaint);
         //canvas.drawBitmap(output,0f,0f,null);//TODO: Aixi em marco el que es important
 
+        //TODO: L'unica idea que tinc es que els canvas transparents estigui per sota del canvas pintat normal
+        // com si fos una copia
 
         bitmapSingleton.INSTANCE.storeNecroticBitmap(redBitmap);
         bitmapSingleton.INSTANCE.storeGrainBitmap(greenBitmap);
@@ -467,6 +489,8 @@ public class CanvasView extends View{
 
         //bitmapSingleton.INSTANCE.storeCanvasBitmap(output);//TODO: Aixi em marco el que es important
         //output.recycle();
+        bmp_Copy.recycle();
+
     }
 /*
     public void changeMode() {

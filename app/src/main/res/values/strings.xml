@@ -68,6 +68,10 @@
     <string name="regio_de_la_ferida">Regio de la Ferida</string>
     <string name="tractamentInput">Tractament</string>
     <string name="numero_historial_clinic">Numero Historial Clinic</string>
+    <string name="numero_historial">Numero Historial</string>
+    <string name="escala_barthel_text">Escala BARTHEL</string>
+    <string name="resultat">Resultat</string>
+    <string name="data_naixement">Data Naixement</string>
 
     <string-array name="CanvasMode">
         <item>Necrotica</item>
@@ -79,6 +83,64 @@
         <item>Dona</item>
         <item>Altres</item>
     </string-array>
+    <string-array name="Estat_mental">
+        <item>Orientat</item>
+        <item>Desorientat</item>
+        <item>Letargic</item>
+        <item>Comatos</item>
+    </string-array>
+    <string-array name="Movilitat">
+        <item>Completa</item>
+        <item>Lleugera limitació</item>
+        <item>Limitació Important</item>
+        <item>Inmòbil</item>
+    </string-array>
+    <string-array name="Incontinencia">
+        <item>No</item>
+        <item>Ocasional</item>
+        <item>Habitual</item>
+        <item>Freqüent</item>
+    </string-array>
+    <string-array name="Nutrició">
+        <item>Correcta</item>
+        <item>Ocasional</item>
+        <item>Incompleta</item>
+        <item>No ingesta</item>
+    </string-array>
+    <string-array name="Activitat">
+        <item>Deambula</item>
+        <item>Amb ajuda</item>
+        <item>Sempre amb Ajuda</item>
+        <item>No deambula</item>
+    </string-array>
+    <string-array name="Barthel_2_option">
+        <item>Independent</item>
+        <item>Dependent</item>
+    </string-array>
+    <string-array name="Barthel_3_option">
+        <item>Independent</item>
+        <item>Necessita Ajuda</item>
+        <item>Dependent</item>
+    </string-array>
+    <string-array name="Barthel_3_option_2">
+        <item>Continent</item>
+        <item>Accidents ocasionals</item>
+        <item>Incontinent</item>
+    </string-array>
+    <string-array name="Barthel_4_option_1">
+        <item>Independent</item>
+        <item>Minima ajuda</item>
+        <item>Gran ajuda</item>
+        <item>Dependent</item>
+    </string-array>
+    <string-array name="Barthel_4_option_2">
+        <item>Independent</item>
+        <item>Necessita Ajuda</item>
+        <item>Cadira de Rodes</item>
+        <item>Dependent</item>
+    </string-array>
+
+
 
 
 </resources>

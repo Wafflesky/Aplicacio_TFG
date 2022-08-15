@@ -3,16 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/Aplicacio_TFG/app/src/main/res/layout/activity_add_patient_info.xml" value="0.22657657657657657" />
-        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/Aplicacio_TFG/app/src/main/res/layout/activity_addinfo.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/Aplicacio_TFG/app/src/main/res/layout/activity_add_patient_info.xml" value="0.25" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/Aplicacio_TFG/app/src/main/res/layout/activity_addinfo.xml" value="0.1" />
         <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/Aplicacio_TFG/app/src/main/res/layout/activity_canvas.xml" value="0.18" />
         <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/Aplicacio_TFG/app/src/main/res/layout/activity_confirm.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/Aplicacio_TFG/app/src/main/res/layout/activity_image.xml" value="0.309375" />
         <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/Aplicacio_TFG/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/Aplicacio_TFG/app/src/main/res/layout/activity_result.xml" value="0.309375" />
-        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/Aplicacio_TFG/app/src/main/res/layout/activity_userinfo.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/Aplicacio_TFG/app/src/main/res/layout/activity_userinfo.xml" value="0.3269856014862982" />
         <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/Aplicacio_TFG/app/src/main/res/layout/activity_userlist.xml" value="0.309375" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/Aplicacio_TFG/app/src/main/res/layout/content_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/Aplicacio_TFG/app/src/main/res/layout/fragment_barthel.xml" value="0.5474339035769828" />
         <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/Aplicacio_TFG/app/src/main/res/layout/fragment_grain.xml" value="0.309375" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/Aplicacio_TFG/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/Aplicacio_TFG/app/src/main/res/layout/fragment_image_slide.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/Aplicacio_TFG/app/src/main/res/layout/fragment_images_grid.xml" value="0.25384615384615383" />
         <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/Aplicacio_TFG/app/src/main/res/layout/fragment_infected.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/alexq/AndroidStudioProjects/Aplicacio/Aplicacio_TFG/app/src/main/res/layout/fragment_necrotic.xml" value="0.36666666666666664" />
