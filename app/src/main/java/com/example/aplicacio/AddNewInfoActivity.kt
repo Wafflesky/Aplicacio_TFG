@@ -17,7 +17,7 @@ class AddNewInfoActivity: AppCompatActivity() {
     private lateinit var age: Number
     private lateinit var dob: EditText
     private lateinit var gender: Spinner
-    private lateinit var selectedGender: String
+
     private lateinit var confirmButton: Button
     private lateinit var NHC: EditText
     private lateinit var name: EditText
@@ -36,6 +36,13 @@ class AddNewInfoActivity: AppCompatActivity() {
     private lateinit var nutritionSpinner: Spinner
     private lateinit var activitySpinner: Spinner
 
+    private lateinit var selectedStatus: String
+    private lateinit var selectedMobility: String
+    private lateinit var selectedIncontinency: String
+    private lateinit var selectedNutrition: String
+    private lateinit var selectedActivity: String
+    private var emina = intArrayOf(0,0,0,0,0)
+
     private lateinit var eatSpinner: Spinner
     private lateinit var bathSpinner: Spinner
     private lateinit var dressSpinner: Spinner
@@ -47,7 +54,18 @@ class AddNewInfoActivity: AppCompatActivity() {
     private lateinit var deambulateSpinner: Spinner
     private lateinit var stairSpinner: Spinner
 
+    private lateinit var selectedEat: String
+    private lateinit var selectedBath: String
+    private lateinit var selectedDress: String
+    private lateinit var selectedTiding: String
+    private lateinit var selectedDeposition: String
+    private lateinit var selectedBladder: String
+    private lateinit var selectedBathroom: String
+    private lateinit var selectedMove: String
+    private lateinit var selectedDeambulate: String
+    private lateinit var selectedStair: String
 
+    private var barthel = intArrayOf(0,0,0,0,0,0,0,0,0,0)
 
 
     @SuppressLint("ResourceAsColor")
@@ -115,9 +133,38 @@ class AddNewInfoActivity: AppCompatActivity() {
                     blockIntent = true
                 }
                 if(!blockIntent){
-                   //age = ageInput.text.toString().toInt()
-                    //bitmapSingleton.storeAge(age)
-                    //bitmapSingleton.storeGender(selectedGender)
+
+                    bitmapSingleton.storeNHC(NHC.text.toString().toInt())
+                    bitmapSingleton.storeDoB(dob.text.toString())
+                    bitmapSingleton.storeName(name.text.toString())
+                    bitmapSingleton.storePatologies(patologies.text.toString())
+                    bitmapSingleton.storeRegion(region.text.toString())
+                    bitmapSingleton.storeTreatment(treatment.text.toString())
+                    bitmapSingleton.storeDesc(bruiseDescription.text.toString())
+
+                    bitmapSingleton.storeMental(selectedStatus)
+                    bitmapSingleton.storeMobility(selectedMobility)
+                    bitmapSingleton.storeIncontinceny(selectedIncontinency)
+                    bitmapSingleton.storeNutrition(selectedNutrition)
+                    bitmapSingleton.storeActivity(selectedActivity)
+
+                    val resultEmina = emina.sum()
+                    bitmapSingleton.storeEmina(resultEmina)
+
+                    bitmapSingleton.storeEat(selectedEat)
+                    bitmapSingleton.storeBath(selectedBath)
+                    bitmapSingleton.storeDress(selectedDress)
+                    bitmapSingleton.storeTiding(selectedTiding)
+                    bitmapSingleton.storeDeposition(selectedDeposition)
+                    bitmapSingleton.storeBladder(selectedBladder)
+                    bitmapSingleton.storeBathroom(selectedBathroom)
+                    bitmapSingleton.storeMove(selectedMove)
+                    bitmapSingleton.storeDeambulate(selectedDeambulate)
+                    bitmapSingleton.storeStair(selectedStair)
+
+                    val resultBarthel = barthel.sum()
+                    bitmapSingleton.storeBarthel(resultBarthel)
+
                     val intent = Intent(this, ResultActivity::class.java)
                     this.startActivity(intent)
                 }
@@ -245,7 +292,10 @@ class AddNewInfoActivity: AppCompatActivity() {
                 parent: AdapterView<*>,
                 view: View, position: Int, id: Long
             ) {
-                selectedGender = stringStatus[position].toString()
+                selectedStatus = stringStatus[position].toString()
+
+                emina[0] = position
+
             }
 
 
@@ -259,7 +309,9 @@ class AddNewInfoActivity: AppCompatActivity() {
                 parent: AdapterView<*>,
                 view: View, position: Int, id: Long
             ) {
-                selectedGender = stringMobility[position].toString()
+                selectedMobility = stringMobility[position].toString()
+
+                emina[1] = position
             }
 
 
@@ -273,7 +325,9 @@ class AddNewInfoActivity: AppCompatActivity() {
                 parent: AdapterView<*>,
                 view: View, position: Int, id: Long
             ) {
-                selectedGender = stringIncontinent[position].toString()
+                selectedIncontinency = stringIncontinent[position].toString()
+
+                emina[2] = position
             }
 
 
@@ -287,7 +341,9 @@ class AddNewInfoActivity: AppCompatActivity() {
                 parent: AdapterView<*>,
                 view: View, position: Int, id: Long
             ) {
-                selectedGender = stringNutrition[position].toString()
+                selectedNutrition = stringNutrition[position].toString()
+
+                emina[3] = position
             }
 
 
@@ -301,7 +357,9 @@ class AddNewInfoActivity: AppCompatActivity() {
                 parent: AdapterView<*>,
                 view: View, position: Int, id: Long
             ) {
-                selectedGender = stringActivity[position].toString()
+                selectedActivity = stringActivity[position].toString()
+
+                emina[4] = position
             }
 
 
@@ -316,7 +374,15 @@ class AddNewInfoActivity: AppCompatActivity() {
                 parent: AdapterView<*>,
                 view: View, position: Int, id: Long
             ) {
-                selectedGender = stringEat[position].toString()
+                selectedEat = stringEat[position].toString()
+
+                when (position) {
+                    0 -> barthel[0] = position
+                    1 -> barthel[0] = 5
+                    2 -> barthel[0] = 10
+
+                }
+
             }
 
 
@@ -330,7 +396,13 @@ class AddNewInfoActivity: AppCompatActivity() {
                 parent: AdapterView<*>,
                 view: View, position: Int, id: Long
             ) {
-                selectedGender = stringBath[position].toString()
+                selectedBath = stringBath[position].toString()
+
+                when (position) {
+                    0 -> barthel[1] = position
+                    1 -> barthel[1] = 5
+                }
+
             }
 
 
@@ -344,7 +416,14 @@ class AddNewInfoActivity: AppCompatActivity() {
                 parent: AdapterView<*>,
                 view: View, position: Int, id: Long
             ) {
-                selectedGender = stringDress[position].toString()
+                selectedDress = stringDress[position].toString()
+
+                when (position) {
+                    0 -> barthel[2] = position
+                    1 -> barthel[2] = 5
+                    2 -> barthel[2] = 10
+                }
+
             }
 
 
@@ -358,7 +437,13 @@ class AddNewInfoActivity: AppCompatActivity() {
                 parent: AdapterView<*>,
                 view: View, position: Int, id: Long
             ) {
-                selectedGender = stringTiding[position].toString()
+                selectedTiding = stringTiding[position].toString()
+
+                when (position) {
+                    0 -> barthel[3] = position
+                    1 -> barthel[3] = 5
+                }
+
             }
 
 
@@ -372,7 +457,13 @@ class AddNewInfoActivity: AppCompatActivity() {
                 parent: AdapterView<*>,
                 view: View, position: Int, id: Long
             ) {
-                selectedGender = stringDeposition[position].toString()
+                selectedDeposition = stringDeposition[position].toString()
+
+                when (position) {
+                    0 -> barthel[4] = position
+                    1 -> barthel[4] = 5
+                    2 -> barthel[4] = 10
+                }
             }
 
 
@@ -386,7 +477,13 @@ class AddNewInfoActivity: AppCompatActivity() {
                 parent: AdapterView<*>,
                 view: View, position: Int, id: Long
             ) {
-                selectedGender = stringMiccio[position].toString()
+                selectedBladder = stringMiccio[position].toString()
+
+                when (position) {
+                    0 -> barthel[5] = position
+                    1 -> barthel[5] = 5
+                    2 -> barthel[5] = 10
+                }
             }
 
 
@@ -400,7 +497,13 @@ class AddNewInfoActivity: AppCompatActivity() {
                 parent: AdapterView<*>,
                 view: View, position: Int, id: Long
             ) {
-                selectedGender = stringBathroom[position].toString()
+                selectedBathroom = stringBathroom[position].toString()
+
+                when (position) {
+                    0 -> barthel[6] = position
+                    1 -> barthel[6] = 5
+                    2 -> barthel[6] = 10
+                }
             }
 
 
@@ -414,7 +517,14 @@ class AddNewInfoActivity: AppCompatActivity() {
                 parent: AdapterView<*>,
                 view: View, position: Int, id: Long
             ) {
-                selectedGender = stringMove[position].toString()
+                selectedMove = stringMove[position].toString()
+
+                when (position) {
+                    0 -> barthel[7] = position
+                    1 -> barthel[7] = 5
+                    2 -> barthel[7] = 10
+                    3 -> barthel[7] = 15
+                }
             }
 
 
@@ -428,7 +538,15 @@ class AddNewInfoActivity: AppCompatActivity() {
                 parent: AdapterView<*>,
                 view: View, position: Int, id: Long
             ) {
-                selectedGender = stringDeambulate[position].toString()
+                selectedDeambulate = stringDeambulate[position].toString()
+
+                when (position) {
+                    0 -> barthel[8] = position
+                    1 -> barthel[8] = 5
+                    2 -> barthel[8] = 10
+                    3 -> barthel[8] = 15
+                }
+
             }
 
 
@@ -442,7 +560,14 @@ class AddNewInfoActivity: AppCompatActivity() {
                 parent: AdapterView<*>,
                 view: View, position: Int, id: Long
             ) {
-                selectedGender = stringStair[position].toString()
+                selectedStair = stringStair[position].toString()
+
+                when (position) {
+                    0 -> barthel[9] = position
+                    1 -> barthel[9] = 5
+                    2 -> barthel[9] = 10
+                }
+
             }
 
 

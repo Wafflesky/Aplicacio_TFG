@@ -57,9 +57,9 @@ class ConfirmActivity: AppCompatActivity() {
         tabLayout = findViewById(R.id.Tab)
         //image = findViewById(R.id.necroticImage)
 
-        necroticBitmap = bitmapSingleton.getNecroticBitmap()
-        grainBitmap = bitmapSingleton.getGrainBitmap()
-        infectedBitmap = bitmapSingleton.getInfectedBitmap()
+        necroticBitmap = bitmapSingleton.getSelectedNecroticBitmap()
+        grainBitmap = bitmapSingleton.getSelectedGrainBitmap()
+        infectedBitmap = bitmapSingleton.getSelectedInfectedBitmap()
 
         confirmButton.setOnClickListener {
 

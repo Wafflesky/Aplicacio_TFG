@@ -25,7 +25,7 @@ class NecroticFragment: Fragment() {
         )
 
         val imageView: ImageView = rootView.findViewById<View>(R.id.Necrotic_Tab) as ImageView
-        val necroticBitmap: Bitmap = bitmapSingleton.getNecroticBitmap()
+        val necroticBitmap: Bitmap = bitmapSingleton.getSelectedNecroticBitmap()
         imageView.setImageBitmap(necroticBitmap)
 
         return rootView

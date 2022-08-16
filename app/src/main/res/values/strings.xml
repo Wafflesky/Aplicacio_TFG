@@ -38,7 +38,7 @@
     <string name="descripci_ferida">Descripció Ferida</string>
     <string name="DoB">Data Naixement:</string>
     <string name="DoB_placeholder">Date Placeholder</string>
-    <string name="nhc">NHC:</string>
+    <string name="nhc">NHC</string>
     <string name="nhc_placeholder">NHC Placeholder</string>
     <string name="bruise_region">Bruise Region</string>
     <string name="escala_emina">Escala EMINA</string>
@@ -139,8 +139,4 @@
         <item>Cadira de Rodes</item>
         <item>Dependent</item>
     </string-array>
-
-
-
-
 </resources>

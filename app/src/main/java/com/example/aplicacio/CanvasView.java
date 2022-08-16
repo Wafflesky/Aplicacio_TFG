@@ -39,9 +39,15 @@ public class CanvasView extends View{
     public int height;
 
     private Bitmap mBitmap;
+
     private Bitmap redBitmap;
     private Bitmap greenBitmap;
     private Bitmap blueBitmap;
+
+    private Bitmap newRedBitmap;
+    private Bitmap newGreenBitmap;
+    private Bitmap newBlueBitmap;
+
     private Bitmap bmp_Copy;
     private Bitmap output;
 
@@ -175,6 +181,14 @@ public class CanvasView extends View{
                 h, Bitmap.Config.ARGB_8888);
         blueBitmap = Bitmap.createBitmap(w,
                 h, Bitmap.Config.ARGB_8888);
+
+        newRedBitmap = Bitmap.createBitmap(w,
+                h, Bitmap.Config.ARGB_8888);
+        newGreenBitmap = Bitmap.createBitmap(w,
+                h, Bitmap.Config.ARGB_8888);
+        newBlueBitmap = Bitmap.createBitmap(w,
+                h, Bitmap.Config.ARGB_8888);
+
         // your Canvas will draw onto the defined Bitmap
         //mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         mBitmap = bitmapSingleton.INSTANCE.getBitmap1();
@@ -189,9 +203,8 @@ public class CanvasView extends View{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        //Canvas BackCanvas = new Canvas(bmp_Copy);
+        Canvas BackCanvas = new Canvas(bmp_Copy);
 
-        //BackCanvas.drawBitmap(bmp_Copy,0f,0f,null);
         canvas.drawBitmap(bmp_Copy,0f,0f,null);
         //canvas.drawPath(pathNou,redPaint);
         //Canvas endCanvas = new Canvas(output);
@@ -416,6 +429,9 @@ public class CanvasView extends View{
         Canvas greenCanvas = new Canvas(greenBitmap);
         Canvas blueCanvas = new Canvas(blueBitmap);
 
+        Canvas newRedCanvas = new Canvas(newRedBitmap);
+        Canvas newGreenCanvas = new Canvas(newGreenBitmap);
+        Canvas newBlueCanvas = new Canvas(newBlueBitmap);
 
 
         Paint newRedPaint = redPaint;
@@ -442,7 +458,7 @@ public class CanvasView extends View{
         //freePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OVER));
         //DST OVER ens deixa amb la zona vermella per afora
 
-        freePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.XOR));
+        //freePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.XOR));
 
             /*
             redCanvas.drawBitmap(bmp_Copy,0,0,null);
@@ -462,6 +478,18 @@ public class CanvasView extends View{
         greenCanvas.drawBitmap(bmp_Copy,0f,0f,null);
         blueCanvas.drawBitmap(bmp_Copy,0f,0f,null);
 
+        newRedCanvas.drawBitmap(bmp_Copy,0f,0f,null);
+        newGreenCanvas.drawBitmap(bmp_Copy,0f,0f,null);
+        newBlueCanvas.drawBitmap(bmp_Copy,0f,0f,null);
+
+        redCanvas.drawPath(redPath,redPaint);
+        greenCanvas.drawPath(greenPath, greenPaint);
+        blueCanvas.drawPath(bluePath,bluePaint);
+
+        bitmapSingleton.INSTANCE.storeSelectedNecroticBitmap(redBitmap);
+        bitmapSingleton.INSTANCE.storeSelectedGrainBitmap(greenBitmap);
+        bitmapSingleton.INSTANCE.storeSelectedInfectedBitmap(blueBitmap);
+
         newRedPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));//TODO: Aixi em marco el que es important
         newRedPath.setFillType(Path.FillType.INVERSE_WINDING);//TODO: Aixi em marco el que es important
         newGreenPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));//TODO: Aixi em marco el que es important
@@ -469,9 +497,9 @@ public class CanvasView extends View{
         newBluePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));//TODO: Aixi em marco el que es important
         newBluePath.setFillType(Path.FillType.INVERSE_WINDING);//TODO: Aixi em marco el que es important
 
-        redCanvas.drawPath(newRedPath,newRedPaint);
-        greenCanvas.drawPath(newGreenPath,newGreenPaint);
-        blueCanvas.drawPath(newBluePath,newBluePaint);
+        newRedCanvas.drawPath(newRedPath,newRedPaint);
+        newGreenCanvas.drawPath(newGreenPath,newGreenPaint);
+        newBlueCanvas.drawPath(newBluePath,newBluePaint);
         //endCanvas.drawPath(paintPath,freePaint);
         //endCanvas.drawPath(mPath,freePaint);
         //endCanvas.drawPath(mPath,mPaint);//TODO: Aixi em marco el que es important
@@ -483,13 +511,19 @@ public class CanvasView extends View{
         //TODO: L'unica idea que tinc es que els canvas transparents estigui per sota del canvas pintat normal
         // com si fos una copia
 
-        bitmapSingleton.INSTANCE.storeNecroticBitmap(redBitmap);
-        bitmapSingleton.INSTANCE.storeGrainBitmap(greenBitmap);
-        bitmapSingleton.INSTANCE.storeInfectedBitmap(blueBitmap);
+        bitmapSingleton.INSTANCE.storeNecroticBitmap(newRedBitmap);
+        bitmapSingleton.INSTANCE.storeGrainBitmap(newGreenBitmap);
+        bitmapSingleton.INSTANCE.storeInfectedBitmap(newBlueBitmap);
 
         //bitmapSingleton.INSTANCE.storeCanvasBitmap(output);//TODO: Aixi em marco el que es important
         //output.recycle();
-        bmp_Copy.recycle();
+
+        newRedPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));//TODO: Aixi em marco el que es important
+        newRedPath.setFillType(Path.FillType.EVEN_ODD);//TODO: Aixi em marco el que es important
+        newGreenPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));//TODO: Aixi em marco el que es important
+        newGreenPath.setFillType(Path.FillType.EVEN_ODD);//TODO: Aixi em marco el que es important
+        newBluePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));//TODO: Aixi em marco el que es important
+        newBluePath.setFillType(Path.FillType.EVEN_ODD);//TODO: Aixi em marco el que es important
 
     }
 /*

@@ -14,9 +14,9 @@ android:layout_height="match_parent">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:text="@string/patologies"
+        android:text="@string/descripci_ferida"
         android:textAlignment="center"
-        android:textSize="16sp"
+        android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
@@ -25,7 +25,7 @@ android:layout_height="match_parent">
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_age3"
+        android:id="@+id/mental"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -36,80 +36,80 @@ android:layout_height="match_parent">
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_age4"
+        android:id="@+id/mobility"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="132dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personal_age3"
+        app:layout_constraintTop_toBottomOf="@+id/mental"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_age5"
+        android:id="@+id/incontinency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="132dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personal_age4"
+        app:layout_constraintTop_toBottomOf="@+id/mobility"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_age6"
+        android:id="@+id/nutricio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="132dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personal_age5"
+        app:layout_constraintTop_toBottomOf="@+id/incontinency"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_age7"
+        android:id="@+id/activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="132dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personal_age6"
+        app:layout_constraintTop_toBottomOf="@+id/nutricio"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_age8"
+        android:id="@+id/resultatEmina"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="132dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personal_age7"
+        app:layout_constraintTop_toBottomOf="@+id/activity"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_age9"
+        android:id="@+id/deposicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="120dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personal_age10"
+        app:layout_constraintTop_toBottomOf="@+id/arreglar"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_age10"
+        android:id="@+id/arreglar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="120dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personal_age13"
+        app:layout_constraintTop_toBottomOf="@+id/vestirse"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -128,7 +128,7 @@ android:layout_height="match_parent">
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_age11"
+        android:id="@+id/menjar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
@@ -184,84 +184,84 @@ android:layout_height="match_parent">
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_age12"
+        android:id="@+id/bany"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="120dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personal_age11"
+        app:layout_constraintTop_toBottomOf="@+id/menjar"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_age13"
+        android:id="@+id/vestirse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="120dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personal_age12"
+        app:layout_constraintTop_toBottomOf="@+id/bany"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_age14"
+        android:id="@+id/miccio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="120dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personal_age9"
+        app:layout_constraintTop_toBottomOf="@+id/deposicio"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_age15"
+        android:id="@+id/labavo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="120dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personal_age14"
+        app:layout_constraintTop_toBottomOf="@+id/miccio"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_age16"
+        android:id="@+id/traslladar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="120dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personal_age15"
+        app:layout_constraintTop_toBottomOf="@+id/labavo"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_age17"
+        android:id="@+id/deambulacio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="120dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personal_age16"
+        app:layout_constraintTop_toBottomOf="@+id/traslladar"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_age18"
+        android:id="@+id/resultatBarthel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="120dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personal_age19"
+        app:layout_constraintTop_toBottomOf="@+id/escales"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_age20"
+        android:id="@+id/regio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
@@ -272,25 +272,25 @@ android:layout_height="match_parent">
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_age21"
+        android:id="@+id/tractament"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="120dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personal_age20"
+        app:layout_constraintTop_toBottomOf="@+id/regio"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_age19"
+        android:id="@+id/escales"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="120dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personal_age17"
+        app:layout_constraintTop_toBottomOf="@+id/deambulacio"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -419,7 +419,7 @@ android:layout_height="match_parent">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/perimeter"
+        android:text="@string/tractament"
         android:textAlignment="center"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -550,29 +550,29 @@ android:layout_height="match_parent">
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_gender2"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="132dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personal_age2"
+        app:layout_constraintTop_toBottomOf="@+id/dob"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_gender3"
+        android:id="@+id/historial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="132dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personal_gender2"
+        app:layout_constraintTop_toBottomOf="@+id/name"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_gender4"
+        android:id="@+id/patologies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -583,7 +583,7 @@ android:layout_height="match_parent">
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/personal_age2"
+        android:id="@+id/dob"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -603,7 +603,7 @@ android:layout_height="match_parent">
         android:textAlignment="center"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/personal_gender2"
+        app:layout_constraintEnd_toStartOf="@+id/name"
         app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/age2"
@@ -619,7 +619,7 @@ android:layout_height="match_parent">
         android:textAlignment="center"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/personal_gender3"
+        app:layout_constraintEnd_toStartOf="@+id/historial"
         app:layout_constraintHorizontal_bias="0.597"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gender2"
@@ -680,7 +680,7 @@ android:layout_height="match_parent">
         android:textAlignment="center"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/personal_age2"
+        app:layout_constraintEnd_toStartOf="@+id/dob"
         app:layout_constraintHorizontal_bias="0.157"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/personal_data2"
@@ -705,7 +705,7 @@ android:layout_height="match_parent">
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personal_gender4" />
+        app:layout_constraintTop_toBottomOf="@+id/patologies" />
 
     <View
         android:id="@+id/divider12"
@@ -742,10 +742,10 @@ android:layout_height="match_parent">
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bruise_inf3" />
+        app:layout_constraintTop_toBottomOf="@+id/bruiseDesc" />
 
     <TextView
-        android:id="@+id/bruise_inf3"
+        android:id="@+id/bruiseDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
