@@ -61,6 +61,16 @@ class ConfirmActivity: AppCompatActivity() {
         grainBitmap = bitmapSingleton.getSelectedGrainBitmap()
         infectedBitmap = bitmapSingleton.getSelectedInfectedBitmap()
 
+        val originalWidth = bitmapSingleton.getWidth()
+        val originalHeight = bitmapSingleton.getHeight()
+
+        necroticBitmap = Bitmap.createScaledBitmap(necroticBitmap,
+            originalWidth as Int, originalHeight as Int, false)
+        grainBitmap = Bitmap.createScaledBitmap(grainBitmap, originalWidth, originalHeight, false)
+        infectedBitmap = Bitmap.createScaledBitmap(infectedBitmap, originalWidth, originalHeight, false)
+
+
+
         confirmButton.setOnClickListener {
 
             val intent = Intent(this, AddNewInfoActivity::class.java)

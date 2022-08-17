@@ -25,7 +25,13 @@ class InfectedFragment: Fragment() {
         )
 
         val imageView: ImageView = rootView.findViewById<View>(R.id.Infected_Tab) as ImageView
-        val infectedBitmap: Bitmap = bitmapSingleton.getSelectedInfectedBitmap()
+        var infectedBitmap: Bitmap = bitmapSingleton.getSelectedInfectedBitmap()
+
+        val originalWidth = bitmapSingleton.getWidth()
+        val originalHeight = bitmapSingleton.getHeight()
+        infectedBitmap = Bitmap.createScaledBitmap(infectedBitmap,
+            originalWidth as Int, originalHeight as Int, false)
+
         imageView.setImageBitmap(infectedBitmap)
 
         return rootView

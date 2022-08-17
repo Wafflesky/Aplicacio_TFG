@@ -69,8 +69,6 @@ class ResultActivity : AppCompatActivity() {
 
         val viewMyLayout: View = inflater.inflate(R.layout.activity_result, null)
 
-        //val originalWidth = bitmapSingleton.getWidth()
-        //val originalHeight = bitmapSingleton.getHeight()
 
         confirmButton = findViewById(R.id.Confirm_info_button)
 
@@ -103,15 +101,18 @@ class ResultActivity : AppCompatActivity() {
         barthel = findViewById(R.id.resultatBarthel)
         gridView = findViewById(R.id.grid)
 
+        val originalWidth = bitmapSingleton.getWidth()
+        val originalHeight = bitmapSingleton.getHeight()
 
         necroticBitmap = bitmapSingleton.getNecroticBitmap()
-        //necroticBitmap = Bitmap.createScaledBitmap(necroticBitmap, originalWidth as Int, originalHeight as Int, false)
+        necroticBitmap = Bitmap.createScaledBitmap(necroticBitmap,
+            originalWidth as Int, originalHeight as Int, false)
 
         grainBitmap = bitmapSingleton.getGrainBitmap()
-        //grainBitmap = Bitmap.createScaledBitmap(grainBitmap, originalWidth as Int, originalHeight as Int, false)
+        grainBitmap = Bitmap.createScaledBitmap(grainBitmap, originalWidth, originalHeight, false)
 
         infectedBitmap = bitmapSingleton.getInfectedBitmap()
-        //infectedBitmap = Bitmap.createScaledBitmap(infectedBitmap, originalWidth as Int, originalHeight as Int, false)
+        infectedBitmap = Bitmap.createScaledBitmap(infectedBitmap, originalWidth, originalHeight, false)
 
         //necroImage.setImageBitmap(necroticBitmap)
         //grainImage.setImageBitmap(grainBitmap)

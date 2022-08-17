@@ -171,8 +171,8 @@ public class CanvasView extends View{
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        height = h;
-        width = w;
+        height = oldh;
+        width = oldw;
         output = Bitmap.createBitmap(w,
                 h, Bitmap.Config.ARGB_8888);
         redBitmap = Bitmap.createBitmap(w,
@@ -188,7 +188,6 @@ public class CanvasView extends View{
                 h, Bitmap.Config.ARGB_8888);
         newBlueBitmap = Bitmap.createBitmap(w,
                 h, Bitmap.Config.ARGB_8888);
-
         // your Canvas will draw onto the defined Bitmap
         //mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         mBitmap = bitmapSingleton.INSTANCE.getBitmap1();
@@ -441,7 +440,7 @@ public class CanvasView extends View{
         Path newRedPath = redPath;
         Path newGreenPath = greenPath;
         Path newBluePath = bluePath;
-
+        
         //freePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OVER));
         //freePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
         //mPaint.setStyle(Paint.Style.STROKE);

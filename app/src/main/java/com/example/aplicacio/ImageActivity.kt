@@ -32,6 +32,12 @@ class ImageActivity: AppCompatActivity() {
         imageBitmap = bitmapSingleton.getBitmap()
         image.setImageBitmap(imageBitmap)
 
+        val width = imageBitmap.width
+        val height = imageBitmap.height
+
+        bitmapSingleton.storeWidth(width)
+        bitmapSingleton.storeHeight(height)
+
         confirmButton.setOnClickListener{
 
             val intent = Intent(this, CanvasActivity::class.java)

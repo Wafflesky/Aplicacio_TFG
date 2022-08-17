@@ -27,7 +27,13 @@ class GrainFragment: Fragment() {
         )
 
         val imageView: ImageView = rootView.findViewById<View>(R.id.Grain_Tab) as ImageView
-        val grainBitmap: Bitmap = bitmapSingleton.getSelectedGrainBitmap()
+        var grainBitmap: Bitmap = bitmapSingleton.getSelectedGrainBitmap()
+
+        val originalWidth = bitmapSingleton.getWidth()
+        val originalHeight = bitmapSingleton.getHeight()
+        grainBitmap = Bitmap.createScaledBitmap(grainBitmap,
+            originalWidth as Int, originalHeight as Int, false)
+
         imageView.setImageBitmap(grainBitmap)
 
         return rootView

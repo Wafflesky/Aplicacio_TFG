@@ -2,11 +2,13 @@ package com.example.aplicacio
 
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 
 
@@ -24,6 +26,7 @@ class UserActivity: AppCompatActivity() {
         existingUser = intent.getBooleanExtra("existing", existingUser)
         list = findViewById(R.id.list)
         val itemList = mutableListOf<Model>()
+        val reducedList = mutableListOf<Model>()
         val nameList = mutableListOf<String>()
         searchView = findViewById(R.id.searchView)
 
@@ -44,8 +47,6 @@ class UserActivity: AppCompatActivity() {
         }
 
         list.adapter = UserListAdapter(this,R.layout.fragment_user_list,itemList,null)
-
-
         list.setOnItemClickListener() { adapterView, view, position, id ->
             val itemAtPos = adapterView.getItemAtPosition(position)
             val itemIdAtPos = adapterView.getItemIdAtPosition(position)
@@ -73,10 +74,12 @@ class UserActivity: AppCompatActivity() {
         adapter =  UserListAdapter(this,R.layout.fragment_user_list,itemList,nameList)
         list.adapter = adapter
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            @RequiresApi(Build.VERSION_CODES.N)
             override fun onQueryTextSubmit(query: String): Boolean {
 
                 if (nameList.contains(query)) {
                     adapter.filter.filter(query)
+
                 } else {
                     Toast.makeText(this@UserActivity, "No Match found", Toast.LENGTH_LONG).show()
                 }
