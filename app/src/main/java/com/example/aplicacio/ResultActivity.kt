@@ -8,6 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import java.io.ByteArrayOutputStream
+import java.util.*
 
 class ResultActivity : AppCompatActivity() {
 
@@ -36,7 +41,7 @@ class ResultActivity : AppCompatActivity() {
     private lateinit var incontinency: TextView
     private lateinit var nutrition: TextView
     private lateinit var activity: TextView
-    private lateinit var emina: TextView
+    private lateinit var eminaResult: TextView
 
     private lateinit var eat: TextView
     private lateinit var bath: TextView
@@ -48,13 +53,52 @@ class ResultActivity : AppCompatActivity() {
     private lateinit var move: TextView
     private lateinit var deambulate: TextView
     private lateinit var stair: TextView
-    private lateinit var barthel: TextView
+    private lateinit var barthelResult: TextView
 
 
     private lateinit var patiengGender: String
     private lateinit var patientAge: Number
 
     private lateinit var gridView: GridView
+
+    data class Patient(
+        val DoB: String = "",
+        val NHC: String = "",
+        var name: String = "",
+        val patologies: String = "",
+        val bruiseData: BruiseData,
+        val barthel: barthel,
+        val emina: emina,
+        val necroticImage: String,
+        val grainImage: String,
+        val infectedImage: String
+    )
+
+    data class BruiseData(
+        val region: String = "",
+        val treatment: String = "",
+        var bruiseDesc: String = "")
+
+    data class barthel(
+        val bath: String = "",
+        val bathroom: String = "",
+        var bladder: String = "",
+        val deambulate: String = "",
+        val deposition: String = "",
+        val dress: String = "",
+        val eat: String = "",
+        val move: String = "",
+        val stair: String = "",
+        val tiding: String = "",
+        val barthelResult: String = "")
+
+    data class emina(
+        val activity: String = "",
+        val incontinency: String = "",
+        var mentalStatus: String = "",
+        val mobility: String = "",
+        val nutrition: String = "",
+        val eminaResult: String = "")
 
     //private lateinit var originalWidth: Number
     //private lateinit var originalHeight: Number
@@ -86,7 +130,7 @@ class ResultActivity : AppCompatActivity() {
         incontinency = findViewById(R.id.incontinency)
         nutrition = findViewById(R.id.nutricio)
         activity = findViewById(R.id.activity)
-        emina = findViewById(R.id.resultatEmina)
+        eminaResult = findViewById(R.id.resultatEmina)
 
         eat = findViewById(R.id.menjar)
         bath = findViewById(R.id.bany)
@@ -98,7 +142,7 @@ class ResultActivity : AppCompatActivity() {
         move = findViewById(R.id.traslladar)
         deambulate = findViewById(R.id.deambulacio)
         stair = findViewById(R.id.escales)
-        barthel = findViewById(R.id.resultatBarthel)
+        barthelResult = findViewById(R.id.resultatBarthel)
         gridView = findViewById(R.id.grid)
 
         val originalWidth = bitmapSingleton.getWidth()
@@ -164,10 +208,10 @@ class ResultActivity : AppCompatActivity() {
         activity.setText(activityText)
 
          when(eminaText) {
-            0 -> emina.setText("Sense risc")
-            in 1..3 -> emina.setText("Risc lleu")
-            in 4..7 -> emina.setText("Risc mig")
-            else -> emina.setText("Risc alt")
+            0 -> eminaResult.setText("Sense risc")
+            in 1..3 -> eminaResult.setText("Risc lleu")
+            in 4..7 -> eminaResult.setText("Risc mig")
+            else -> eminaResult.setText("Risc alt")
         }
 
 
@@ -183,11 +227,11 @@ class ResultActivity : AppCompatActivity() {
         stair.setText(stairText)
 
         when(barthelText) {
-            in 0..19 -> barthel.setText("Dependència total")
-            in 20..39 -> barthel.setText("Dependència greu")
-            in 40..59 -> barthel.setText("Dependència moderada")
-            in 60..99 -> barthel.setText("Dependència lleu")
-            else -> barthel.setText("Independència")
+            in 0..19 -> barthelResult.setText("Dependència total")
+            in 20..39 -> barthelResult.setText("Dependència greu")
+            in 40..59 -> barthelResult.setText("Dependència moderada")
+            in 60..99 -> barthelResult.setText("Dependència lleu")
+            else -> barthelResult.setText("Independència")
         }
 
         val images = mutableListOf<Bitmap>()
@@ -213,11 +257,131 @@ class ResultActivity : AppCompatActivity() {
 
         confirmButton.setOnClickListener{
 
-            val intent = Intent(this, HomeActivity::class.java)
-            this.startActivity(intent)
+            val database = Firebase.database("https://alex-tfg-default-rtdb.europe-west1.firebasedatabase.app/")
+            val storage = Firebase.storage
+            val myRef = database.getReference().child("Patients")
 
+            var cont = false
+
+            val storageRef = storage.reference
+
+            val necroticBaos = ByteArrayOutputStream()
+            val infectedBaos = ByteArrayOutputStream()
+            val grainBaos = ByteArrayOutputStream()
+
+            val necroticUUID = UUID.randomUUID().toString()
+            val grainUUID = UUID.randomUUID().toString()
+            val infectedUUID = UUID.randomUUID().toString()
+
+            necroticBitmap.compress(Bitmap.CompressFormat.PNG, 100, necroticBaos)
+            grainBitmap.compress(Bitmap.CompressFormat.PNG, 100, grainBaos)
+            infectedBitmap.compress(Bitmap.CompressFormat.PNG, 100, infectedBaos)
+
+            //create a file to write bitmap data
+
+            val necroticData = necroticBaos.toByteArray()
+
+            val necroticReference = storageRef.child(necroticUUID)
+            val uploadNecro = necroticReference.putBytes(necroticData)
+            uploadNecro.addOnFailureListener {
+                // Handle unsuccessful uploads
+            }.addOnSuccessListener {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                // ...
+                cont = true
+            }
+
+            val grainData = grainBaos.toByteArray()
+
+            val grainReference = storageRef.child(grainUUID)
+            val uploadGrain = grainReference.putBytes(grainData)
+            uploadGrain.addOnFailureListener {
+                // Handle unsuccessful uploads
+            }.addOnSuccessListener {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                // ...
+                cont = true
+            }
+
+            val infectedData = infectedBaos.toByteArray()
+
+            val infectedReference = storageRef.child(infectedUUID)
+            val uploadInfected = infectedReference.putBytes(infectedData)
+            uploadInfected.addOnFailureListener {
+                // Handle unsuccessful uploads
+            }.addOnSuccessListener {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                // ...
+                cont = true
+            }
+/*
+
+            val necroticData = necroticBaos.toByteArray()
+            //val grainData = grainBaos.toByteArray()
+            //val infectedData = infectedBaos.toByteArray()
+
+            val uploadTask = storageRef.putBytes(necroticData)
+            uploadTask.addOnFailureListener {
+                // Handle unsuccessful uploads
+            }.addOnSuccessListener { taskSnapshot ->
+                // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+                // ...
+                cont = true
+            }
+*/
+
+            if(cont) {
+
+                //TODO: Mirar si el codi entra aqui, de moment tinc un error
+                // W/NetworkRequest: No App Check token for request.
+
+                val bruiseInfo = BruiseData(regionText, treatmentText, descText)
+                val barthelInfo = barthel(
+                    bathText,
+                    bathroomText,
+                    bladderText,
+                    deambulateText,
+                    depositiontext,
+                    dressText,
+                    eatText,
+                    moveText,
+                    stairText,
+                    tidingText,
+                    barthelText.toString()
+                )
+                val eminaInfo = emina(
+                    activityText,
+                    incontinencyText,
+                    statusText,
+                    mobilityText,
+                    nutritionText,
+                    eminaText.toString()
+                )
+                val patientInfo = Patient(
+                    dobText,
+                    NHCText.toString(),
+                    nameText,
+                    patologiesText,
+                    bruiseInfo,
+                    barthelInfo,
+                    eminaInfo,
+                    necroticUUID,
+                    grainUUID,
+                    infectedUUID
+                )
+
+
+                myRef.child("Patient").setValue(patientInfo)
+
+
+                val intent = Intent(this, HomeActivity::class.java)
+                this.startActivity(intent)
+            }
         }
     }
 }
+
+
+
 
 

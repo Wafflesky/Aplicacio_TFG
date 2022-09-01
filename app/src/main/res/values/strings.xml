@@ -72,6 +72,10 @@
     <string name="escala_barthel_text">Escala BARTHEL</string>
     <string name="resultat">Resultat</string>
     <string name="data_naixement">Data Naixement</string>
+    <string name="confirm">Confirm</string>
+    <string name="register">Register</string>
+    <string name="confirmar">confirmar</string>
+    <string name="login">Login</string>
 
     <string-array name="CanvasMode">
         <item>Necrotica</item>

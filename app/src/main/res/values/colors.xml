@@ -10,5 +10,6 @@
     <color name="Button_Green">#66CC99</color>
     <color name="Button_Red">#FF9999</color>
     <color name="Button_Grey">#E0E0E0</color>
+    <color name="Button_dark_Grey">#999999</color>
     <color name="Button_Blue">#81D4FA</color>
 </resources>
