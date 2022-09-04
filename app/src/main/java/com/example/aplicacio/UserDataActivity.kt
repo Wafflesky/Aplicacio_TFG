@@ -2,11 +2,24 @@ package com.example.aplicacio
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.FirebaseApp
+import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+
 
 class UserDataActivity: AppCompatActivity() {
 
@@ -15,6 +28,10 @@ class UserDataActivity: AppCompatActivity() {
     private lateinit var necroticBitmap: Bitmap
     private lateinit var grainBitmap: Bitmap
     private lateinit var infectedBitmap: Bitmap
+
+    private lateinit var necroticUrl: String
+    private lateinit var grainUrl: String
+    private lateinit var infectedUrl: String
 
     private lateinit var necroImage: ImageView
     private lateinit var grainImage: ImageView
@@ -49,19 +66,31 @@ class UserDataActivity: AppCompatActivity() {
     private lateinit var stair: TextView
     private lateinit var barthel: TextView
 
+    private var pacient = Patient()
+
 
     private lateinit var patiengGender: String
     private lateinit var patientAge: Number
 
     private lateinit var gridView: GridView
+    private lateinit var selectedNHC: String
+    private lateinit var selectedEntry: String
+    private var selectedNumberEntry: Int = 0
+
+    private val mDatabase = Firebase.database("https://alex-tfg-default-rtdb.europe-west1.firebasedatabase.app")
+
+    private val images = mutableListOf<String>()
+
+    private val storage = Firebase.storage
 
     //private lateinit var originalWidth: Number
     //private lateinit var originalHeight: Number
 
+    @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("SetTextI18n", "InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_result)
+        setContentView(R.layout.activity_userinfo)
 
         val inflater =
             LayoutInflater.from(this) // or (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -71,7 +100,10 @@ class UserDataActivity: AppCompatActivity() {
         //val originalWidth = bitmapSingleton.getWidth()
         //val originalHeight = bitmapSingleton.getHeight()
 
-        confirmButton = findViewById(R.id.Confirm_info_button)
+        selectedNHC = bitmapSingleton.getNHC()
+        selectedNumberEntry = bitmapSingleton.getNHCEntries()
+
+        //Log.i("nhc",selectedEntry)
 
         DoB = findViewById(R.id.dob)
         name = findViewById(R.id.name)
@@ -103,63 +135,69 @@ class UserDataActivity: AppCompatActivity() {
         gridView = findViewById(R.id.grid)
 
 
-        necroticBitmap = bitmapSingleton.getNecroticBitmap()
-        //necroticBitmap = Bitmap.createScaledBitmap(necroticBitmap, originalWidth as Int, originalHeight as Int, false)
+        val myRef = mDatabase.getReference()
+        myRef.child("Patients").addValueEventListener(object : ValueEventListener {
 
-        grainBitmap = bitmapSingleton.getGrainBitmap()
-        //grainBitmap = Bitmap.createScaledBitmap(grainBitmap, originalWidth as Int, originalHeight as Int, false)
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (jobSnapshot in dataSnapshot.children) {
 
-        infectedBitmap = bitmapSingleton.getInfectedBitmap()
-        //infectedBitmap = Bitmap.createScaledBitmap(infectedBitmap, originalWidth as Int, originalHeight as Int, false)
+                    pacient = Patient()
 
-        //necroImage.setImageBitmap(necroticBitmap)
-        //grainImage.setImageBitmap(grainBitmap)
-        //infImage.setImageBitmap(infectedBitmap)
+                    val nhc = jobSnapshot.child("nhc").getValue(String::class.java).toString()
+                    val patient = jobSnapshot.child("patient").getValue(Patient::class.java)
+                    Log.i("NHC", nhc)
+                    Log.i("Patient", patient.toString())
+
+                    if(nhc.equals(selectedNHC)){
+                        if (patient != null) {
+                            if (patient.entryNumber == (selectedNumberEntry -1)) {
+                                pacient = patient
+                                populateView()
+
+                            }
+                        }
+
+                    }
+
+
+                        //val item = Json.decodeFromJsonElement<Patient>(patient.toJsonObject())
+                            Log.i("firebase", "Got value ${patient}")
+                    }
+
+                }
+                // go to next step from here e.g handlePosts(posts);
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.i(javaClass.name.toString(), ": " + databaseError.message)
+            }
+        })
 
         //TODO: Aixo en lloc d'agafar.ho del singleton ho agafarem del usuari que hagi triat
 
-        val dobText = bitmapSingleton.getDoB()
-        val nameText = bitmapSingleton.getName()
-        val NHCText = bitmapSingleton.getNHC()
-        val patologiesText = bitmapSingleton.getPatologies()
 
-        val regionText = bitmapSingleton.getRegion()
-        val treatmentText = bitmapSingleton.getTreatment()
-        val descText = bitmapSingleton.getDesc()
 
-        val statusText = bitmapSingleton.getStatus()
-        val mobilityText = bitmapSingleton.getMobility()
-        val incontinencyText = bitmapSingleton.getIncontinency()
-        val nutritionText = bitmapSingleton.getNutrition()
-        val activityText = bitmapSingleton.getActivity()
-        val eminaText = bitmapSingleton.getEmina()
+    }
 
-        val eatText = bitmapSingleton.getEat()
-        val bathText = bitmapSingleton.getBath()
-        val dressText = bitmapSingleton.getDress()
-        val tidingText = bitmapSingleton.getTiding()
-        val depositiontext = bitmapSingleton.getDeposition()
-        val bladderText = bitmapSingleton.getBladder()
-        val bathroomText = bitmapSingleton.getBathroom()
-        val moveText = bitmapSingleton.getMove()
-        val deambulateText = bitmapSingleton.getDeambulate()
-        val stairText = bitmapSingleton.getStair()
-        val barthelText = bitmapSingleton.getBarthel()
 
-        DoB.setText(dobText)
-        name.setText(nameText)
-        NHC.setText(NHCText.toString())
-        patologies.setText(patologiesText)
+    fun populateView() {
 
-        region.setText(regionText)
-        treatment.setText(treatmentText)
-        desc.setText(descText)
+        DoB.setText(pacient.DoB)
+        name.setText(pacient.name)
+        NHC.setText(selectedNHC)
+        patologies.setText(pacient.patologies)
 
-        status.setText(statusText)
-        mobility.setText(mobilityText)
-        incontinency.setText(incontinencyText)
-        nutrition.setText(nutritionText)
-        activity.setText(activityText)
+        region.setText(pacient.bruiseData.region)
+        treatment.setText(pacient.bruiseData.treatment)
+        desc.setText(pacient.bruiseData.bruiseDesc)
+
+        status.setText(pacient.emina.mentalStatus)
+        mobility.setText(pacient.emina.mobility)
+        incontinency.setText(pacient.emina.incontinency)
+        nutrition.setText(pacient.emina.nutrition)
+        activity.setText(pacient.emina.activity)
+
+        Log.i("emina", pacient.emina.eminaResult)
+
+        val eminaText = pacient.emina.eminaResult.toInt()
 
         when (eminaText) {
             0 -> emina.setText("Sense risc")
@@ -169,16 +207,18 @@ class UserDataActivity: AppCompatActivity() {
         }
 
 
-        eat.setText(eatText)
-        bath.setText(bathText)
-        dress.setText(dressText)
-        tiding.setText(tidingText)
-        deposition.setText(depositiontext)
-        bladder.setText(bladderText)
-        bathroom.setText(bathroomText)
-        move.setText(moveText)
-        deambulate.setText(deambulateText)
-        stair.setText(stairText)
+        eat.setText(pacient.barthel.eat)
+        bath.setText(pacient.barthel.bath)
+        dress.setText(pacient.barthel.dress)
+        tiding.setText(pacient.barthel.tiding)
+        deposition.setText(pacient.barthel.deposition)
+        bladder.setText(pacient.barthel.bladder)
+        bathroom.setText(pacient.barthel.bathroom)
+        move.setText(pacient.barthel.move)
+        deambulate.setText(pacient.barthel.deambulate)
+        stair.setText(pacient.barthel.stair)
+
+        val barthelText = pacient.barthel.barthelResult.toInt()
 
         when (barthelText) {
             in 0..19 -> barthel.setText("Dependència total")
@@ -188,25 +228,33 @@ class UserDataActivity: AppCompatActivity() {
             else -> barthel.setText("Independència")
         }
 
-        val images = mutableListOf<Bitmap>()
-        images.add(necroticBitmap)
-        images.add(grainBitmap)
-        images.add(infectedBitmap)
+        images.add(pacient.necroticImage)
+        images.add(pacient.grainImage)
+        images.add(pacient.infectedImage)
+
+        if (!images.isEmpty()) {
+
+            FirebaseApp.initializeApp(/*context=*/this)
+            val firebaseAppCheck = FirebaseAppCheck.getInstance()
+            firebaseAppCheck.installAppCheckProviderFactory(
+                SafetyNetAppCheckProviderFactory.getInstance()
+            )
 
 
-        // on below line we are initializing our course adapter
-        // and passing course list and context.
-        val courseAdapter = GridAdapter(images, context = this)
+            // on below line we are initializing our course adapter
+            // and passing course list and context.
+            val courseAdapter = GridAdapter(images,null, this@UserDataActivity,true)
 
-        // on below line we are setting adapter to our grid view.
-        gridView.adapter = courseAdapter
+            // on below line we are setting adapter to our grid view.
+            gridView.adapter = courseAdapter
 
-        // on below line we are adding on item
-        // click listener for our grid view.
-        gridView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-            // inside on click method we are simply displaying
-            // a toast message with course name.
+            // on below line we are adding on item
+            // click listener for our grid view.
+            gridView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+                // inside on click method we are simply displaying
+                // a toast message with course name.
+            }
+
         }
-
     }
 }

@@ -12,10 +12,15 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.appcheck.AppCheckProviderFactory;
+import com.google.firebase.appcheck.FirebaseAppCheck;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.AuthResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import java.util.Calendar;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -25,11 +30,14 @@ public class LoginActivity extends AppCompatActivity {
     private Button register;
 
     private FirebaseAuth mAuth;
+    private AppCheckProviderFactory SafetyNetAppCheckProviderFactory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         // taking instance of FirebaseAuth
         mAuth = FirebaseAuth.getInstance();
 
@@ -39,6 +47,8 @@ public class LoginActivity extends AppCompatActivity {
         Btn = findViewById(R.id.confirm_button);
         register = findViewById(R.id.register);
         progressbar = findViewById(R.id.progressBar);
+
+
 
         // Set on Click Listener on Sign-in button
         Btn.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +112,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                     // hide the progress bar
                                     progressbar.setVisibility(View.GONE);
+
 
                                     // if sign-in is successful
                                     // intent to home activity

@@ -1,6 +1,7 @@
 package com.example.aplicacio
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.view.LayoutInflater
@@ -9,14 +10,17 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 
 // on below line we are creating an
 // adapter class for our grid view.
 internal class GridAdapter(
     // on below line we are creating two
     // variables for course list and context
-    private val images: List<Bitmap>,
-    private val context: Context
+    private val images: MutableList<String>?,
+    private val imageBitmap: MutableList<Bitmap>?,
+    private val context: Context,
+    private val downloadImage: Boolean
 ) :
     BaseAdapter() {
     // in base adapter class we are creating variables
@@ -24,7 +28,15 @@ internal class GridAdapter(
     private var layoutInflater: LayoutInflater? = null
     private lateinit var image: ImageView
     override fun getCount(): Int {
-        return images.size
+        if(images != null){
+            return images.size
+        }
+
+        if(imageBitmap != null){
+            return imageBitmap.size
+        }
+
+        return 0
     }
 
     // below method is use to return the count of course list
@@ -40,6 +52,7 @@ internal class GridAdapter(
     }
 
     // in below function we are getting individual item of grid view.
+    @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
         var convertView = convertView
         // on blow line we are checking if layout inflater
@@ -48,20 +61,20 @@ internal class GridAdapter(
             layoutInflater =
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         }
+
+        convertView = layoutInflater!!.inflate(R.layout.fragment_images_grid, null)
+        image = convertView!!.findViewById(R.id.idIVCourse)
         // on the below line we are checking if convert view is null.
         // If it is null we are initializing it.
-        if (convertView == null) {
-            // on below line we are passing the layout file
-            // which we have to inflate for each item of grid view.
-            convertView = layoutInflater!!.inflate(R.layout.fragment_images_grid, null)
+        if(downloadImage) {
+            Glide
+                .with(context)
+                .load(images?.get(position))
+                .into(image)
         }
-        // on below line we are initializing our course image view
-        // and course text view with their ids.
-        image = convertView!!.findViewById(R.id.idIVCourse)
-        // on below line we are setting image for our course image view.
-        image.setImageBitmap(images[position])
-        // on below line we are setting text in our course text view.
-        // at last we are returning our convert view.
+        else {
+            image.setImageBitmap(imageBitmap?.get(position))
+        }
         return convertView
     }
 }

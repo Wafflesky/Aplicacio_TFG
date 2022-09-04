@@ -26,10 +26,13 @@ object bitmapSingleton{
     private lateinit var gender: String
     private lateinit var location: String
 
-    private lateinit var NHC: Number
+    private lateinit var NHC: String
     private lateinit var DoB: String
     private lateinit var name: String
     private lateinit var patologies: String
+
+    private var nhcEntry: Int = 0
+    private var nhcEntryCreation: Int = 0
 
     private lateinit var region: String
     private lateinit var treatment: String
@@ -58,10 +61,6 @@ object bitmapSingleton{
         this.bitmap = bitmap
     }
 
-    fun storeCanvasBitmap(result: Bitmap){
-        this.result = result
-    }
-
     fun storeGrainBitmap(grain: Bitmap){
         this.grain = grain
     }
@@ -86,14 +85,6 @@ object bitmapSingleton{
         this.selectedInfected = selectedInfected
     }
 
-    fun storeAge(age: Number){
-        this.age = age
-    }
-
-    fun storeGender(gender: String){
-        this.gender = gender
-    }
-
     fun storeWidth(originalWidth: Number){
         this.originalWidth = originalWidth
     }
@@ -102,13 +93,7 @@ object bitmapSingleton{
         this.originalHeight = originalHeight
     }
 
-    fun storeLocation(location: String){
-
-        this.location = location
-
-    }
-
-    fun storeNHC(NHC: Number){
+    fun storeNHC(NHC: String){
         this.NHC = NHC
     }
 
@@ -122,6 +107,14 @@ object bitmapSingleton{
 
     fun storePatologies(patologies: String){
         this.patologies = patologies
+    }
+
+    fun storeNHCEntry(nhcEntry: Int){
+        this.nhcEntry = nhcEntry
+    }
+
+    fun storeNHCEntryCreation(nhcEntryCreation: Int){
+        this.nhcEntryCreation = nhcEntryCreation
     }
 
     fun storeRegion(region: String){
@@ -208,10 +201,6 @@ object bitmapSingleton{
         return bitmap
     }
 
-    fun getCanvasBitmap(): Bitmap{
-        return result
-    }
-
     fun getGrainBitmap(): Bitmap{
         return this.grain
     }
@@ -236,22 +225,6 @@ object bitmapSingleton{
         return this.selectedInfected
     }
 
-    fun getAge(): Number{
-        return this.age
-    }
-
-    fun getGender(): String{
-
-        return this.gender
-
-    }
-
-    fun getLocation(): String{
-
-        return this.location
-
-    }
-
     fun getWidth(): Number{
 
         return this.originalWidth
@@ -271,7 +244,7 @@ object bitmapSingleton{
 
     }
 
-    fun getNHC(): Number{
+    fun getNHC(): String{
 
         return this.NHC
 
@@ -287,6 +260,14 @@ object bitmapSingleton{
 
         return this.patologies
 
+    }
+
+    fun getNHCEntries(): Int{
+        return this.nhcEntry
+    }
+
+    fun getNHCEntriesCreation(): Int{
+        return this.nhcEntryCreation
     }
 
     fun getRegion(): String{

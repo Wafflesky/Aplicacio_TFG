@@ -73,17 +73,13 @@ class AddNewInfoActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_patient_info)
 
-        // Write a message to the database
-        // Write a message to the database
-        val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("message")
-
-        myRef.setValue("Hello, World!")
 
         val inflater =
             LayoutInflater.from(this) // or (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         val viewMyLayout: View = inflater.inflate(R.layout.activity_add_patient_info, null)
+
+        val requestedNHC = bitmapSingleton.getNHC()
 
         dob = findViewById(R.id.editTextDate)
         NHC = findViewById(R.id.editTextNumber)
@@ -117,6 +113,8 @@ class AddNewInfoActivity: AppCompatActivity() {
 
         confirmButton = findViewById(R.id.confirm)
 
+        NHC.setText(requestedNHC)
+
         if(NHC.text != null && dob.text != null && name.text != null){
             blockIntent = false
             confirmButton.setOnClickListener{
@@ -134,7 +132,7 @@ class AddNewInfoActivity: AppCompatActivity() {
                 }
                 if(!blockIntent){
 
-                    bitmapSingleton.storeNHC(NHC.text.toString().toInt())
+                    bitmapSingleton.storeNHC(NHC.text.toString())
                     bitmapSingleton.storeDoB(dob.text.toString())
                     bitmapSingleton.storeName(name.text.toString())
                     bitmapSingleton.storePatologies(patologies.text.toString())
@@ -171,21 +169,6 @@ class AddNewInfoActivity: AppCompatActivity() {
 
             }
         }
-        /*if(ageInput.text != null){
-            confirmButton.setOnClickListener{
-                if(ageInput.text.toString().equals("")){
-                    ageInput.setBackgroundColor(R.color.Button_Red)
-                }
-                else {
-                    age = ageInput.text.toString().toInt()
-                    //bitmapSingleton.storeAge(age)
-                    //bitmapSingleton.storeGender(selectedGender)
-                    val intent = Intent(this, ResultActivity::class.java)
-                    this.startActivity(intent)
-                }
-
-            }
-        }*/
 
     }
 

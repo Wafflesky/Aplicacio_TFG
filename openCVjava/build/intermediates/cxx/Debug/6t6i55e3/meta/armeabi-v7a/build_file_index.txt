@@ -1,1 +1,0 @@
-C:\Users\alexq\AndroidStudioProjects\Aplicacio\Aplicacio_TFG\openCVjava\libcxx_helper\CMakeLists.txt

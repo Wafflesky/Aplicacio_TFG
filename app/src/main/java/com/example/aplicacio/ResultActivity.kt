@@ -4,15 +4,23 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.PackageManagerCompat.LOG_TAG
+import com.google.firebase.FirebaseApp
+import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
 import java.util.*
+
 
 class ResultActivity : AppCompatActivity() {
 
@@ -22,11 +30,6 @@ class ResultActivity : AppCompatActivity() {
     private lateinit var grainBitmap: Bitmap
     private lateinit var infectedBitmap: Bitmap
 
-    private lateinit var necroImage: ImageView
-    private lateinit var grainImage: ImageView
-    private lateinit var infImage: ImageView
-
-    private lateinit var patient: TextView
     private lateinit var DoB: TextView
     private lateinit var name: TextView
     private lateinit var NHC: TextView
@@ -55,53 +58,7 @@ class ResultActivity : AppCompatActivity() {
     private lateinit var stair: TextView
     private lateinit var barthelResult: TextView
 
-
-    private lateinit var patiengGender: String
-    private lateinit var patientAge: Number
-
     private lateinit var gridView: GridView
-
-    data class Patient(
-        val DoB: String = "",
-        val NHC: String = "",
-        var name: String = "",
-        val patologies: String = "",
-        val bruiseData: BruiseData,
-        val barthel: barthel,
-        val emina: emina,
-        val necroticImage: String,
-        val grainImage: String,
-        val infectedImage: String
-    )
-
-    data class BruiseData(
-        val region: String = "",
-        val treatment: String = "",
-        var bruiseDesc: String = "")
-
-    data class barthel(
-        val bath: String = "",
-        val bathroom: String = "",
-        var bladder: String = "",
-        val deambulate: String = "",
-        val deposition: String = "",
-        val dress: String = "",
-        val eat: String = "",
-        val move: String = "",
-        val stair: String = "",
-        val tiding: String = "",
-        val barthelResult: String = "")
-
-    data class emina(
-        val activity: String = "",
-        val incontinency: String = "",
-        var mentalStatus: String = "",
-        val mobility: String = "",
-        val nutrition: String = "",
-        val eminaResult: String = "")
-
-    //private lateinit var originalWidth: Number
-    //private lateinit var originalHeight: Number
 
     @SuppressLint("SetTextI18n", "InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -157,10 +114,6 @@ class ResultActivity : AppCompatActivity() {
 
         infectedBitmap = bitmapSingleton.getInfectedBitmap()
         infectedBitmap = Bitmap.createScaledBitmap(infectedBitmap, originalWidth, originalHeight, false)
-
-        //necroImage.setImageBitmap(necroticBitmap)
-        //grainImage.setImageBitmap(grainBitmap)
-        //infImage.setImageBitmap(infectedBitmap)
 
         //TODO: Aixo en lloc d'agafar.ho del singleton ho agafarem del usuari que hagi triat
 
@@ -242,7 +195,7 @@ class ResultActivity : AppCompatActivity() {
 
         // on below line we are initializing our course adapter
         // and passing course list and context.
-        val courseAdapter = GridAdapter(images, context = this)
+        val courseAdapter = GridAdapter(null,images, context = this,false)
 
         // on below line we are setting adapter to our grid view.
         gridView.adapter = courseAdapter
@@ -257,9 +210,9 @@ class ResultActivity : AppCompatActivity() {
 
         confirmButton.setOnClickListener{
 
-            val database = Firebase.database("https://alex-tfg-default-rtdb.europe-west1.firebasedatabase.app/")
+            val database = Firebase.database("https://alex-tfg-default-rtdb.europe-west1.firebasedatabase.app")
             val storage = Firebase.storage
-            val myRef = database.getReference().child("Patients")
+            val myRef = database.getReference().child("Patients").push()
 
             var cont = false
 
@@ -269,9 +222,11 @@ class ResultActivity : AppCompatActivity() {
             val infectedBaos = ByteArrayOutputStream()
             val grainBaos = ByteArrayOutputStream()
 
-            val necroticUUID = UUID.randomUUID().toString()
-            val grainUUID = UUID.randomUUID().toString()
-            val infectedUUID = UUID.randomUUID().toString()
+            val nhcEntry = bitmapSingleton.getNHCEntries()
+
+            var necroticUUID = UUID.randomUUID().toString()
+            var grainUUID = UUID.randomUUID().toString()
+            var infectedUUID = UUID.randomUUID().toString()
 
             necroticBitmap.compress(Bitmap.CompressFormat.PNG, 100, necroticBaos)
             grainBitmap.compress(Bitmap.CompressFormat.PNG, 100, grainBaos)
@@ -281,105 +236,117 @@ class ResultActivity : AppCompatActivity() {
 
             val necroticData = necroticBaos.toByteArray()
 
-            val necroticReference = storageRef.child(necroticUUID)
+            FirebaseApp.initializeApp(/*context=*/this)
+            val firebaseAppCheck = FirebaseAppCheck.getInstance()
+            firebaseAppCheck.installAppCheckProviderFactory(
+                SafetyNetAppCheckProviderFactory.getInstance()
+            )
+
+            val necroticReference = storageRef.child("Necrotic/" + necroticUUID + ".png")
             val uploadNecro = necroticReference.putBytes(necroticData)
-            uploadNecro.addOnFailureListener {
-                // Handle unsuccessful uploads
-            }.addOnSuccessListener {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
-                cont = true
-            }
 
-            val grainData = grainBaos.toByteArray()
+            uploadNecro.addOnCompleteListener {
 
-            val grainReference = storageRef.child(grainUUID)
-            val uploadGrain = grainReference.putBytes(grainData)
-            uploadGrain.addOnFailureListener {
-                // Handle unsuccessful uploads
-            }.addOnSuccessListener {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
-                cont = true
-            }
+                necroticReference.downloadUrl.addOnSuccessListener {
+                    necroticUUID= it.toString()
 
-            val infectedData = infectedBaos.toByteArray()
+                    val grainData = grainBaos.toByteArray()
 
-            val infectedReference = storageRef.child(infectedUUID)
-            val uploadInfected = infectedReference.putBytes(infectedData)
-            uploadInfected.addOnFailureListener {
-                // Handle unsuccessful uploads
-            }.addOnSuccessListener {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
-                cont = true
-            }
-/*
+                    val grainReference = storageRef.child("Grain/" + grainUUID + ".png")
+                    val uploadGrain = grainReference.putBytes(grainData)
+                    uploadGrain.addOnCompleteListener {
 
-            val necroticData = necroticBaos.toByteArray()
-            //val grainData = grainBaos.toByteArray()
-            //val infectedData = infectedBaos.toByteArray()
+                        grainReference.downloadUrl.addOnSuccessListener {
+                            grainUUID = it.toString()
 
-            val uploadTask = storageRef.putBytes(necroticData)
-            uploadTask.addOnFailureListener {
-                // Handle unsuccessful uploads
-            }.addOnSuccessListener { taskSnapshot ->
-                // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
-                // ...
-                cont = true
-            }
-*/
+                            val infectedData = infectedBaos.toByteArray()
 
-            if(cont) {
+                            val infectedReference = storageRef.child("Infected/" + infectedUUID + ".png")
+                            val uploadInfected = infectedReference.putBytes(infectedData)
+                            uploadInfected.addOnCompleteListener {
 
-                //TODO: Mirar si el codi entra aqui, de moment tinc un error
-                // W/NetworkRequest: No App Check token for request.
+                                infectedReference.downloadUrl.addOnSuccessListener {
+                                    infectedUUID = it.toString()
 
-                val bruiseInfo = BruiseData(regionText, treatmentText, descText)
-                val barthelInfo = barthel(
-                    bathText,
-                    bathroomText,
-                    bladderText,
-                    deambulateText,
-                    depositiontext,
-                    dressText,
-                    eatText,
-                    moveText,
-                    stairText,
-                    tidingText,
-                    barthelText.toString()
-                )
-                val eminaInfo = emina(
-                    activityText,
-                    incontinencyText,
-                    statusText,
-                    mobilityText,
-                    nutritionText,
-                    eminaText.toString()
-                )
-                val patientInfo = Patient(
-                    dobText,
-                    NHCText.toString(),
-                    nameText,
-                    patologiesText,
-                    bruiseInfo,
-                    barthelInfo,
-                    eminaInfo,
-                    necroticUUID,
-                    grainUUID,
-                    infectedUUID
-                )
+                                    val entryNumber = bitmapSingleton.getNHCEntriesCreation()
 
+                                    val bruiseInfo = BruiseData(regionText, treatmentText, descText)
+                                    val barthelInfo = Barthel(
+                                        bathText,
+                                        bathroomText,
+                                        bladderText,
+                                        deambulateText,
+                                        depositiontext,
+                                        dressText,
+                                        eatText,
+                                        moveText,
+                                        stairText,
+                                        tidingText,
+                                        barthelText.toString()
+                                    )
+                                    val eminaInfo = Emina(
+                                        activityText,
+                                        incontinencyText,
+                                        statusText,
+                                        mobilityText,
+                                        nutritionText,
+                                        eminaText.toString()
+                                    )
+                                    val patientInfo = Patient(
+                                        dobText,
+                                        name = nameText,
+                                        entryNumber = entryNumber,
+                                        patologies = patologiesText,
+                                        bruiseData = bruiseInfo,
+                                        barthel = barthelInfo,
+                                        emina = eminaInfo,
+                                        necroticImage = necroticUUID,
+                                        grainImage = grainUUID,
+                                        infectedImage = infectedUUID
+                                    )
 
-                myRef.child("Patient").setValue(patientInfo)
+                                    val nhc = bitmapSingleton.getNHC()
+                                    val history = UserActivity.Historial(patientInfo, nhc)
 
+                                    print(patientInfo)
 
-                val intent = Intent(this, HomeActivity::class.java)
-                this.startActivity(intent)
+                                    myRef.setValue(
+                                        history,
+                                        object : DatabaseReference.CompletionListener {
+                                            @SuppressLint("RestrictedApi")
+                                            override fun onComplete(
+                                                error: DatabaseError?,
+                                                ref: DatabaseReference
+                                            ) {
+                                                if (error != null) {
+                                                    Log.v(
+                                                        LOG_TAG,
+                                                        "Data could not be saved. " + error.getMessage()
+                                                    ) //Hits here every time.
+                                                } else {
+                                                    Log.v(
+                                                        LOG_TAG,
+                                                        "Data saved successfully. Finishing activity..."
+                                                    )
+                                                    finish()
+                                                }
+                                            }
+
+                                        })
+
+                                    val intent = Intent(this, HomeActivity::class.java)
+                                    this.startActivity(intent)
+
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
 }
+
 
 
 
