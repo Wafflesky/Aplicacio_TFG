@@ -65,6 +65,44 @@ class UserActivity: AppCompatActivity() {
                     }
                 }
 
+                list.adapter = UserListAdapter(this@UserActivity,R.layout.fragment_user_list,nameList)
+                list.setOnItemClickListener() { adapterView, view, position, id ->
+                    val itemAtPos = adapterView.getItemAtPosition(position)
+                    val itemIdAtPos = adapterView.getItemIdAtPosition(position)
+                    val clicked = itemAtPos
+                    //TODO: Aixo ens agafa per NHC, perfecte per a cridar a base de dades
+                    Toast.makeText(this@UserActivity,
+                        "Click on item $clicked"
+                        ,Toast.LENGTH_LONG ).show()
+                    // Toast.makeText(this, "You Clicked:"+" "+position,Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@UserActivity, UserEntriesActivity::class.java)
+                    intent.putExtra("nhc", clicked.toString())
+                    startActivity(intent)
+
+                }
+
+
+                adapter =  UserListAdapter(this@UserActivity,R.layout.fragment_user_list,nameList)
+                list.adapter = adapter
+                searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    @RequiresApi(Build.VERSION_CODES.N)
+                    //TODO: Qurery filter no canvia els valors de la llista
+                    override fun onQueryTextSubmit(query: String): Boolean {
+
+                        if (nameList.contains(query)) {
+                            adapter.filter.filter(query)
+
+                        } else {
+                            Toast.makeText(this@UserActivity, "No Match found", Toast.LENGTH_LONG).show()
+                        }
+                        return false
+                    }
+                    override fun onQueryTextChange(newText: String): Boolean {
+                        adapter.filter.filter(newText)
+                        return false
+                    }
+                })
+
                 // go to next step from here e.g handlePosts(posts);
             }
 
@@ -73,42 +111,7 @@ class UserActivity: AppCompatActivity() {
             }
         })
 
-        list.adapter = UserListAdapter(this,R.layout.fragment_user_list,nameList)
-        list.setOnItemClickListener() { adapterView, view, position, id ->
-            val itemAtPos = adapterView.getItemAtPosition(position)
-            val itemIdAtPos = adapterView.getItemIdAtPosition(position)
-            val clicked = itemAtPos
-            //TODO: Aixo ens agafa per NHC, perfecte per a cridar a base de dades
-            Toast.makeText(this,
-                "Click on item $clicked"
-                ,Toast.LENGTH_LONG ).show()
-            // Toast.makeText(this, "You Clicked:"+" "+position,Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, UserEntriesActivity::class.java)
-                intent.putExtra("nhc", clicked.toString())
-                this.startActivity(intent)
 
-        }
-
-
-        adapter =  UserListAdapter(this,R.layout.fragment_user_list,nameList)
-        list.adapter = adapter
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            @RequiresApi(Build.VERSION_CODES.N)
-            override fun onQueryTextSubmit(query: String): Boolean {
-
-                if (nameList.contains(query)) {
-                    adapter.filter.filter(query)
-
-                } else {
-                    Toast.makeText(this@UserActivity, "No Match found", Toast.LENGTH_LONG).show()
-                }
-                return false
-            }
-            override fun onQueryTextChange(newText: String): Boolean {
-                adapter.filter.filter(newText)
-                return false
-            }
-        })
     }
 
     /**

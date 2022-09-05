@@ -17,8 +17,6 @@ class UserListAdapter(var mCtx: Context, var resource:Int, var items: MutableLis
     :ArrayAdapter<String>( mCtx , resource , items as MutableList<String>){
 
 
-
-
     @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
@@ -35,8 +33,5 @@ class UserListAdapter(var mCtx: Context, var resource:Int, var items: MutableLis
 
         return view
     }
-
-
-
 
 }
