@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/HomeFragment"
-        android:name="com.example.aplicacio.HomeFragment"
+        android:name="com.example.aplicacio.ViewModel.HomeFragment"
         android:label="@string/HomeFragment"
         tools:layout="@layout/activity_main">
 
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/ImageFragment"
-        android:name="com.example.aplicacio.ImageFragment"
+        android:name="com.example.aplicacio.ViewModel.ImageFragment"
         android:label="@string/ImageFragment"
         tools:layout="@layout/activity_image">
 
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/UserFragment"
-        android:name="com.example.aplicacio.UserFragment"
+        android:name="com.example.aplicacio.ViewModel.UserFragment"
         android:label="@string/UserFragment"
         tools:layout="@layout/activity_userlist">
 
@@ -53,7 +53,7 @@
 
         <action
             android:id="@+id/action_ResultFragment_to_CanvasFragment"
-            app:destination="@id/CanvasFragment" />
+            app:destination="@id/HomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/CanvasFragment"
@@ -70,7 +70,7 @@
     </fragment>
     <fragment
         android:id="@+id/ConfirmFragment"
-        android:name="com.example.aplicacio.ImageFragment"
+        android:name="com.example.aplicacio.ViewModel.ImageFragment"
         android:label="@string/ImageFragment"
         tools:layout="@layout/activity_confirm">
 

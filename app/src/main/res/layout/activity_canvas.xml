@@ -6,13 +6,14 @@
     android:layout_height="match_parent"
     tools:ignore="ExtraText">
 
-    <com.example.aplicacio.CanvasView
+    <com.example.aplicacio.ViewModel.CanvasView
         android:id="@+id/signature_canvas"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="412dp"
+        android:layout_height="691dp"
+        android:layout_marginBottom="8dp"
         android:textColor="#FFFFFF"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="1dp" />
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        tools:layout_editor_absoluteX="-1dp" />
 
     <Button
         android:id="@+id/button2"
@@ -44,16 +45,15 @@
         android:id="@+id/spinner"
         android:layout_width="169dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/Button_Red"
+        android:backgroundTint="@color/Button_Grey"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button2"
-        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintHorizontal_bias="0.562"
         app:layout_constraintStart_toEndOf="@+id/button1"
-        android:textAlignment="center"
-        android:backgroundTint="@color/Button_Grey"
-        android:background="@color/Button_Red"
         tools:ignore="MissingConstraints" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

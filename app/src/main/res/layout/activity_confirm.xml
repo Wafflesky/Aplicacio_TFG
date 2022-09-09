@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConfirmActivity">
+    tools:context=".ViewModel.ConfirmActivity">
 
     <!--
     slideranimation duration is to set duration for transition between two slides
@@ -24,6 +24,7 @@
         android:id="@+id/confirm_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="36dp"
         android:layout_marginBottom="48dp"
         android:backgroundTint="@color/Button_Green"
@@ -75,9 +76,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:hint="Número Historial Clinic"
+        android:layout_marginBottom="48dp"
         android:ems="10"
+        android:hint="Número Historial Clinic"
         android:inputType="number"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/simpleFrameLayout"
         tools:ignore="HardcodedText" />

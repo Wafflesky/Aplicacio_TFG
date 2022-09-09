@@ -13,13 +13,13 @@
             android:id="@+id/textView12"
             android:layout_width="69dp"
             android:layout_height="19dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="36dp"
             android:text="@string/nutricio"
             android:textAlignment="viewEnd"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerNutricio"
-            app:layout_constraintHorizontal_bias="0.785"
+            app:layout_constraintHorizontal_bias="0.675"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView11"
             tools:ignore="MissingConstraints" />
@@ -28,13 +28,13 @@
             android:id="@+id/textView19"
             android:layout_width="69dp"
             android:layout_height="19dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="36dp"
             android:text="@string/activitat"
             android:textAlignment="viewEnd"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerActivitat"
-            app:layout_constraintHorizontal_bias="0.785"
+            app:layout_constraintHorizontal_bias="0.662"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView12"
             tools:ignore="MissingConstraints" />
@@ -43,10 +43,12 @@
             android:id="@+id/confirm"
             android:layout_width="127dp"
             android:layout_height="53dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginBottom="32dp"
             android:backgroundTint="@color/Button_Green"
             android:text="@string/Confirm"
             android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.481"
             app:layout_constraintStart_toStartOf="parent"
@@ -116,13 +118,13 @@
             android:id="@+id/age3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="38dp"
+            android:layout_marginTop="28dp"
             android:text="@string/age"
             android:textAlignment="center"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/editTextNumber"
-            app:layout_constraintHorizontal_bias="0.468"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/patient3"
             tools:ignore="MissingConstraints" />
@@ -138,7 +140,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/age3"
+            app:layout_constraintTop_toBottomOf="@+id/editTextDate"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -209,7 +211,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat"
-            app:layout_constraintHorizontal_bias="0.681"
+            app:layout_constraintHorizontal_bias="0.584"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewEmina"
             tools:ignore="MissingConstraints" />
@@ -218,38 +220,38 @@
             android:id="@+id/textView10"
             android:layout_width="69dp"
             android:layout_height="19dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="36dp"
             android:text="@string/movilitat"
             android:textAlignment="viewEnd"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerMovilitat"
-            app:layout_constraintHorizontal_bias="0.785"
+            app:layout_constraintHorizontal_bias="0.675"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5"
             tools:ignore="MissingConstraints" />
+
 
         <TextView
             android:id="@+id/textView11"
             android:layout_width="103dp"
             android:layout_height="20dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="36dp"
             android:text="@string/incontinencia"
             android:textAlignment="viewEnd"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerIncontinencia"
-            app:layout_constraintHorizontal_bias="0.666"
+            app:layout_constraintHorizontal_bias="0.581"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10"
             tools:ignore="MissingConstraints" />
 
-
         <EditText
             android:id="@+id/editTextNumber"
-            android:layout_width="242dp"
+            android:layout_width="190dp"
             android:layout_height="48dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
             android:autofillHints=""
             android:ems="8"
@@ -261,7 +263,7 @@
 
         <Spinner
             android:id="@+id/spinnerEstat"
-            android:layout_width="242dp"
+            android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
@@ -271,7 +273,7 @@
 
         <Spinner
             android:id="@+id/spinnerEstat2"
-            android:layout_width="242dp"
+            android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
@@ -281,7 +283,7 @@
 
         <Spinner
             android:id="@+id/spinnerEstat4"
-            android:layout_width="242dp"
+            android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
@@ -291,7 +293,7 @@
 
         <Spinner
             android:id="@+id/spinnerEstat5"
-            android:layout_width="242dp"
+            android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
@@ -301,7 +303,7 @@
 
         <Spinner
             android:id="@+id/spinnerEstat6"
-            android:layout_width="242dp"
+            android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
@@ -311,7 +313,7 @@
 
         <Spinner
             android:id="@+id/spinnerEstat7"
-            android:layout_width="242dp"
+            android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
@@ -321,7 +323,7 @@
 
         <Spinner
             android:id="@+id/spinnerEstat8"
-            android:layout_width="242dp"
+            android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
@@ -331,7 +333,7 @@
 
         <Spinner
             android:id="@+id/spinnerEstat9"
-            android:layout_width="242dp"
+            android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
@@ -341,7 +343,7 @@
 
         <Spinner
             android:id="@+id/spinnerEstat10"
-            android:layout_width="242dp"
+            android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
@@ -351,7 +353,7 @@
 
         <Spinner
             android:id="@+id/spinnerEstat11"
-            android:layout_width="242dp"
+            android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
@@ -361,7 +363,7 @@
 
         <Spinner
             android:id="@+id/spinnerEstat3"
-            android:layout_width="242dp"
+            android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
@@ -371,7 +373,7 @@
 
         <Spinner
             android:id="@+id/spinnerMovilitat"
-            android:layout_width="242dp"
+            android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
@@ -381,7 +383,7 @@
 
         <Spinner
             android:id="@+id/spinnerIncontinencia"
-            android:layout_width="242dp"
+            android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
@@ -391,7 +393,7 @@
 
         <Spinner
             android:id="@+id/spinnerNutricio"
-            android:layout_width="242dp"
+            android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
@@ -401,7 +403,7 @@
 
         <Spinner
             android:id="@+id/spinnerActivitat"
-            android:layout_width="242dp"
+            android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
@@ -466,13 +468,13 @@
             android:id="@+id/textView20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="36dp"
             android:text="@string/menjar"
             android:textAlignment="center"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat3"
-            app:layout_constraintHorizontal_bias="0.828"
+            app:layout_constraintHorizontal_bias="0.711"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewEmina2" />
 
@@ -493,13 +495,13 @@
             android:id="@+id/textView22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="36dp"
             android:text="@string/vestir_se"
             android:textAlignment="center"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat4"
-            app:layout_constraintHorizontal_bias="0.82"
+            app:layout_constraintHorizontal_bias="0.681"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
@@ -507,13 +509,13 @@
             android:id="@+id/textView23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="36dp"
             android:text="@string/arreglar_se"
             android:textAlignment="center"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat5"
-            app:layout_constraintHorizontal_bias="0.78"
+            app:layout_constraintHorizontal_bias="0.644"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
@@ -521,13 +523,13 @@
             android:id="@+id/textView24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="36dp"
             android:text="@string/deposici"
             android:textAlignment="center"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat6"
-            app:layout_constraintHorizontal_bias="0.807"
+            app:layout_constraintHorizontal_bias="0.668"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
@@ -535,13 +537,13 @@
             android:id="@+id/textView25"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="32dp"
             android:text="@string/micci"
             android:textAlignment="center"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat7"
-            app:layout_constraintHorizontal_bias="0.831"
+            app:layout_constraintHorizontal_bias="0.703"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
@@ -549,13 +551,13 @@
             android:id="@+id/textView27"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="36dp"
             android:text="@string/anar_al_labavo"
             android:textAlignment="center"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat8"
-            app:layout_constraintHorizontal_bias="0.632"
+            app:layout_constraintHorizontal_bias="0.552"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView25" />
 
@@ -563,13 +565,13 @@
             android:id="@+id/textView28"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="32dp"
             android:text="@string/traslladar_se"
             android:textAlignment="center"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat9"
-            app:layout_constraintHorizontal_bias="0.716"
+            app:layout_constraintHorizontal_bias="0.592"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
@@ -577,13 +579,13 @@
             android:id="@+id/textView29"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="36dp"
             android:text="@string/deambulaci"
             android:textAlignment="center"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat11"
-            app:layout_constraintHorizontal_bias="0.721"
+            app:layout_constraintHorizontal_bias="0.611"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView28" />
 
@@ -591,13 +593,13 @@
             android:id="@+id/textView30"
             android:layout_width="135dp"
             android:layout_height="24dp"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="32dp"
             android:text="@string/pujar_baixar_escales"
             android:textAlignment="viewEnd"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat10"
-            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintHorizontal_bias="0.423"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
@@ -622,52 +624,52 @@
 
         <EditText
             android:id="@+id/editTextTextPersonName"
-            android:layout_width="242dp"
+            android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@string/nom"
+            android:hint="@string/nom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
 
         <EditText
             android:id="@+id/editTextTextPersonName2"
-            android:layout_width="242dp"
+            android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"
-            android:text="@string/regio_de_la_ferida"
+            android:hint="@string/regio_de_la_ferida"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <EditText
             android:id="@+id/editTextTextPersonName3"
-            android:layout_width="242dp"
+            android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="24dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"
-            android:text="@string/tractamentInput"
+            android:hint="@string/tractamentInput"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 
-        <EditText
+        <DatePicker
             android:id="@+id/editTextDate"
-            android:layout_width="243dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:ems="10"
-            android:inputType="date"
+            android:layout_width="245dp"
+            android:layout_height="179dp"
+            android:layout_marginTop="16dp"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/patient3" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/age3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

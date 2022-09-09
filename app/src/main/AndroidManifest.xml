@@ -20,7 +20,7 @@
         android:theme="@style/Theme.Aplicacio"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
+            android:name=".ViewModel.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegistrationActivity"
+            android:name=".ViewModel.RegistrationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -38,7 +38,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HomeActivity"
+            android:name=".ViewModel.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -47,7 +47,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ImageActivity"
+            android:name=".ViewModel.ImageActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -56,7 +56,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UserActivity"
+            android:name=".ViewModel.UserActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -65,7 +65,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UserDataActivity"
+            android:name=".ViewModel.UserDataActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -74,7 +74,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UserEntriesActivity"
+            android:name=".ViewModel.UserEntriesActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -83,7 +83,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ResultActivity"
+            android:name=".ViewModel.ResultActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -92,7 +92,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CanvasActivity"
+            android:name=".ViewModel.CanvasActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -101,7 +101,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ConfirmActivity"
+            android:name=".ViewModel.ConfirmActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -110,7 +110,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddNewInfoActivity"
+            android:name=".ViewModel.AddNewInfoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -119,7 +119,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddExistingInfoActivity"
+            android:name=".ViewModel.AddExistingInfoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
