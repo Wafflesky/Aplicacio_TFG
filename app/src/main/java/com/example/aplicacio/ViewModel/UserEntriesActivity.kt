@@ -94,6 +94,7 @@ class UserEntriesActivity: AppCompatActivity() {
 
                         if (nameList.contains(query)) {
                             adapter.filter.filter(query)
+                            list.adapter = adapter
 
                         } else {
                             Toast.makeText(this@UserEntriesActivity, "No Match found", Toast.LENGTH_LONG).show()
@@ -113,6 +114,7 @@ class UserEntriesActivity: AppCompatActivity() {
                 Log.i(javaClass.name.toString(), ": " + databaseError.message)
             }
         })
+
 
     }
 

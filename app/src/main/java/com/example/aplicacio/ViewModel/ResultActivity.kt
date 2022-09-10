@@ -3,6 +3,7 @@ package com.example.aplicacio.ViewModel
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,7 @@ import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.content.PackageManagerCompat.LOG_TAG
 import com.example.aplicacio.*
 import com.example.aplicacio.Model.*
@@ -31,6 +33,9 @@ import java.util.*
 class ResultActivity : AppCompatActivity() {
 
     private lateinit var confirmButton: Button
+    private lateinit var progressbar: ProgressBar
+    private lateinit var cardEmina: CardView
+    private lateinit var cardBarthel: CardView
 
     private val images = mutableListOf<Bitmap>()
 
@@ -110,6 +115,7 @@ class ResultActivity : AppCompatActivity() {
         //Arreglar visibilitat + Posar una barra de carrega
 
         populateView()
+        progressbar.visibility = View.GONE
 
         val originalWidth = bitmapSingleton.getWidth()
         val originalHeight = bitmapSingleton.getHeight()
@@ -138,12 +144,22 @@ class ResultActivity : AppCompatActivity() {
         // on below line we are adding on item
         // click listener for our grid view.
         gridView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+
+            bitmapSingleton.storeBitmap(images.get(position))
+            val intent = Intent(this@ResultActivity, ViewImageActivity::class.java)
+            intent.putExtra("position", position);
+            startActivity(intent)
+
             // inside on click method we are simply displaying
             // a toast message with course name.
         }
 
 
         confirmButton.setOnClickListener{
+
+
+            // show the visibility of progress bar to show loading
+            progressbar.visibility = View.VISIBLE
 
             val database = Firebase.database("https://alex-tfg-default-rtdb.europe-west1.firebasedatabase.app")
             val storage = Firebase.storage
@@ -265,6 +281,7 @@ class ResultActivity : AppCompatActivity() {
                                                         LOG_TAG,
                                                         "Data saved successfully. Finishing activity..."
                                                     )
+                                                    progressbar.visibility = View.GONE
                                                     val intent = Intent(this@ResultActivity, HomeActivity::class.java)
                                                     startActivity(intent)
                                                 }
@@ -312,6 +329,10 @@ class ResultActivity : AppCompatActivity() {
         stair = findViewById(R.id.escales)
         barthelResult = findViewById(R.id.resultatBarthel)
         gridView = findViewById(R.id.grid)
+
+        progressbar = findViewById<ProgressBar>(R.id.progressBarResult)
+        cardEmina = findViewById(R.id.cardView)
+        cardBarthel = findViewById(R.id.cardView2)
 
     }
 
@@ -376,10 +397,22 @@ class ResultActivity : AppCompatActivity() {
         activity.setText(activityText)
 
         when(eminaText) {
-            0 -> eminaResult.setText("Sense risc")
-            in 1..3 -> eminaResult.setText("Risc lleu")
-            in 4..7 -> eminaResult.setText("Risc mig")
-            else -> eminaResult.setText("Risc alt")
+            0 -> {
+                eminaResult.setText("Sense risc")
+                cardEmina.setCardBackgroundColor(Color.argb(100,0, 200, 0))
+            }
+            in 1..3 -> {
+                eminaResult.setText("Risc lleu")
+                cardEmina.setCardBackgroundColor(Color.argb(100,100, 160, 0))
+            }
+            in 4..7 -> {
+                eminaResult.setText("Risc mig")
+                cardEmina.setCardBackgroundColor(Color.argb(100,255, 160, 0))
+            }
+            else -> {
+                eminaResult.setText("Risc alt")
+                cardEmina.setCardBackgroundColor(Color.argb(100,255, 0, 0))
+            }
         }
 
         eat.setText(eatText)
@@ -394,11 +427,26 @@ class ResultActivity : AppCompatActivity() {
         stair.setText(stairText)
 
         when(barthelText) {
-            in 0..19 -> barthelResult.setText("Dependència total")
-            in 20..39 -> barthelResult.setText("Dependència greu")
-            in 40..59 -> barthelResult.setText("Dependència moderada")
-            in 60..99 -> barthelResult.setText("Dependència lleu")
-            else -> barthelResult.setText("Independència")
+            in 0..19 -> {
+                barthelResult.setText("Independència")
+                cardBarthel.setCardBackgroundColor(Color.argb(100,0, 200, 0))
+            }
+            in 20..39 -> {
+                barthelResult.setText("Dependència lleu")
+                cardBarthel.setCardBackgroundColor(Color.argb(100,75, 200, 0))
+            }
+            in 40..59 -> {
+                barthelResult.setText("Dependència moderada")
+                cardBarthel.setCardBackgroundColor(Color.argb(100,150, 200, 0))
+            }
+            in 60..99 -> {
+                barthelResult.setText("Dependència greu")
+                cardBarthel.setCardBackgroundColor(Color.argb(100,255, 200, 0))
+            }
+            else -> {
+                barthelResult.setText("Dependència total")
+                cardBarthel.setCardBackgroundColor(Color.argb(100,255, 0, 0))
+            }
         }
 
         images.add(necroticBitmap)

@@ -2,7 +2,9 @@ package com.example.aplicacio.ViewModel
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
@@ -13,6 +15,7 @@ import android.view.Window
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import com.example.aplicacio.Model.Patient
 import com.example.aplicacio.Model.bitmapSingleton
 import com.example.aplicacio.R
@@ -29,19 +32,8 @@ import com.google.firebase.storage.ktx.storage
 
 class UserDataActivity: AppCompatActivity() {
 
-    private lateinit var confirmButton: Button
-
-    private lateinit var necroticBitmap: Bitmap
-    private lateinit var grainBitmap: Bitmap
-    private lateinit var infectedBitmap: Bitmap
-
-    private lateinit var necroticUrl: String
-    private lateinit var grainUrl: String
-    private lateinit var infectedUrl: String
-
-    private lateinit var necroImage: ImageView
-    private lateinit var grainImage: ImageView
-    private lateinit var infImage: ImageView
+    private lateinit var cardEmina: CardView
+    private lateinit var cardBarthel: CardView
 
     private lateinit var patient: TextView
     private lateinit var DoB: TextView
@@ -106,7 +98,6 @@ class UserDataActivity: AppCompatActivity() {
         //Fer la informació més gran
 
         populateView()
-        fillInformation()
 
         val myRef = mDatabase.getReference()
         myRef.child("Patients").addValueEventListener(object : ValueEventListener {
@@ -126,7 +117,7 @@ class UserDataActivity: AppCompatActivity() {
                             if (patient.entryNumber == (selectedNumberEntry -1)) {
                                 pacient = patient
                                 populateView()
-
+                                fillInformation()
                             }
                         }
                     }
@@ -184,6 +175,9 @@ class UserDataActivity: AppCompatActivity() {
         barthel = findViewById(R.id.resultatBarthel)
         gridView = findViewById(R.id.grid)
 
+        cardEmina = findViewById(R.id.cardView)
+        cardBarthel = findViewById(R.id.cardView2)
+
     }
 
     fun fillInformation() {
@@ -207,11 +201,23 @@ class UserDataActivity: AppCompatActivity() {
 
         val eminaText = pacient.emina.eminaResult.toInt()
 
-        when (eminaText) {
-            0 -> emina.setText("Sense risc")
-            in 1..3 -> emina.setText("Risc lleu")
-            in 4..7 -> emina.setText("Risc mig")
-            else -> emina.setText("Risc alt")
+        when(eminaText) {
+            0 -> {
+                emina.setText("Sense risc")
+                cardEmina.setCardBackgroundColor(Color.argb(100,0, 200, 0))
+            }
+            in 1..3 -> {
+                emina.setText("Risc lleu")
+                cardEmina.setCardBackgroundColor(Color.argb(100,100, 160, 0))
+            }
+            in 4..7 -> {
+                emina.setText("Risc mig")
+                cardEmina.setCardBackgroundColor(Color.argb(100,255, 160, 0))
+            }
+            else -> {
+                emina.setText("Risc alt")
+                cardEmina.setCardBackgroundColor(Color.argb(100,255, 0, 0))
+            }
         }
 
 
@@ -228,12 +234,27 @@ class UserDataActivity: AppCompatActivity() {
 
         val barthelText = pacient.barthel.barthelResult.toInt()
 
-        when (barthelText) {
-            in 0..19 -> barthel.setText("Dependència total")
-            in 20..39 -> barthel.setText("Dependència greu")
-            in 40..59 -> barthel.setText("Dependència moderada")
-            in 60..99 -> barthel.setText("Dependència lleu")
-            else -> barthel.setText("Independència")
+        when(barthelText) {
+            in 0..19 -> {
+                barthel.setText("Independència")
+                cardBarthel.setCardBackgroundColor(Color.argb(100,0, 200, 0))
+            }
+            in 20..39 -> {
+                barthel.setText("Dependència lleu")
+                cardBarthel.setCardBackgroundColor(Color.argb(100,75, 200, 0))
+            }
+            in 40..59 -> {
+                barthel.setText("Dependència moderada")
+                cardBarthel.setCardBackgroundColor(Color.argb(100,150, 200, 0))
+            }
+            in 60..99 -> {
+                barthel.setText("Dependència greu")
+                cardBarthel.setCardBackgroundColor(Color.argb(100,255, 200, 0))
+            }
+            else -> {
+                barthel.setText("Dependència total")
+                cardBarthel.setCardBackgroundColor(Color.argb(100,255, 0, 0))
+            }
         }
 
         images.add(pacient.necroticImage)
@@ -261,6 +282,11 @@ class UserDataActivity: AppCompatActivity() {
             gridView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
                 // inside on click method we are simply displaying
                 // a toast message with course name.
+                //bitmapSingleton.storeBitmap(images.get(position))
+                val intent = Intent(this@UserDataActivity, ViewImageActivity::class.java)
+                intent.putExtra("position", position);
+                intent.putExtra("stringImage",images.get(position))
+                startActivity(intent)
 
             }
 

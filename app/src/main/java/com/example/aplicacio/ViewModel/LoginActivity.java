@@ -1,5 +1,7 @@
 package com.example.aplicacio.ViewModel;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.content.Intent;
 import android.text.TextUtils;
@@ -82,7 +84,12 @@ public class LoginActivity extends AppCompatActivity {
                             "Please enter email!!",
                             Toast.LENGTH_LONG)
                     .show();
+            progressbar.setVisibility(View.GONE);
+            emailTextView.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
             return;
+        }
+        else{
+            emailTextView.getBackground().setColorFilter(Color.TRANSPARENT, PorterDuff.Mode.SRC_ATOP);
         }
 
         if (TextUtils.isEmpty(password)) {
@@ -90,7 +97,12 @@ public class LoginActivity extends AppCompatActivity {
                             "Please enter password!!",
                             Toast.LENGTH_LONG)
                     .show();
+            progressbar.setVisibility(View.GONE);
+            passwordTextView.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
             return;
+        }
+        else{
+            passwordTextView.getBackground().setColorFilter(Color.TRANSPARENT, PorterDuff.Mode.SRC_ATOP);
         }
 
         // signin existing user

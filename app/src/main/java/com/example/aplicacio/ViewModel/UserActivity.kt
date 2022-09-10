@@ -96,7 +96,7 @@ class UserActivity: AppCompatActivity() {
 
                         if (nameList.contains(query)) {
                             adapter.filter.filter(query)
-
+                            list.adapter = adapter
                         } else {
                             Toast.makeText(this@UserActivity, "No Match found", Toast.LENGTH_LONG).show()
                         }

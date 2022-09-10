@@ -58,7 +58,6 @@ class UserListAdapter(var mCtx: Context, var resource:Int, var items: MutableLis
 
         nhc.text = nhcText
 
-
         return view
     }
 
