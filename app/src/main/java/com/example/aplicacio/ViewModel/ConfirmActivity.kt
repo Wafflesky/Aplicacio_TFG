@@ -25,9 +25,11 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
-
-private val NUM_PAGES = 3
-
+/**
+ * Classe on trobem les seleccions separades en tres imatges diferents. Aqui l'usuari pot comprovar
+ * les seleccions fetes i accedir a la pantalla d'omplir la informació del pacient mitjançant el
+ * número d'historial clinic d'aquest
+ */
 class ConfirmActivity: AppCompatActivity() {
 
     private lateinit var confirmButton: Button
@@ -47,6 +49,10 @@ class ConfirmActivity: AppCompatActivity() {
     private val mDatabase = Firebase.database("https://alex-tfg-default-rtdb.europe-west1.firebasedatabase.app")
 
 
+    /**
+     * Funció que es crida en la creació de la activitat. Aqui carreguem els bitmaps que s'han
+     * aconseguit en la pantalla del canvas i s'afegeixen en el tabLayout
+     */
     @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,7 +83,9 @@ class ConfirmActivity: AppCompatActivity() {
 
 
 
-
+        //Aqui es comprova si l'usuari ha introduït el numero d'historal Clinic i es comprova si
+        // aquest existeix dins la base de dades. Depenent de si existeix o no es porta a l'usuari
+        // a la pantalla d'afegir informació d'un pacient nou o el d'un pacient existent.
         confirmButton.setOnClickListener {
 
             if(editTextNHC.text.toString().equals("")){
@@ -133,7 +141,7 @@ class ConfirmActivity: AppCompatActivity() {
 
         var prefragment: Fragment? = null
         val fm = supportFragmentManager
-        prefragment = NecroticFragment()
+        prefragment = ImageFragment(necroticBitmap)
         val ft: FragmentTransaction = fm.beginTransaction()
         ft.replace(R.id.simpleFrameLayout, prefragment)
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
@@ -144,9 +152,9 @@ class ConfirmActivity: AppCompatActivity() {
 // get the current selected tab's position and replace the fragment accordingly
                 var fragment: Fragment? = null
                 when (tab.position) {
-                    0 -> fragment = NecroticFragment()
-                    1 -> fragment = GrainFragment()
-                    2 -> fragment = InfectedFragment()
+                    0 -> fragment = ImageFragment(necroticBitmap)
+                    1 -> fragment = ImageFragment(grainBitmap)
+                    2 -> fragment = ImageFragment(infectedBitmap)
                 }
                 val fm = supportFragmentManager
                 val ft: FragmentTransaction = fm.beginTransaction()

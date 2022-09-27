@@ -13,13 +13,16 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
-import com.example.aplicacio.R
 import com.example.aplicacio.Model.bitmapSingleton
+import com.example.aplicacio.R
 
-
+/**
+ * Classe on l'usuari es mourà per a utiltizar les funcionalitats de la aplicació
+ */
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -31,9 +34,12 @@ class HomeActivity : AppCompatActivity() {
     private var imageUri: Uri? = null
     //Camera Related
     val REQUEST_IMAGE_CAPTURE = 1
-    lateinit var currentPhotoPath: String
 
     @SuppressLint("InflateParams")
+    /**
+     * Funció que es crida a l'hora de crear la classe, aqui connectem els elements de la vista amb
+     * el codi i afegim listeners als botons per a que aquests fagin les funcionalitats que volem
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -65,35 +71,17 @@ class HomeActivity : AppCompatActivity() {
         //Draw a Mask
         dataBaseButton.setOnClickListener {
 
-
-
             val intent = Intent(this, UserActivity::class.java)
             this.startActivity(intent)
 
         }
 
-        /*
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        /*
-         */
-        val permissions = arrayOf(android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE)
-
-        fun hasNoPermissions(): Boolean{
-            return ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-        }
-
-        fun requestPermission(){
-            ActivityCompat.requestPermissions(this, permissions,0)
-        }
-    */
 
     }
 
+    /**
+     * Aqui s'aconsegueix la imatge que s'ha fet amb la camera i ens porta a la pantalla de confirmació d'aquesta
+     */
     private val getResult =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()) {
@@ -109,6 +97,10 @@ class HomeActivity : AppCompatActivity() {
 
             }
         }
+
+    /**
+     * Funció que demana accedir a la camera del telèfon
+     */
     @SuppressLint("QueryPermissionsNeeded")
     private fun dispatchTakePictureIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
@@ -118,7 +110,9 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    //Converts into Bitmap
+    /**
+     * Funció que converteix la imatge adquirida a bitmap per a poder tractar-la posteriorment
+     */
     private fun getCapturedImage(selectedPhotoUri: Uri): Bitmap {
         val bitmap = when {
             Build.VERSION.SDK_INT < 28 -> MediaStore.Images.Media.getBitmap(
@@ -132,6 +126,11 @@ class HomeActivity : AppCompatActivity() {
         }
         return bitmap
     }
+
+    /**
+     * Funció que comprova si les activitats de fer foto o seleccionar foto s'han acabat
+     * i que actua depenent del cas
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && requestCode == pickImage) {
@@ -159,5 +158,14 @@ class HomeActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    /**
+     * Funció que evita que l'usuari torni a la pantalla del login o a la pantalla de resultats.
+     */
+    override fun onBackPressed() {
+        // super.onBackPressed();
+        Toast.makeText(this@HomeActivity, "There is no back action", Toast.LENGTH_LONG).show()
+        return
     }
 }

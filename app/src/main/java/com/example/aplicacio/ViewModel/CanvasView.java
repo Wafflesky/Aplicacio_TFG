@@ -20,6 +20,13 @@ import java.util.LinkedList;
 
 // https://examples.javacodegeeks.com/android/core/graphics/canvas-graphics/android-canvas-example/
 
+/**
+ *  Aquesta classe correspon a la vista que utilitza el CanvasActivity per a poder pintar la selecció.
+ *  A diferència de les altres vistes aquesta s'ha de crear des del codi a causa de la complexitat d'aquesta.
+ *  La vista esta formada per diferents elements que trobem en les vistes que agrupades ens permeten
+ *  crear el canvas on pintem.
+ *
+ */
 public class CanvasView extends View{
 
     public int width;
@@ -55,8 +62,7 @@ public class CanvasView extends View{
     private Paint erasePaint;
 
     private float mX, mY;
-    private float centerX;
-    private float centerY;
+
 
     private static final float TOLERANCE = 5;
 
@@ -71,7 +77,12 @@ public class CanvasView extends View{
 
     private String paintMode = null;
 
-
+    /**
+     * Constructor de la classe canvasView, aqui s'inicialitzen les variables corresponents a el
+     * pinzell i la pintura utilitzats.
+     * @param c Context de la vista
+     * @param attrs Atributs que agafem de la classe de la que hereda
+     */
     public CanvasView(Context c, AttributeSet attrs) {
         super(c, attrs);
         context = c;
@@ -103,7 +114,6 @@ public class CanvasView extends View{
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setStyle(Paint.Style.STROKE);
-        //mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         mPaint.setStrokeJoin(Paint.Join.ROUND);
         mPaint.setStrokeWidth(10f);
         mPaint.setARGB(255,255,0,0);
@@ -111,7 +121,6 @@ public class CanvasView extends View{
         redPaint = new Paint();
         redPaint.setAntiAlias(true);
         redPaint.setStyle(Paint.Style.STROKE);
-        //mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         redPaint.setStrokeJoin(Paint.Join.ROUND);
         redPaint.setStrokeWidth(10f);
         redPaint.setARGB(150,255,0,0);
@@ -119,7 +128,6 @@ public class CanvasView extends View{
         greenPaint = new Paint();
         greenPaint.setAntiAlias(true);
         greenPaint.setStyle(Paint.Style.STROKE);
-        //mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         greenPaint.setStrokeJoin(Paint.Join.ROUND);
         greenPaint.setStrokeWidth(10f);
         greenPaint.setARGB(150,0,255,0);
@@ -127,7 +135,6 @@ public class CanvasView extends View{
         bluePaint = new Paint();
         bluePaint.setAntiAlias(true);
         bluePaint.setStyle(Paint.Style.STROKE);
-        //mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         bluePaint.setStrokeJoin(Paint.Join.ROUND);
         bluePaint.setStrokeWidth(10f);
         bluePaint.setARGB(150,0,0,255);
@@ -143,16 +150,22 @@ public class CanvasView extends View{
         erasePaint = new Paint();
         erasePaint.setAntiAlias(true);
         erasePaint.setStyle(Paint.Style.STROKE);
-        //mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         erasePaint.setStrokeJoin(Paint.Join.ROUND);
         erasePaint.setStrokeWidth(20f);
-        //erasePaint.setARGB(255,0,0,0);
         erasePaint.setColor(Color.TRANSPARENT);
 
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
     }
 
+    /**
+     * Funció on inicialitzem els bitmaps on es pinta i on s'escala el bitmap que conte la
+     * imatge per a introduïrla en el canvas.
+     * @param w Amplada del canvas
+     * @param h Altura del canvas
+     * @param oldw Amplada de la imatge
+     * @param oldh altura de la imatge
+     */
     // override onSizeChanged
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -176,14 +189,18 @@ public class CanvasView extends View{
         newBlueBitmap = Bitmap.createBitmap(w,
                 h, Bitmap.Config.ARGB_8888);
         // your Canvas will draw onto the defined Bitmap
-        //mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         mBitmap = bitmapSingleton.INSTANCE.getBitmap1();
 
         bmp_Copy = mBitmap.copy(Bitmap.Config.ARGB_8888,true);
         bmp_Copy = Bitmap.createScaledBitmap(bmp_Copy, w, h, false);
     }
 
-
+    /**
+     * Funció que es crida en bucle per a dibuixar tot el contingut de la pantalla i actualitzar el
+     * que es pinta sobre aquesta. Aqui primer es dibuixa la imatge en el canvas i despres es
+     * dibuixen les seleccions que ha fet l'usuari a sobre.
+     * @param canvas Canvas on es pinta la imatge i la selecció
+     */
     // override onDraw
     @SuppressLint("DrawAllocation")
     @Override
@@ -192,43 +209,10 @@ public class CanvasView extends View{
         Canvas BackCanvas = new Canvas(bmp_Copy);
 
         canvas.drawBitmap(bmp_Copy,0f,0f,null);
-        //canvas.drawPath(pathNou,redPaint);
-        //Canvas endCanvas = new Canvas(output);
-
-            /*
-            if(mask){
-                canvas.drawPath(pathNou,bluePaint);
-            }
-            */
-        //canvas.drawPath(paintPath, freePaint);
-        //canvas.drawPath(mPath, mPaint);
-        //pintar end differents modes provoca un canvi de el que s'esta pintant. Seria millor mirar
-        // d'aplicar diferents paints o algo, fer la recerca per si es pot pintar un mateix espai amb diferents paints
-
-
-        //Sembla molt important pintar les coses aqui, fer un flag que em fagi la mascara aqui?
-        //if(mask){
-
-        //mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        //mPaint.setStyle(Paint.Style.STROKE);
-        //mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-
-        //mPath.setFillType(Path.FillType.INVERSE_EVEN_ODD);
-            /*
-                endCanvas.drawBitmap(bmp_Copy,0f,0f,null);
-                endCanvas.drawPath(mPath,mPaint);
-                endCanvas.drawPath(paintPath,freePaint);
-                canvas.drawPath(pathNou,mPaint);
-
-
-                canvas.drawBitmap(output,0f,0f,null);
-*/
-
-
-        //}
 
         if(mask){
             //mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+            //canvi del traç de la selecció a omplir l'interior d'aquest
             switch(paintMode){
                 case "Necrotica":
                     redPaint.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -249,83 +233,18 @@ public class CanvasView extends View{
 
             }
         }
-        /*
-        else{
-            mPaint.setStyle(Paint.Style.STROKE);
-        }*/
-
-
-        //else{
-            /*
-            mPaint.setStyle(Paint.Style.STROKE);
-            mPaint.setXfermode(null);
-            int halfx = (int) width / 3;
-            int halfy = (int) height / 3;
-            canvas.drawBitmap(bmp_Copy, 0, 0, null);
-             */
-
-            /*
-            //if(!erase) {
-
-                switch (paintMode) {
-
-                    case 1:
-                        //Canvas grain = new Canvas();
-                        //redPaint = mPaint;
-
-                        //redPaint.setARGB(100, 255, 0, 0);
-                        canvas.drawPath(redPath, mPaint);
-
-                        break;
-                    case 2:
-                        //Canvas necro = new Canvas();
-                        //mPaint.setARGB(100, 0, 255, 0);
-                        canvas.drawPath(greenPath, mPaint);
-                        break;
-                    case 3:
-                        //Canvas infec = new Canvas();
-                        //mPaint.setARGB(100, 0, 0, 255);
-                        canvas.drawPath(bluePath, mPaint);
-                        break;
-
-                }
-
-                */
 
         canvas.drawPath(redPath,redPaint);
         canvas.drawPath(greenPath,greenPaint);
         canvas.drawPath(bluePath,bluePaint);
 
-            /*
-                if(paintMode == 4){
-                    erasePaint.setStyle(Paint.Style.STROKE);
-                    erasePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-                    canvas.drawPath(redPath,erasePaint);
-                }
-
-                */
-        //}
-        //else{
-
-        //mPaint.setARGB(0,0,0,0);
-        //mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-
-        //}
-
-
-        //canvas.drawPath(mPath, mPaint);
-        //canvas.drawPath(paintPath,freePaint);
-
-        //canvas.setBitmap(bmp_Paint);
-        // draw the mPath with the mPaint on the canvas when onDraw
-
-        //tempCanvas.drawBitmap(tmp, 0, 0, mPaint);
-        //}
-
-
-        //Mirar si aqui puc mostrar un opencV fet
     }
 
+    /**
+     * Funció que es crida quan la vista detecta que s'ha presionat la pantalla
+     * @param x Coordenada horitzontal on s'ha clicat
+     * @param y Coordenada vertical on s'ha clicat
+     */
     // when ACTION_DOWN start touch according to the x,y values
     private void startTouch(float x, float y) {
         if(isPaint){
@@ -349,6 +268,11 @@ public class CanvasView extends View{
         mY = y;
     }
 
+    /**
+     * Funció que es crida quan la vista detecta quan l'usuari mou el dit a una altra posició de la pantalla
+     * @param x Coordenada horitzontal on s'ha mogut
+     * @param y Coordenada vertical on s'ha mogut
+     */
     // when ACTION_MOVE move touch according to the x,y values
     private void moveTouch(float x, float y) {
         float dx = Math.abs(x - mX);
@@ -377,19 +301,26 @@ public class CanvasView extends View{
         }
     }
 
+    /**
+     * Funció que es crida per a borrar la selecció que s'ha fet en el canvas corresponent a el
+     * teixit seleccionat al spinner
+     */
     public void clearCanvas() {
-        System.out.println("Amogus");
+
         mPath.reset();
         paintPath.reset();
         switch(paintMode){
             case "Necrotica":
                 redPath.reset();
+                redPaint.setStyle(Paint.Style.STROKE);
                 break;
             case "Granulosa":
                 greenPath.reset();
+                greenPaint.setStyle(Paint.Style.STROKE);
                 break;
             case "Infectada":
                 bluePath.reset();
+                bluePaint.setStyle(Paint.Style.STROKE);
                 break;
         }
         invalidate();
@@ -406,10 +337,15 @@ public class CanvasView extends View{
         //System.out.println("Amgous");
     }
 
+    /**
+     * Funció que es crida un cop l'usuari clica el botó de confirmació. Aqui es fa la operació per
+     * a crear les màscares de la imatge i es on es guarda la informacio de les seleccions per a
+     * poder-les utilitzar en les pantalles que venen més tard en la execució .
+     */
     public void saveBitmap(){
         mask = false;
-        Canvas canvas = new Canvas(bmp_Copy);//TODO: Aixi em marco el que es important
-        Canvas endCanvas = new Canvas(output);//TODO: Aixi em marco el que es important
+        Canvas canvas = new Canvas(bmp_Copy);
+        Canvas endCanvas = new Canvas(output);
 
         Canvas redCanvas = new Canvas(redBitmap);
         Canvas greenCanvas = new Canvas(greenBitmap);
@@ -432,33 +368,10 @@ public class CanvasView extends View{
         //freePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
         //mPaint.setStyle(Paint.Style.STROKE);
 
-        //mPath.addPath(paintPath);//TODO: Aixi em marco el que es important
-        /**
-         * Aixo el que fa es ens posa en mode "Mascara2
-         */
-        mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));//TODO: Aixi em marco el que es important
-        mPath.setFillType(Path.FillType.INVERSE_WINDING);//TODO: Aixi em marco el que es important
-        //freePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.XOR));
+        //mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        //mPath.setFillType(Path.FillType.INVERSE_WINDING);
 
-        //amb aixo no borra per sobre, pero no surt despres, mirar alguna altra forma
-        //freePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OVER));
-        //DST OVER ens deixa amb la zona vermella per afora
-
-        //freePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.XOR));
-
-            /*
-            redCanvas.drawBitmap(bmp_Copy,0,0,null);
-            redCanvas.drawPath(redPath,redPaint);
-
-            greenCanvas.drawBitmap(bmp_Copy,0,0,null);
-            greenCanvas.drawPath(greenPath,greenPaint);
-
-            blueCanvas.drawBitmap(bmp_Copy,0,0,null);
-            blueCanvas.drawPath(bluePath,bluePaint);
-            */
-
-        //paintPath.setFillType(Path.FillType.INVERSE_WINDING);
-        endCanvas.drawBitmap(bmp_Copy,0f,0f,null); //TODO: Aixi em marco el que es important
+        //endCanvas.drawBitmap(bmp_Copy,0f,0f,null);
 
         redCanvas.drawBitmap(bmp_Copy,0f,0f,null);
         greenCanvas.drawBitmap(bmp_Copy,0f,0f,null);
@@ -476,66 +389,44 @@ public class CanvasView extends View{
         bitmapSingleton.INSTANCE.storeSelectedGrainBitmap(greenBitmap);
         bitmapSingleton.INSTANCE.storeSelectedInfectedBitmap(blueBitmap);
 
-        newRedPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));//TODO: Aixi em marco el que es important
-        newRedPath.setFillType(Path.FillType.INVERSE_WINDING);//TODO: Aixi em marco el que es important
-        newGreenPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));//TODO: Aixi em marco el que es important
-        newGreenPath.setFillType(Path.FillType.INVERSE_WINDING);//TODO: Aixi em marco el que es important
-        newBluePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));//TODO: Aixi em marco el que es important
-        newBluePath.setFillType(Path.FillType.INVERSE_WINDING);//TODO: Aixi em marco el que es important
+        newRedPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        newRedPath.setFillType(Path.FillType.INVERSE_WINDING);
+        newGreenPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        newGreenPath.setFillType(Path.FillType.INVERSE_WINDING);
+        newBluePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        newBluePath.setFillType(Path.FillType.INVERSE_WINDING);
 
         newRedCanvas.drawPath(newRedPath,newRedPaint);
         newGreenCanvas.drawPath(newGreenPath,newGreenPaint);
         newBlueCanvas.drawPath(newBluePath,newBluePaint);
-        //endCanvas.drawPath(paintPath,freePaint);
-        //endCanvas.drawPath(mPath,freePaint);
-        //endCanvas.drawPath(mPath,mPaint);//TODO: Aixi em marco el que es important
-        //endCanvas.drawPath(paintPath,freePaint);
-        //endCanvas.drawPath(paintPath,mPaint);
-        //endCanvas.drawPath(paintPath,freePaint);
-        //canvas.drawBitmap(output,0f,0f,null);//TODO: Aixi em marco el que es important
-
-        //TODO: L'unica idea que tinc es que els canvas transparents estigui per sota del canvas pintat normal
-        // com si fos una copia
 
         bitmapSingleton.INSTANCE.storeNecroticBitmap(newRedBitmap);
         bitmapSingleton.INSTANCE.storeGrainBitmap(newGreenBitmap);
         bitmapSingleton.INSTANCE.storeInfectedBitmap(newBlueBitmap);
 
-        //bitmapSingleton.INSTANCE.storeCanvasBitmap(output);//TODO: Aixi em marco el que es important
-        //output.recycle();
-
-        newRedPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));//TODO: Aixi em marco el que es important
-        newRedPath.setFillType(Path.FillType.EVEN_ODD);//TODO: Aixi em marco el que es important
-        newGreenPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));//TODO: Aixi em marco el que es important
-        newGreenPath.setFillType(Path.FillType.EVEN_ODD);//TODO: Aixi em marco el que es important
-        newBluePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));//TODO: Aixi em marco el que es important
-        newBluePath.setFillType(Path.FillType.EVEN_ODD);//TODO: Aixi em marco el que es important
+        newRedPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));
+        newRedPath.setFillType(Path.FillType.EVEN_ODD);
+        newGreenPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));
+        newGreenPath.setFillType(Path.FillType.EVEN_ODD);
+        newBluePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));
+        newBluePath.setFillType(Path.FillType.EVEN_ODD);
 
     }
-/*
-    public void changeMode() {
 
-        isPaint = !isPaint; //TODO: Aixo esta aqui perque es el que em deixa canviar entre stroke paint i Stroke fill
-        //erase = !erase;
-            /*
-            mask = false;
-            if(paintMode != 3){
-                paintMode++;
-            }
-            else{
-                paintMode = 1;
-            }
-
-
-    }*/
-
+    /**
+     * Funció que canvia el mode en que es pinta, per a canviar el teixit que s'està seleccionant
+     * @param mode Valor del spinner
+     */
     public void changeMode(String mode){
         System.out.println(mode);
         paintMode = mode;
     }
 
 
-
+    /**
+     * Funció que es crida una vegada es detecta que l'usuari ha deixat de presionar la pantalla.
+     * Aqui s'acaba de pintar i s'omple la forma de la selecció per dins.
+     */
     // when ACTION_UP stop touch
     private void upTouch() {
         if(isPaint){
@@ -559,13 +450,7 @@ public class CanvasView extends View{
                 break;
         }
         paintNotFinished = false;
-        System.out.println(xPoints);
-        System.out.println(yPoints);
 
-        centerX = calculateCenter(xPoints);
-        centerY = calculateCenter(yPoints);
-        System.out.println(centerX);
-        System.out.println(centerY);
         pathNou.set(mPath);
 
         paintPoint = true;
@@ -574,18 +459,12 @@ public class CanvasView extends View{
 
     }
 
-    private float calculateCenter(LinkedList<Float> point){
-
-        float sum = 0;
-        for (int i = 0; i < point.size(); i++){
-
-            float temp = point.get(i);
-            sum = sum + temp;
-        }
-        return sum/point.size();
-
-    }
-
+    /**
+     * Funció que detecta que hi ha hagut algun contacte amb la pantalla i crida a la funció
+     * corresponent al cas.
+     * @param event Aixo ens diu quin tipus d'acció ha fet l'usuari
+     * @return Retorna si s'ha detectat a lo'usuari o no
+     */
     //override the onTouchEvent
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -617,8 +496,6 @@ public class CanvasView extends View{
         return false;
     }
 
-    //return false;
-    // }
 
 }
 

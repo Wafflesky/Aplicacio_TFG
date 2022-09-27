@@ -19,7 +19,9 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
-
+/**
+ * Classe corresponent al llistat de pacients
+ */
 class UserActivity: AppCompatActivity() {
 
     lateinit var list: ListView
@@ -39,6 +41,9 @@ class UserActivity: AppCompatActivity() {
         var nhc: String
         )
 
+    /**
+     * Funció que es crida al iniciar la classe, aqui fem la connexio amb la database per a omplir el listView amb els pacients
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_userlist)
@@ -84,7 +89,7 @@ class UserActivity: AppCompatActivity() {
 
                 }
 
-                //Arreglar Query no funcionant correctament
+                //TODO: Arreglar Query no funcionant correctament
                 adapter =  UserListAdapter(this@UserActivity, R.layout.fragment_user_list,nameList)
                 list.adapter = adapter
                 searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

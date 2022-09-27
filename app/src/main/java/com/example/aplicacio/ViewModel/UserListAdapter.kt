@@ -15,6 +15,10 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
+/**
+ * Classe que crea cada element que trobem en el llistat del UserActivity.
+ * Aqui es prepara el requadre amb la informació de cada pacient
+ */
 class UserListAdapter(var mCtx: Context, var resource:Int, var items: MutableList<String>)
     :ArrayAdapter<String>( mCtx , resource , items as MutableList<String>){
 
@@ -22,6 +26,12 @@ class UserListAdapter(var mCtx: Context, var resource:Int, var items: MutableLis
 
 
     @SuppressLint("ViewHolder")
+    /**
+     * Aquesta funcio agafa el fragment_user_list i l'omple amb la informació de cada pacient.
+     * Per a aconseguir aquesta informació es fa la connexió amb la base de dades i s'agafa els NHCS
+     * unics. En el llistat mostrem un pacient amb el seu NHC tot i que les dades es puguin
+     * repetir en Firebase
+     */
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
         val layoutInflater : LayoutInflater = LayoutInflater.from(mCtx)

@@ -2,94 +2,17 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/HomeFragment">
+    android:id="@+id/nav_graph">
 
-    <fragment
-        android:id="@+id/HomeFragment"
-        android:name="com.example.aplicacio.ViewModel.HomeFragment"
-        android:label="@string/HomeFragment"
-        tools:layout="@layout/activity_main">
-
-        <action
-            android:id="@+id/action_HomeFragment_to_ImageFragment"
-            app:destination="@id/ImageFragment" />
-        <action
-            android:id="@+id/action_HomeFragment_to_UserFragment"
-            app:destination="@id/UserFragment"
-            />
-    </fragment>
     <fragment
         android:id="@+id/ImageFragment"
         android:name="com.example.aplicacio.ViewModel.ImageFragment"
         android:label="@string/ImageFragment"
-        tools:layout="@layout/activity_image">
-
-        <action
-            android:id="@+id/action_ImageFragment_to_CanvasFragment"
-            app:destination="@id/CanvasFragment" />
-        <action
-            android:id="@+id/action_ImageFragment_to_HomeFragment"
-            app:destination="@id/HomeFragment" />
-    </fragment>
+        tools:layout="@layout/activity_image"/>
     <fragment
         android:id="@+id/UserFragment"
         android:name="com.example.aplicacio.ViewModel.UserFragment"
         android:label="@string/UserFragment"
-        tools:layout="@layout/activity_userlist">
-
-        <action
-            android:id="@+id/action_UserFragment_to_UserDataFragment"
-            app:destination="@id/UserDataFragment" />
-        <action
-            android:id="@+id/action_UserFragment_to_HomeFragment"
-            app:destination="@id/HomeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/ResultFragment"
-        android:name="com.example.aplicacio.ResultFragment"
-        android:label="@string/ResultFragment"
-        tools:layout="@layout/activity_result">
-
-        <action
-            android:id="@+id/action_ResultFragment_to_CanvasFragment"
-            app:destination="@id/HomeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/CanvasFragment"
-        android:name="com.example.aplicacio.ResultFragment"
-        android:label="@string/CanvasFragment"
-        tools:layout="@layout/activity_canvas">
-
-        <action
-            android:id="@+id/action_CanvasFragment_to_ResultFragment"
-            app:destination="@id/ResultFragment" />
-        <action
-            android:id="@+id/action_CanvasFragment_to_ImageFragment"
-            app:destination="@id/ImageFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/ConfirmFragment"
-        android:name="com.example.aplicacio.ViewModel.ImageFragment"
-        android:label="@string/ImageFragment"
-        tools:layout="@layout/activity_confirm">
-
-        <action
-            android:id="@+id/action_ConfirmFragment_to_CanvasFragment"
-            app:destination="@id/CanvasFragment" />
-        <action
-            android:id="@+id/action_ConfirmFragment_to_resultFragment"
-            app:destination="@id/ResultFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/UserDataFragment"
-        android:name="com.example.aplicacio.ResultFragment"
-        android:label="@string/UserDataFragment"
-        tools:layout="@layout/activity_userinfo">
-
-        <action
-            android:id="@+id/action_UserDataFragment_to_UserFragment"
-            app:destination="@id/UserFragment" />
-    </fragment>
+        tools:layout="@layout/activity_userlist"/>
 
 </navigation>

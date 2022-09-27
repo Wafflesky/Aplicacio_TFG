@@ -16,11 +16,20 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import org.w3c.dom.Text
 
+/**
+ * Classe que crea cada element que trobem en el llistat del UserEntriesActivity.
+ * Aqui es prepara el requadre amb la informació de cada ferida
+ */
 class UserEntriesAdapter(var mCtx: Context, var resource:Int, var items: MutableList<String>, var NHC: String)
     :ArrayAdapter<String>( mCtx , resource , items as MutableList<String>){
 
     private val mDatabase = Firebase.database("https://alex-tfg-default-rtdb.europe-west1.firebasedatabase.app")
     @SuppressLint("ViewHolder")
+    /**
+     * Aquesta funcio agafa el fragment_user_entries per a dibuixar el requadre que s'utilitza en
+     * el llistat i l'omple amb la informació trobada del usuari seleccionat mitjançant el número
+     * d'historial clinic
+     */
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
         val layoutInflater : LayoutInflater = LayoutInflater.from(mCtx)

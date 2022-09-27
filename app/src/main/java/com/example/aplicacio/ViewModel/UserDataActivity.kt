@@ -29,7 +29,9 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
-
+/**
+ * Classe on trobem tota la informació de la ferida del pacient seleccionada
+ */
 class UserDataActivity: AppCompatActivity() {
 
     private lateinit var cardEmina: CardView
@@ -86,6 +88,10 @@ class UserDataActivity: AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("SetTextI18n", "InflateParams")
+    /**
+     * Funció que es crida quan es crea la classe. Aqui es busca dins la base de dades al pacient
+     * mitjançant el seu NHC i la ferida
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_userinfo)
@@ -98,7 +104,6 @@ class UserDataActivity: AppCompatActivity() {
         //Fer la informació més gran
 
         populateView()
-
         val myRef = mDatabase.getReference()
         myRef.child("Patients").addValueEventListener(object : ValueEventListener {
 
@@ -137,8 +142,12 @@ class UserDataActivity: AppCompatActivity() {
 
 
 
+
     }
 
+    /**
+     * Funció que connecta els elements del codi amb els corresponents elements de la vista mitjançant els identificadors
+     */
     fun populateView(){
 
         selectedNHC = bitmapSingleton.getNHC()
@@ -180,6 +189,10 @@ class UserDataActivity: AppCompatActivity() {
 
     }
 
+    /**
+     * Funció que afegeix la informació del usuari dins dels elements. També es calcula els
+     * resultats de les escales EMINA i Barthel i es mostra un text i color depenent d'aquests
+     */
     fun fillInformation() {
 
         DoB.setText(pacient.DoB)
@@ -235,6 +248,8 @@ class UserDataActivity: AppCompatActivity() {
         val barthelText = pacient.barthel.barthelResult.toInt()
 
         when(barthelText) {
+
+            //Canviar els valors i posar-ho al reves, la independencia els 100
             in 0..19 -> {
                 barthel.setText("Independència")
                 cardBarthel.setCardBackgroundColor(Color.argb(100,0, 200, 0))

@@ -12,8 +12,10 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.example.aplicacio.R
 
-// on below line we are creating an
-// adapter class for our grid view.
+
+/**
+ * Classe que s'utilitza per a carregar informació dins el element GridView i donar-li diferents funcionalitats
+ */
 internal class GridAdapter(
     // on below line we are creating two
     // variables for course list and context
@@ -23,10 +25,13 @@ internal class GridAdapter(
     private val downloadImage: Boolean
 ) :
     BaseAdapter() {
-    // in base adapter class we are creating variables
-    // for layout inflater, course image view and course text view.
+
     private var layoutInflater: LayoutInflater? = null
     private lateinit var image: ImageView
+
+    /**
+     * Funció que compta quantes variables hi ha dins la llista d'imatges
+     */
     override fun getCount(): Int {
         if(images != null){
             return images.size
@@ -39,20 +44,21 @@ internal class GridAdapter(
         return 0
     }
 
-    // below method is use to return the count of course list
-
-    // below function is use to return the item of grid view.
     override fun getItem(position: Int): Any? {
         return null
     }
 
-    // below function is use to return item id of grid view.
+
     override fun getItemId(position: Int): Long {
         return 0
     }
 
-    // in below function we are getting individual item of grid view.
+
     @SuppressLint("ViewHolder")
+    /**
+     * Funció que s'utilitza per a introduir els valors a cada element del view. Aqui introduim
+     * la nostra imatge mitjançant un link que ens proporciona firebase Storage
+     */
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
         var convertView = convertView
         // on blow line we are checking if layout inflater

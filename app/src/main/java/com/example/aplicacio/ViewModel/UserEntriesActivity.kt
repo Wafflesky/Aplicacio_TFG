@@ -15,13 +15,16 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import org.w3c.dom.Text
 
-
+/**
+ * Classe que mostra les ferides del pacient seleccionat en el UserActivity en una llista
+ */
 class UserEntriesActivity: AppCompatActivity() {
 
     private lateinit var list: ListView
     private lateinit var pacientText: TextView
     private lateinit var searchView: SearchView
     private lateinit var adapter: ArrayAdapter<*>
+    private lateinit var selectedNHC: String
     private val mDatabase = Firebase.database("https://alex-tfg-default-rtdb.europe-west1.firebasedatabase.app")
 
     private var patients: ArrayList<Patient> = ArrayList()
@@ -29,7 +32,10 @@ class UserEntriesActivity: AppCompatActivity() {
     private val nameList = mutableListOf<String>()
     //private var nhc:Int = 0
 
-
+    /**
+     * Funció que es crida quan es crea la classe. Aqui inicialitzem els elements per a
+     * connectar-los amb el codi i accedim a la base de dades per a poder crear el llistat de les ferides
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_entrieslist)
@@ -40,7 +46,7 @@ class UserEntriesActivity: AppCompatActivity() {
 
         searchView = findViewById(R.id.searchView)
 
-        var selectedNHC = intent.getStringExtra("nhc").toString()
+        selectedNHC = intent.getStringExtra("nhc").toString()
 
         val myRef = mDatabase.getReference()
 
@@ -65,6 +71,7 @@ class UserEntriesActivity: AppCompatActivity() {
                         }
                     }
                 }
+
                 list.adapter = UserEntriesAdapter(this@UserEntriesActivity,
                     R.layout.fragment_user_entries,nameList,selectedNHC)
                 list.setOnItemClickListener() { adapterView, view, position, id ->

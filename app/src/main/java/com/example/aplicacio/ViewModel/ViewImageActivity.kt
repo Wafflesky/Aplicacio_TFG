@@ -15,6 +15,10 @@ import com.example.aplicacio.Model.bitmapSingleton
 import com.example.aplicacio.R
 import org.bytedeco.librealsense.context
 
+/**
+ * Classe que apareix un cop es clica un dels items dins dels gridViews que trobem en el
+ * ResultActivity i en el UserDataActivity
+ */
 class ViewImageActivity: AppCompatActivity() {
 
 
@@ -23,6 +27,10 @@ class ViewImageActivity: AppCompatActivity() {
     private lateinit var imageBitmap: Bitmap
 
     @SuppressLint("InflateParams")
+    /**
+     * Funció que es crida un cop es crea la classe, aqui agafem el valor que s'ha clicat en el
+     * gridview i l'utilitzem per a mostrar la imatge corresponent
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_image)
@@ -49,6 +57,8 @@ class ViewImageActivity: AppCompatActivity() {
 
         if(imageURL != null){
 
+            //Amb aquesta funció podem agafar la imatge que s'ha guardat en el firebase Storage i
+            //accedir-hi fàcilment
             Glide
                 .with(applicationContext)
                 .load(imageURL)

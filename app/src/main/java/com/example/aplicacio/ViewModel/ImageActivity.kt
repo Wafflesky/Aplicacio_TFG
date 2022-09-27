@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.aplicacio.R
 import com.example.aplicacio.Model.bitmapSingleton
 
+/**
+ * Classe on l'usuari confirma la imatge seleccionada
+ */
 class ImageActivity: AppCompatActivity() {
 
     private lateinit var confirmButton: Button
@@ -20,6 +23,10 @@ class ImageActivity: AppCompatActivity() {
     private lateinit var imageBitmap: Bitmap
 
     @SuppressLint("InflateParams")
+    /**
+     * Funció que es crida un cop es crea la classe i es on s'inicialitza les variables.
+     * També es creen els listeners dels botons per a tornar enrere o seguir amb la execució
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image)

@@ -29,7 +29,9 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-
+/**
+ * Classe on es mostra la informació resultant del pacient
+ */
 class ResultActivity : AppCompatActivity() {
 
     private lateinit var confirmButton: Button
@@ -80,6 +82,7 @@ class ResultActivity : AppCompatActivity() {
     private lateinit var treatmentText: String
     private lateinit var descText: String
 
+    private lateinit var emina: Emina
     private lateinit var statusText: String
     private lateinit var mobilityText: String
     private lateinit var incontinencyText: String
@@ -87,6 +90,7 @@ class ResultActivity : AppCompatActivity() {
     private lateinit var activityText: String
     private lateinit var eminaText: Number
 
+    private lateinit var barthel: Barthel
     private lateinit var eatText: String
     private lateinit var bathText: String
     private lateinit var dressText: String
@@ -103,6 +107,9 @@ class ResultActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n", "InflateParams")
+    /**
+     * Funció que es crida quan s'inicia la classe. Aqui es carrega la informació del singleton i s'inicialitzen les variables.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
@@ -129,8 +136,6 @@ class ResultActivity : AppCompatActivity() {
 
         infectedBitmap = bitmapSingleton.getInfectedBitmap()
         infectedBitmap = Bitmap.createScaledBitmap(infectedBitmap, originalWidth, originalHeight, false)
-
-        //TODO: Aixo en lloc d'agafar.ho del singleton ho agafarem del usuari que hagi triat
 
         fillInformation()
 
@@ -297,6 +302,9 @@ class ResultActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Funció que connecta els elements del codi amb els corresponents elements de la vista mitjançant els identificadors
+     */
     fun populateView(){
 
         confirmButton = findViewById(R.id.Confirm_info_button)
@@ -336,6 +344,10 @@ class ResultActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Funció que afegeix la informació del usuari dins dels elements. També es calcula els
+     * resultats de les escales EMINA i Barthel i es mostra un text i color depenent d'aquests
+     */
     fun fillInformation(){
 
         val originalWidth = bitmapSingleton.getWidth()
@@ -351,8 +363,6 @@ class ResultActivity : AppCompatActivity() {
         infectedBitmap = bitmapSingleton.getInfectedBitmap()
         infectedBitmap = Bitmap.createScaledBitmap(infectedBitmap, originalWidth, originalHeight, false)
 
-        //TODO: Aixo en lloc d'agafar.ho del singleton ho agafarem del usuari que hagi triat
-
         dobText = bitmapSingleton.getDoB()
         nameText = bitmapSingleton.getName()
         NHCText = bitmapSingleton.getNHC()
@@ -362,24 +372,29 @@ class ResultActivity : AppCompatActivity() {
         treatmentText = bitmapSingleton.getTreatment()
         descText = bitmapSingleton.getDesc()
 
-        statusText = bitmapSingleton.getStatus()
-        mobilityText = bitmapSingleton.getMobility()
-        incontinencyText = bitmapSingleton.getIncontinency()
-        nutritionText = bitmapSingleton.getNutrition()
-        activityText = bitmapSingleton.getActivity()
-        eminaText = bitmapSingleton.getEmina()
+        emina = bitmapSingleton.getEmina()
 
-        eatText = bitmapSingleton.getEat()
-        bathText = bitmapSingleton.getBath()
-        dressText = bitmapSingleton.getDress()
-        tidingText = bitmapSingleton.getTiding()
-        depositiontext = bitmapSingleton.getDeposition()
-        bladderText = bitmapSingleton.getBladder()
-        bathroomText = bitmapSingleton.getBathroom()
-        moveText = bitmapSingleton.getMove()
-        deambulateText = bitmapSingleton.getDeambulate()
-        stairText = bitmapSingleton.getStair()
-        barthelText = bitmapSingleton.getBarthel()
+        statusText = emina.mentalStatus
+        mobilityText = emina.mobility
+        incontinencyText = emina.incontinency
+        nutritionText = emina.nutrition
+        activityText = emina.activity
+        eminaText = bitmapSingleton.getEminaResult()
+
+        barthel = bitmapSingleton.getBarthel()
+
+        eatText = barthel.eat
+        bathText = barthel.bath
+        dressText = barthel.dress
+        tidingText = barthel.tiding
+        depositiontext = barthel.deposition
+        bladderText = barthel.bladder
+        bathroomText = barthel.bathroom
+        moveText = barthel.move
+        deambulateText = barthel.deambulate
+        stairText = barthel.stair
+
+        barthelText = bitmapSingleton.getBarthelResult()
 
         DoB.setText(dobText)
         name.setText(nameText)

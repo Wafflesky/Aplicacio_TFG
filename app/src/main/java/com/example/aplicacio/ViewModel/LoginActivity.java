@@ -21,6 +21,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+/**
+ * Classe corresponent a l'inici de sessió del usuari. Aquesta utilitza firebase authentication per
+ * a comprovar si l'usuari existeix
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private EditText emailTextView, passwordTextView;
@@ -32,6 +36,9 @@ public class LoginActivity extends AppCompatActivity {
     private AppCheckProviderFactory SafetyNetAppCheckProviderFactory;
 
     @Override
+    /**
+     * Funció que es crida quan es crea la classe. Aqui inicialitzem els elements i afegim els listeners
+     */
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -67,6 +74,9 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Aquesta funció comprova que l'usuari existeix dins la base de dades de firebase authentiacion
+     */
     private void loginUserAccount()
     {
 
@@ -106,6 +116,8 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         // signin existing user
+
+        //En el cas que tot hagi estat correcte l'usuari accedeix a la pantalla d'inici
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(
                         new OnCompleteListener<AuthResult>() {

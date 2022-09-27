@@ -13,11 +13,12 @@
         android:layout_marginBottom="8dp"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/spinner"
-        tools:layout_editor_absoluteX="-1dp" />
+        tools:layout_editor_absoluteX="-1dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="125dp"
+        android:layout_width="124dp"
         android:layout_height="54dp"
         android:layout_gravity="bottom|center"
         android:backgroundTint="@color/Button_Green"
@@ -30,7 +31,7 @@
 
     <Button
         android:id="@+id/button1"
-        android:layout_width="101dp"
+        android:layout_width="124dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|left"
         android:backgroundTint="@color/Button_Red"
@@ -43,11 +44,9 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="169dp"
-        android:layout_height="45dp"
+        android:layout_width="140dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="4dp"
-        android:background="@color/Button_Red"
-        android:backgroundTint="@color/Button_Grey"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button2"

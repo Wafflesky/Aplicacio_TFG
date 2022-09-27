@@ -2,6 +2,13 @@ package com.example.aplicacio.Model
 
 import android.graphics.Bitmap
 
+/**
+ * Objecte que utilitzem per a guardar la informació durant l'execució. Majortiràriament utilitzada
+ * per a poder enviar els bitmaps entre les pantalles degut a errors provocats per les funcions
+ * putExtra i getExtra de la classe Intent. Aqui es guarden tots els valors que trobem en el model
+ * a més de les imatges, les seves seleccions, les seves mascares, etc...
+ * Aqui trobarem els setters i els getters de cada variable.
+ */
 object bitmapSingleton{
 
     init {
@@ -11,7 +18,6 @@ object bitmapSingleton{
     private lateinit var originalWidth: Number
     private lateinit var originalHeight: Number
     private lateinit var bitmap: Bitmap
-    private lateinit var result: Bitmap
 
     private lateinit var grain: Bitmap
     private lateinit var necrotic: Bitmap
@@ -20,10 +26,6 @@ object bitmapSingleton{
     private lateinit var selectedGrain: Bitmap
     private lateinit var selectedNecrotic: Bitmap
     private lateinit var selectedInfected: Bitmap
-
-    private lateinit var age: Number
-    private lateinit var gender: String
-    private lateinit var location: String
 
     private lateinit var NHC: String
     private lateinit var DoB: String
@@ -37,24 +39,12 @@ object bitmapSingleton{
     private lateinit var treatment: String
     private lateinit var description: String
 
-    private lateinit var mental: String
-    private lateinit var mobility: String
-    private lateinit var incontinency: String
-    private lateinit var nutrition: String
-    private lateinit var activity: String
-    private lateinit var emina: Number
+    private lateinit var eminaResult: Number
 
-    private lateinit var eat: String
-    private lateinit var bath: String
-    private lateinit var dress: String
-    private lateinit var tiding: String
-    private lateinit var deposition: String
-    private lateinit var bladder: String
-    private lateinit var bathroom: String
-    private lateinit var move: String
-    private lateinit var deambulate: String
-    private lateinit var stair: String
-    private lateinit var barthel: Number
+    private lateinit var emina: Emina
+    private lateinit var barthel: Barthel
+
+    private lateinit var barthelResult: Number
 
     fun storeBitmap(bitmap: Bitmap){
         bitmapSingleton.bitmap = bitmap
@@ -128,71 +118,15 @@ object bitmapSingleton{
         description = desc
     }
 
-    fun storeMental(mental: String){
-        bitmapSingleton.mental = mental
+    fun storeEmina(emina: Emina, eminaResult: Number){
+        this.emina = emina
+        this.eminaResult = eminaResult
     }
 
-    fun storeMobility(mobility: String){
-        bitmapSingleton.mobility = mobility
-    }
+    fun storeBarthel(barthel :Barthel, barthelResult: Number){
+        this.barthel = barthel
+        this.barthelResult = barthelResult
 
-    fun storeIncontinceny(inc: String){
-        incontinency = inc
-    }
-
-    fun storeNutrition(nutrition: String){
-        bitmapSingleton.nutrition = nutrition
-    }
-
-    fun storeActivity(act: String){
-        activity = act
-    }
-
-    fun storeEat(eat: String){
-        bitmapSingleton.eat = eat
-    }
-
-    fun storeBath(bath: String){
-        bitmapSingleton.bath = bath
-    }
-
-    fun storeDress(dress: String){
-        bitmapSingleton.dress = dress
-    }
-
-    fun storeTiding(tid: String){
-        tiding = tid
-    }
-
-    fun storeDeposition(dep: String){
-        deposition = dep
-    }
-
-    fun storeBladder(bladder: String){
-        bitmapSingleton.bladder = bladder
-    }
-
-    fun storeBathroom(br: String){
-        bathroom = br
-    }
-
-    fun storeMove(move: String){
-        bitmapSingleton.move = move
-    }
-
-    fun storeDeambulate(deambulate: String){
-        bitmapSingleton.deambulate = deambulate
-    }
-    fun storeStair(stair: String){
-        bitmapSingleton.stair = stair
-    }
-
-    fun storeEmina(emina: Number){
-        bitmapSingleton.emina = emina
-    }
-
-    fun storeBarthel(barthel: Number){
-        bitmapSingleton.barthel = barthel
     }
 
     @JvmName("getBitmap1")
@@ -235,8 +169,6 @@ object bitmapSingleton{
 
     }
 
-    //TODO: All gets del formulari
-
     fun getDoB(): String{
 
         return DoB
@@ -269,6 +201,23 @@ object bitmapSingleton{
         return nhcEntryCreation
     }
 
+    fun getEmina(): Emina{
+        return emina
+    }
+
+    fun getBarthel(): Barthel{
+        return barthel
+    }
+
+    fun getEminaResult(): Number{
+        return eminaResult
+    }
+
+    fun getBarthelResult(): Number {
+        return barthelResult
+    }
+
+
     fun getRegion(): String{
 
         return region
@@ -286,109 +235,6 @@ object bitmapSingleton{
         return description
 
     }
-
-    fun getStatus(): String{
-
-        return mental
-
-    }
-
-    fun getMobility(): String{
-
-        return mobility
-
-    }
-
-    fun getIncontinency(): String{
-
-        return incontinency
-
-    }
-
-    fun getNutrition(): String{
-
-        return nutrition
-
-    }
-
-    fun getActivity(): String{
-
-        return activity
-
-    }
-
-    fun getEat(): String{
-
-        return eat
-
-    }
-
-    fun getBath(): String{
-
-        return bath
-
-    }
-
-    fun getDress(): String{
-
-        return dress
-
-    }
-
-    fun getTiding(): String{
-
-        return tiding
-
-    }
-
-    fun getDeposition(): String{
-
-        return deposition
-
-    }
-
-    fun getBladder(): String{
-
-        return bladder
-
-    }
-
-    fun getBathroom(): String{
-
-        return bathroom
-
-    }
-
-    fun getMove(): String{
-
-        return move
-
-    }
-
-    fun getDeambulate(): String{
-
-        return deambulate
-
-    }
-
-    fun getStair(): String{
-
-        return stair
-
-    }
-
-    fun getEmina(): Number{
-
-        return emina
-
-    }
-
-    fun getBarthel(): Number{
-
-        return barthel
-
-    }
-
 
 
 }

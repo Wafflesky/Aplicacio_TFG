@@ -10,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.aplicacio.Model.Barthel
+import com.example.aplicacio.Model.Emina
 import com.example.aplicacio.Model.Patient
 import com.example.aplicacio.R
 import com.example.aplicacio.Model.bitmapSingleton
@@ -20,7 +22,10 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
-
+/**
+ * Classe on es troba el formulari que l'usuari ha d'omplir en cas que el pacient ja existeixi a
+ * la base de dades.
+ */
 class AddExistingInfoActivity: AppCompatActivity() {
 
     private lateinit var patient: TextView
@@ -49,7 +54,7 @@ class AddExistingInfoActivity: AppCompatActivity() {
     private lateinit var selectedIncontinency: String
     private lateinit var selectedNutrition: String
     private lateinit var selectedActivity: String
-    private var emina = intArrayOf(0,0,0,0,0)
+    private var eminaResult = intArrayOf(0,0,0,0,0)
 
     private lateinit var eatSpinner: Spinner
     private lateinit var bathSpinner: Spinner
@@ -73,12 +78,18 @@ class AddExistingInfoActivity: AppCompatActivity() {
     private lateinit var selectedDeambulate: String
     private lateinit var selectedStair: String
 
-    private var barthel = intArrayOf(0,0,0,0,0,0,0,0,0,0)
+    private var barthelResult = intArrayOf(0,0,0,0,0,0,0,0,0,0)
 
     private val mDatabase = Firebase.database("https://alex-tfg-default-rtdb.europe-west1.firebasedatabase.app")
 
 
     @SuppressLint("ResourceAsColor")
+    /**
+     * Funció que es crida en el moment que es crea la classe, aquí es carrega la vista i
+     * connectem els elements amb el codi. Es fa la connexió amb la base de dades per a aconseguir
+     * la informació existent de l'usuari com la data de naixement o el seu nom. Un cop es clica el
+     * boto de confirmació s'activa el onClickListener per a passar a la següent pantalla.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addinfo)
@@ -97,6 +108,7 @@ class AddExistingInfoActivity: AppCompatActivity() {
 
         val requestedNHC = bitmapSingleton.getNHC()
 
+        //Connexio amb la base de dades, cercant dins de l'atribut Pacients
         val myRef = mDatabase.getReference()
         myRef.child("Patients").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -139,6 +151,7 @@ class AddExistingInfoActivity: AppCompatActivity() {
             blockIntent = false
             confirmButton.setOnClickListener{
 
+                //Control dels colors/informació en cas d'informació no introduïda
                 if(region.text.toString().equals("")){
                     region.background.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP)
                 }
@@ -162,6 +175,7 @@ class AddExistingInfoActivity: AppCompatActivity() {
                     bruiseDescription.setText("Cap informació afegida")
                 }
 
+                //Comprovació de la informació no introduïda
                 if(!region.text.toString().equals("") && !treatment.text.toString().equals(""))
                 {
 
@@ -170,28 +184,29 @@ class AddExistingInfoActivity: AppCompatActivity() {
                     bitmapSingleton.storeTreatment(treatment.text.toString())
                     bitmapSingleton.storeDesc(bruiseDescription.text.toString())
 
-                    bitmapSingleton.storeMental(selectedStatus)
-                    bitmapSingleton.storeMobility(selectedMobility)
-                    bitmapSingleton.storeIncontinceny(selectedIncontinency)
-                    bitmapSingleton.storeNutrition(selectedNutrition)
-                    bitmapSingleton.storeActivity(selectedActivity)
+                    val resultEmina = eminaResult.sum()
+                    var emina = Emina(activity = selectedActivity,
+                        incontinency = selectedIncontinency,
+                        mentalStatus = selectedStatus,
+                        mobility = selectedMobility,
+                        nutrition = selectedNutrition,
+                        eminaResult = resultEmina.toString())
+                    bitmapSingleton.storeEmina(emina, eminaResult =  resultEmina)
 
-                    val resultEmina = emina.sum()
-                    bitmapSingleton.storeEmina(resultEmina)
+                    var resultBarthel = barthelResult.sum()
+                    var barthel = Barthel(bath = selectedBath,
+                        bathroom = selectedBathroom,
+                        bladder = selectedBladder ,
+                        deambulate = selectedDeambulate,
+                        deposition = selectedDeposition,
+                        dress = selectedDress,
+                        eat = selectedEat,
+                        move = selectedMove,
+                        stair = selectedStair,
+                        tiding = selectedTiding,
+                        barthelResult = resultBarthel.toString())
 
-                    bitmapSingleton.storeEat(selectedEat)
-                    bitmapSingleton.storeBath(selectedBath)
-                    bitmapSingleton.storeDress(selectedDress)
-                    bitmapSingleton.storeTiding(selectedTiding)
-                    bitmapSingleton.storeDeposition(selectedDeposition)
-                    bitmapSingleton.storeBladder(selectedBladder)
-                    bitmapSingleton.storeBathroom(selectedBathroom)
-                    bitmapSingleton.storeMove(selectedMove)
-                    bitmapSingleton.storeDeambulate(selectedDeambulate)
-                    bitmapSingleton.storeStair(selectedStair)
-
-                    val resultBarthel = barthel.sum()
-                    bitmapSingleton.storeBarthel(resultBarthel)
+                    bitmapSingleton.storeBarthel(barthel,resultBarthel)
 
                     val intent = Intent(this, ResultActivity::class.java)
                     this.startActivity(intent)
@@ -202,6 +217,10 @@ class AddExistingInfoActivity: AppCompatActivity() {
             }
         }
 
+    /**
+     * Funció per a fer la connexió entre els elements del codi amb els seus respectius elements
+     * en la vista mitjançant les seves ID.
+      */
     fun setupView(){
 
         dob = findViewById(R.id.dobTextView)
@@ -234,7 +253,13 @@ class AddExistingInfoActivity: AppCompatActivity() {
 
     }
 
+    /**
+     * Funció per a carregar la informació que tenen els Spinners. El onItemSelectedListener és el
+     * que utilitzarem per a saber si la informació dels spinners s'ha canviat
+     */
     fun setupAdapters(){
+
+        //Carregem la informació guardada en el arxiu res/values/strings
         val stringStatus = resources.getStringArray(R.array.Estat_mental)
         val stringMobility = resources.getStringArray(R.array.Movilitat)
         val stringIncontinent = resources.getStringArray(R.array.Incontinencia)
@@ -252,6 +277,7 @@ class AddExistingInfoActivity: AppCompatActivity() {
         val stringDeambulate = resources.getStringArray(R.array.Barthel_4_option_2)
         val stringStair = resources.getStringArray(R.array.Barthel_3_option)
 
+        //afegim la informació carregada en un adapter
         val statusAdapter = ArrayAdapter(
             this,
             android.R.layout.simple_spinner_item, stringStatus
@@ -314,6 +340,7 @@ class AddExistingInfoActivity: AppCompatActivity() {
             android.R.layout.simple_spinner_item, stringStair
         )
 
+        //Connectem el adapter amb el Spinner
         statusSpinner.adapter = statusAdapter
         mobilitySpinner.adapter = mobilityAdapter
         incontinencySpinner.adapter = incontinentAdapter
@@ -331,6 +358,7 @@ class AddExistingInfoActivity: AppCompatActivity() {
         deambulateSpinner.adapter = deambulateAdapter
         stairSpinner.adapter = stairAdapter
 
+        //Creem el listener per a canviar el valor del spinner en cas que l'usuari el canviï
         statusSpinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -339,7 +367,7 @@ class AddExistingInfoActivity: AppCompatActivity() {
             ) {
                 selectedStatus = stringStatus[position].toString()
 
-                emina[0] = position
+                eminaResult[0] = position
 
             }
 
@@ -356,7 +384,7 @@ class AddExistingInfoActivity: AppCompatActivity() {
             ) {
                 selectedMobility = stringMobility[position].toString()
 
-                emina[1] = position
+                eminaResult[1] = position
             }
 
 
@@ -372,7 +400,7 @@ class AddExistingInfoActivity: AppCompatActivity() {
             ) {
                 selectedIncontinency = stringIncontinent[position].toString()
 
-                emina[2] = position
+                eminaResult[2] = position
             }
 
 
@@ -388,7 +416,7 @@ class AddExistingInfoActivity: AppCompatActivity() {
             ) {
                 selectedNutrition = stringNutrition[position].toString()
 
-                emina[3] = position
+                eminaResult[3] = position
             }
 
 
@@ -404,7 +432,7 @@ class AddExistingInfoActivity: AppCompatActivity() {
             ) {
                 selectedActivity = stringActivity[position].toString()
 
-                emina[4] = position
+                eminaResult[4] = position
             }
 
 
@@ -422,9 +450,9 @@ class AddExistingInfoActivity: AppCompatActivity() {
                 selectedEat = stringEat[position].toString()
 
                 when (position) {
-                    0 -> barthel[0] = position
-                    1 -> barthel[0] = 5
-                    2 -> barthel[0] = 10
+                    0 -> barthelResult[0] = position
+                    1 -> barthelResult[0] = 5
+                    2 -> barthelResult[0] = 10
 
                 }
 
@@ -444,8 +472,8 @@ class AddExistingInfoActivity: AppCompatActivity() {
                 selectedBath = stringBath[position].toString()
 
                 when (position) {
-                    0 -> barthel[1] = position
-                    1 -> barthel[1] = 5
+                    0 -> barthelResult[1] = position
+                    1 -> barthelResult[1] = 5
                 }
 
             }
@@ -464,9 +492,9 @@ class AddExistingInfoActivity: AppCompatActivity() {
                 selectedDress = stringDress[position].toString()
 
                 when (position) {
-                    0 -> barthel[2] = position
-                    1 -> barthel[2] = 5
-                    2 -> barthel[2] = 10
+                    0 -> barthelResult[2] = position
+                    1 -> barthelResult[2] = 5
+                    2 -> barthelResult[2] = 10
                 }
 
             }
@@ -485,8 +513,8 @@ class AddExistingInfoActivity: AppCompatActivity() {
                 selectedTiding = stringTiding[position].toString()
 
                 when (position) {
-                    0 -> barthel[3] = position
-                    1 -> barthel[3] = 5
+                    0 -> barthelResult[3] = position
+                    1 -> barthelResult[3] = 5
                 }
 
             }
@@ -505,9 +533,9 @@ class AddExistingInfoActivity: AppCompatActivity() {
                 selectedDeposition = stringDeposition[position].toString()
 
                 when (position) {
-                    0 -> barthel[4] = position
-                    1 -> barthel[4] = 5
-                    2 -> barthel[4] = 10
+                    0 -> barthelResult[4] = position
+                    1 -> barthelResult[4] = 5
+                    2 -> barthelResult[4] = 10
                 }
             }
 
@@ -525,9 +553,9 @@ class AddExistingInfoActivity: AppCompatActivity() {
                 selectedBladder = stringMiccio[position].toString()
 
                 when (position) {
-                    0 -> barthel[5] = position
-                    1 -> barthel[5] = 5
-                    2 -> barthel[5] = 10
+                    0 -> barthelResult[5] = position
+                    1 -> barthelResult[5] = 5
+                    2 -> barthelResult[5] = 10
                 }
             }
 
@@ -545,9 +573,9 @@ class AddExistingInfoActivity: AppCompatActivity() {
                 selectedBathroom = stringBathroom[position].toString()
 
                 when (position) {
-                    0 -> barthel[6] = position
-                    1 -> barthel[6] = 5
-                    2 -> barthel[6] = 10
+                    0 -> barthelResult[6] = position
+                    1 -> barthelResult[6] = 5
+                    2 -> barthelResult[6] = 10
                 }
             }
 
@@ -565,10 +593,10 @@ class AddExistingInfoActivity: AppCompatActivity() {
                 selectedMove = stringMove[position].toString()
 
                 when (position) {
-                    0 -> barthel[7] = position
-                    1 -> barthel[7] = 5
-                    2 -> barthel[7] = 10
-                    3 -> barthel[7] = 15
+                    0 -> barthelResult[7] = position
+                    1 -> barthelResult[7] = 5
+                    2 -> barthelResult[7] = 10
+                    3 -> barthelResult[7] = 15
                 }
             }
 
@@ -586,10 +614,10 @@ class AddExistingInfoActivity: AppCompatActivity() {
                 selectedDeambulate = stringDeambulate[position].toString()
 
                 when (position) {
-                    0 -> barthel[8] = position
-                    1 -> barthel[8] = 5
-                    2 -> barthel[8] = 10
-                    3 -> barthel[8] = 15
+                    0 -> barthelResult[8] = position
+                    1 -> barthelResult[8] = 5
+                    2 -> barthelResult[8] = 10
+                    3 -> barthelResult[8] = 15
                 }
 
             }
@@ -608,9 +636,9 @@ class AddExistingInfoActivity: AppCompatActivity() {
                 selectedStair = stringStair[position].toString()
 
                 when (position) {
-                    0 -> barthel[9] = position
-                    1 -> barthel[9] = 5
-                    2 -> barthel[9] = 10
+                    0 -> barthelResult[9] = position
+                    1 -> barthelResult[9] = 5
+                    2 -> barthelResult[9] = 10
                 }
 
             }
