@@ -5,20 +5,29 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.aplicacio.Model.bitmapSingleton
 import com.example.aplicacio.R
+import org.bytedeco.librealsense.context
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 /**
  * Classe on l'usuari es mourà per a utiltizar les funcionalitats de la aplicació
@@ -32,8 +41,12 @@ class HomeActivity : AppCompatActivity() {
     private val pickImage = 100
     private val cameraRequest = 1888
     private var imageUri: Uri? = null
+    private lateinit var mCurrentPhotoPath: String
     //Camera Related
     val REQUEST_IMAGE_CAPTURE = 1
+    val REQUEST_TAKE_PHOTO = 2
+
+    val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
     @SuppressLint("InflateParams")
     /**
@@ -103,11 +116,37 @@ class HomeActivity : AppCompatActivity() {
      */
     @SuppressLint("QueryPermissionsNeeded")
     private fun dispatchTakePictureIntent() {
-        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-            takePictureIntent.resolveActivity(packageManager)?.also {
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if (takePictureIntent.resolveActivity(packageManager) != null){
+
+            val photoFile = createImageFile()
+
+
+            if(photoFile != null){
+                val photoURI = FileProvider.getUriForFile(
+                    this,
+                    "com.example.aplicacio.provider",
+                    photoFile
+                )
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                startActivityForResult(takePictureIntent,REQUEST_TAKE_PHOTO)
             }
+
         }
+    }
+
+    private fun createImageFile() : File {
+
+        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val image = File.createTempFile(
+            timeStamp,
+            ".jpg",
+            storageDir
+        )
+        Log.i("Path",image.absolutePath)
+        mCurrentPhotoPath = image.absolutePath
+        return image
     }
 
     /**
@@ -131,8 +170,13 @@ class HomeActivity : AppCompatActivity() {
      * Funció que comprova si les activitats de fer foto o seleccionar foto s'han acabat
      * i que actua depenent del cas
      */
+    @SuppressLint("RestrictedApi")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        Log.i("Result","Enter")
+        Log.i("ResultCode", resultCode.toString())
+        Log.i("RequestCode", requestCode.toString())
+        Log.i("Result_Ok", RESULT_OK.toString())
         if (resultCode == RESULT_OK && requestCode == pickImage) {
             imageUri = data?.data
             val bitmap = imageUri?.let { getCapturedImage(it) }
@@ -146,17 +190,24 @@ class HomeActivity : AppCompatActivity() {
 
         }
 
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
+            Log.i("Balls","Balls")
+            val fileImage = File(mCurrentPhotoPath)
+            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver,Uri.fromFile(fileImage))
+            if (bitmap != null) {
 
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            val imageBitmap = data?.extras?.get("data") as Bitmap
-            bitmapSingleton.storeBitmap(imageBitmap)
-            bitmapSingleton.storeWidth(imageBitmap.width)
-            bitmapSingleton.storeHeight(imageBitmap.height)
-            val intent = Intent(this, ImageActivity::class.java)
-            this.startActivity(intent)
+                bitmapSingleton.storeBitmap(bitmap)
+                bitmapSingleton.storeWidth(bitmap.width)
+                bitmapSingleton.storeHeight(bitmap.height)
+
+                val intent = Intent(this, ImageActivity::class.java)
+                this.startActivity(intent)
+
+            }
+            val file = File(Environment.getExternalStorageDirectory(), "MyPhoto.jpg")
+
 
         }
-
 
     }
 

@@ -16,6 +16,7 @@ data class Patient(
     val necroticImage: String = "",
     val grainImage: String = "",
     val infectedImage: String = "",
+    val originalImage: String = "",
     val dataEnregistrament: String = ""
 )
 

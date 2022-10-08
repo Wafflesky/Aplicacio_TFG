@@ -59,8 +59,7 @@
             android:id="@+id/list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="15.0dp"
+            tools:listitem="@layout/fragment_user_entries"
             tools:ignore="MissingConstraints,NestedScrolling" />
     </RelativeLayout>
 

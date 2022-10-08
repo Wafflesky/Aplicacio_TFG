@@ -56,6 +56,8 @@ class UserListAdapter(var mCtx: Context, var resource:Int, var items: MutableLis
 
                         if (patient != null) {
                             name.text= patient.name
+                            nhc.text = nhcText
+
                         }
                     }
                 }
@@ -65,8 +67,6 @@ class UserListAdapter(var mCtx: Context, var resource:Int, var items: MutableLis
                 TODO("Not yet implemented")
             }
         })
-
-        nhc.text = nhcText
 
         return view
     }

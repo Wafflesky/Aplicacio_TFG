@@ -39,7 +39,7 @@ class UserActivity: AppCompatActivity() {
     data class Historial(
         var patient: Patient,
         var nhc: String
-        )
+    )
 
     /**
      * Funció que es crida al iniciar la classe, aqui fem la connexio amb la database per a omplir el listView amb els pacients
@@ -90,18 +90,17 @@ class UserActivity: AppCompatActivity() {
                 }
 
                 //TODO: Arreglar Query no funcionant correctament
-                adapter =  UserListAdapter(this@UserActivity, R.layout.fragment_user_list,nameList)
+                adapter =  UserListAdapter(this@UserActivity,
+                    R.layout.fragment_user_list,nameList)
                 list.adapter = adapter
                 searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                     @RequiresApi(Build.VERSION_CODES.N)
-
-                    //TODO: Qurery filter no canvia els valors de la llista correctament fa un pop,
-                    // mante el primer valor i borra a sota
                     override fun onQueryTextSubmit(query: String): Boolean {
 
                         if (nameList.contains(query)) {
                             adapter.filter.filter(query)
                             list.adapter = adapter
+
                         } else {
                             Toast.makeText(this@UserActivity, "No Match found", Toast.LENGTH_LONG).show()
                         }

@@ -71,8 +71,6 @@ class UserEntriesAdapter(var mCtx: Context, var resource:Int, var items: Mutable
             }
         })
 
-
-
         return view
     }
 

@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
 import java.time.LocalDateTime
@@ -44,6 +45,7 @@ class ResultActivity : AppCompatActivity() {
     private lateinit var necroticBitmap: Bitmap
     private lateinit var grainBitmap: Bitmap
     private lateinit var infectedBitmap: Bitmap
+    private lateinit var originalBitmap: Bitmap
 
     private lateinit var DoB: TextView
     private lateinit var name: TextView
@@ -137,6 +139,8 @@ class ResultActivity : AppCompatActivity() {
         infectedBitmap = bitmapSingleton.getInfectedBitmap()
         infectedBitmap = Bitmap.createScaledBitmap(infectedBitmap, originalWidth, originalHeight, false)
 
+        originalBitmap = bitmapSingleton.getBitmap()
+
         fillInformation()
 
         // on below line we are initializing our course adapter
@@ -175,18 +179,21 @@ class ResultActivity : AppCompatActivity() {
             val necroticBaos = ByteArrayOutputStream()
             val infectedBaos = ByteArrayOutputStream()
             val grainBaos = ByteArrayOutputStream()
+            val originalBaos = ByteArrayOutputStream()
 
             var necroticUUID = UUID.randomUUID().toString()
             var grainUUID = UUID.randomUUID().toString()
             var infectedUUID = UUID.randomUUID().toString()
+            var originalUUID = UUID.randomUUID().toString()
 
             necroticBitmap.compress(Bitmap.CompressFormat.PNG, 100, necroticBaos)
             grainBitmap.compress(Bitmap.CompressFormat.PNG, 100, grainBaos)
             infectedBitmap.compress(Bitmap.CompressFormat.PNG, 100, infectedBaos)
+            originalBitmap.compress(Bitmap.CompressFormat.PNG,100,originalBaos)
+
 
             //create a file to write bitmap data
-
-            val necroticData = necroticBaos.toByteArray()
+            val originalData = originalBaos.toByteArray()
 
             FirebaseApp.initializeApp(/*context=*/this)
             val firebaseAppCheck = FirebaseAppCheck.getInstance()
@@ -194,105 +201,125 @@ class ResultActivity : AppCompatActivity() {
                 SafetyNetAppCheckProviderFactory.getInstance()
             )
 
-            val necroticReference = storageRef.child("Necrotic/" + necroticUUID + ".png")
-            val uploadNecro = necroticReference.putBytes(necroticData)
+            val originalReference = storageRef.child("image/" + originalUUID + ".png")
+            val uploadOriginal = originalReference.putBytes(originalData)
 
-            uploadNecro.addOnCompleteListener {
+            uploadOriginal.addOnCompleteListener {
 
-                necroticReference.downloadUrl.addOnSuccessListener {
-                    necroticUUID= it.toString()
+                originalReference.downloadUrl.addOnSuccessListener {
+                    originalUUID = it.toString()
 
-                    val grainData = grainBaos.toByteArray()
+                    val necroticData = necroticBaos.toByteArray()
 
-                    val grainReference = storageRef.child("Grain/" + grainUUID + ".png")
-                    val uploadGrain = grainReference.putBytes(grainData)
-                    uploadGrain.addOnCompleteListener {
+                    val necroticReference = storageRef.child("Necrotic/" + necroticUUID + ".png")
+                    val uploadNecro = necroticReference.putBytes(necroticData)
 
-                        grainReference.downloadUrl.addOnSuccessListener {
-                            grainUUID = it.toString()
+                    uploadNecro.addOnCompleteListener {
 
-                            val infectedData = infectedBaos.toByteArray()
+                        necroticReference.downloadUrl.addOnSuccessListener {
+                            necroticUUID = it.toString()
 
-                            val infectedReference = storageRef.child("Infected/" + infectedUUID + ".png")
-                            val uploadInfected = infectedReference.putBytes(infectedData)
-                            uploadInfected.addOnCompleteListener {
+                            val grainData = grainBaos.toByteArray()
 
-                                infectedReference.downloadUrl.addOnSuccessListener {
-                                    infectedUUID = it.toString()
+                            val grainReference = storageRef.child("Grain/" + grainUUID + ".png")
+                            val uploadGrain = grainReference.putBytes(grainData)
+                            uploadGrain.addOnCompleteListener {
 
-                                    val entryNumber = bitmapSingleton.getNHCEntriesCreation()
+                                grainReference.downloadUrl.addOnSuccessListener {
+                                    grainUUID = it.toString()
+
+                                    val infectedData = infectedBaos.toByteArray()
+
+                                    val infectedReference =
+                                        storageRef.child("Infected/" + infectedUUID + ".png")
+                                    val uploadInfected = infectedReference.putBytes(infectedData)
+                                    uploadInfected.addOnCompleteListener {
+
+                                        infectedReference.downloadUrl.addOnSuccessListener {
+                                            infectedUUID = it.toString()
+
+                                            val entryNumber =
+                                                bitmapSingleton.getNHCEntriesCreation()
 
 
-                                    val current = LocalDateTime.now()
-                                    val formatter = DateTimeFormatter.ofPattern("dd/mm/yyyy")
-                                    val formatted = current.format(formatter)
+                                            val current = LocalDateTime.now()
+                                            val formatter =
+                                                DateTimeFormatter.ofPattern("dd/MM/yyyy")
+                                            val formatted = current.format(formatter)
 
-                                    val bruiseInfo = BruiseData(regionText, treatmentText, descText)
-                                    val barthelInfo = Barthel(
-                                        bathText,
-                                        bathroomText,
-                                        bladderText,
-                                        deambulateText,
-                                        depositiontext,
-                                        dressText,
-                                        eatText,
-                                        moveText,
-                                        stairText,
-                                        tidingText,
-                                        barthelText.toString()
-                                    )
-                                    val eminaInfo = Emina(
-                                        activityText,
-                                        incontinencyText,
-                                        statusText,
-                                        mobilityText,
-                                        nutritionText,
-                                        eminaText.toString()
-                                    )
-                                    val patientInfo = Patient(
-                                        dobText,
-                                        name = nameText,
-                                        entryNumber = entryNumber,
-                                        patologies = patologiesText,
-                                        bruiseData = bruiseInfo,
-                                        barthel = barthelInfo,
-                                        emina = eminaInfo,
-                                        necroticImage = necroticUUID,
-                                        grainImage = grainUUID,
-                                        infectedImage = infectedUUID,
-                                        dataEnregistrament = formatted
-                                    )
+                                            val bruiseInfo =
+                                                BruiseData(regionText, treatmentText, descText)
+                                            val barthelInfo = Barthel(
+                                                bathText,
+                                                bathroomText,
+                                                bladderText,
+                                                deambulateText,
+                                                depositiontext,
+                                                dressText,
+                                                eatText,
+                                                moveText,
+                                                stairText,
+                                                tidingText,
+                                                barthelText.toString()
+                                            )
+                                            val eminaInfo = Emina(
+                                                activityText,
+                                                incontinencyText,
+                                                statusText,
+                                                mobilityText,
+                                                nutritionText,
+                                                eminaText.toString()
+                                            )
+                                            val patientInfo = Patient(
+                                                dobText,
+                                                name = nameText,
+                                                entryNumber = entryNumber,
+                                                patologies = patologiesText,
+                                                bruiseData = bruiseInfo,
+                                                barthel = barthelInfo,
+                                                emina = eminaInfo,
+                                                necroticImage = necroticUUID,
+                                                grainImage = grainUUID,
+                                                infectedImage = infectedUUID,
+                                                originalImage = originalUUID,
+                                                dataEnregistrament = formatted
+                                            )
 
-                                    val nhc = bitmapSingleton.getNHC()
-                                    val history = UserActivity.Historial(patientInfo, nhc)
+                                            val nhc = bitmapSingleton.getNHC()
+                                            val history = UserActivity.Historial(patientInfo, nhc)
 
-                                    print(patientInfo)
+                                            print(patientInfo)
 
-                                    myRef.setValue(
-                                        history,
-                                        object : DatabaseReference.CompletionListener {
-                                            @SuppressLint("RestrictedApi")
-                                            override fun onComplete(
-                                                error: DatabaseError?,
-                                                ref: DatabaseReference
-                                            ) {
-                                                if (error != null) {
-                                                    Log.v(
-                                                        LOG_TAG,
-                                                        "Data could not be saved. " + error.getMessage()
-                                                    ) //Hits here every time.
-                                                } else {
-                                                    Log.v(
-                                                        LOG_TAG,
-                                                        "Data saved successfully. Finishing activity..."
-                                                    )
-                                                    progressbar.visibility = View.GONE
-                                                    val intent = Intent(this@ResultActivity, HomeActivity::class.java)
-                                                    startActivity(intent)
-                                                }
-                                            }
+                                            myRef.setValue(
+                                                history,
+                                                object : DatabaseReference.CompletionListener {
+                                                    @SuppressLint("RestrictedApi")
+                                                    override fun onComplete(
+                                                        error: DatabaseError?,
+                                                        ref: DatabaseReference
+                                                    ) {
+                                                        if (error != null) {
+                                                            Log.v(
+                                                                LOG_TAG,
+                                                                "Data could not be saved. " + error.getMessage()
+                                                            ) //Hits here every time.
+                                                        } else {
+                                                            Log.v(
+                                                                LOG_TAG,
+                                                                "Data saved successfully. Finishing activity..."
+                                                            )
+                                                            progressbar.visibility = View.GONE
+                                                            val intent = Intent(
+                                                                this@ResultActivity,
+                                                                HomeActivity::class.java
+                                                            )
+                                                            startActivity(intent)
+                                                        }
+                                                    }
 
-                                        })
+                                                })
+                                        }
+                                    }
                                 }
                             }
                         }
