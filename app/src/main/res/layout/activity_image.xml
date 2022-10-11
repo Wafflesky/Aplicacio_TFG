@@ -22,24 +22,26 @@
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="155dp"
+        android:layout_width="wrap_content"
         android:layout_height="64dp"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="28dp"
         android:backgroundTint="@color/Button_Red"
         android:text="@string/Cancel"
         android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/button5"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="155dp"
+        android:layout_width="wrap_content"
         android:layout_height="64dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginEnd="32dp"
         android:backgroundTint="@color/Button_Green"
         android:text="@string/Confirm"
         android:textColor="@color/black"

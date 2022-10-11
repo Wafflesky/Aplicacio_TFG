@@ -9,6 +9,7 @@ import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
@@ -110,6 +111,13 @@ class AddNewInfoActivity: AppCompatActivity() {
         dob.maxDate = Date().time
 
         NHC.setText(requestedNHC)
+
+        NHC.isEnabled = false
+        NHC.isFocusable = false
+        NHC.setTextColor(Color.BLACK)
+        NHC.background.setColorFilter(Color.GRAY,PorterDuff.Mode.SRC_ATOP)
+        NHC.gravity = Gravity.CENTER_HORIZONTAL
+
 
         if(NHC.text != null && name.text != null){
             blockIntent = false

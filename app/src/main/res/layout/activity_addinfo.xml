@@ -13,13 +13,13 @@
             android:id="@+id/textView12"
             android:layout_width="69dp"
             android:layout_height="19dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="36dp"
             android:text="@string/nutricio"
             android:textAlignment="viewEnd"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerNutricio"
-            app:layout_constraintHorizontal_bias="0.718"
+            app:layout_constraintHorizontal_bias="0.276"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView11"
             tools:ignore="MissingConstraints" />
@@ -28,13 +28,13 @@
             android:id="@+id/textView19"
             android:layout_width="69dp"
             android:layout_height="19dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="36dp"
             android:text="@string/activitat"
             android:textAlignment="viewEnd"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerActivitat"
-            app:layout_constraintHorizontal_bias="0.739"
+            app:layout_constraintHorizontal_bias="0.276"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView12"
             tools:ignore="MissingConstraints" />
@@ -159,22 +159,22 @@
 
         <TextView
             android:id="@+id/textView7"
-            android:layout_width="69dp"
-            android:layout_height="19dp"
-            android:layout_marginTop="28dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:text="@string/regio"
             android:textAlignment="viewEnd"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName2"
-            app:layout_constraintHorizontal_bias="0.333"
+            app:layout_constraintHorizontal_bias="0.247"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="99dp"
+            android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:layout_marginTop="36dp"
             android:text="@string/tractament"
@@ -182,29 +182,29 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName3"
-            app:layout_constraintHorizontal_bias="0.392"
+            app:layout_constraintHorizontal_bias="0.328"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textView5"
-            android:layout_width="127dp"
+            android:layout_width="wrap_content"
             android:layout_height="26dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="38dp"
             android:text="@string/mental_Status"
             android:textAlignment="viewEnd"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat"
-            app:layout_constraintHorizontal_bias="0.511"
+            app:layout_constraintHorizontal_bias="0.343"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewEmina"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textView10"
-            android:layout_width="103dp"
+            android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginTop="32dp"
             android:text="@string/movilitat"
@@ -212,22 +212,22 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerMovilitat"
-            app:layout_constraintHorizontal_bias="0.609"
+            app:layout_constraintHorizontal_bias="0.271"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textView11"
-            android:layout_width="113dp"
+            android:layout_width="wrap_content"
             android:layout_height="23dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="32dp"
             android:text="@string/incontinencia"
             android:textAlignment="viewEnd"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerIncontinencia"
-            app:layout_constraintHorizontal_bias="0.581"
+            app:layout_constraintHorizontal_bias="0.362"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10"
             tools:ignore="MissingConstraints" />
@@ -237,7 +237,8 @@
             android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewEmina"
             tools:ignore="MissingConstraints" />
@@ -247,7 +248,8 @@
             android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerEstat3"
             tools:ignore="MissingConstraints" />
@@ -257,7 +259,8 @@
             android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerEstat2"
             tools:ignore="MissingConstraints" />
@@ -267,7 +270,8 @@
             android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerEstat4"
             tools:ignore="MissingConstraints" />
@@ -277,7 +281,8 @@
             android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerEstat5"
             tools:ignore="MissingConstraints" />
@@ -287,7 +292,8 @@
             android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerEstat6"
             tools:ignore="MissingConstraints" />
@@ -297,7 +303,8 @@
             android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerEstat7"
             tools:ignore="MissingConstraints" />
@@ -307,7 +314,8 @@
             android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerEstat8"
             tools:ignore="MissingConstraints" />
@@ -317,9 +325,10 @@
             android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerEstat11"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerEstat9"
             tools:ignore="MissingConstraints" />
 
         <Spinner
@@ -327,9 +336,10 @@
             android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerEstat9"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerEstat10"
             tools:ignore="MissingConstraints" />
 
         <Spinner
@@ -337,7 +347,8 @@
             android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewEmina2"
             tools:ignore="MissingConstraints" />
@@ -347,7 +358,8 @@
             android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerEstat"
             tools:ignore="MissingConstraints" />
@@ -357,7 +369,8 @@
             android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerMovilitat"
             tools:ignore="MissingConstraints" />
@@ -367,7 +380,8 @@
             android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerIncontinencia"
             tools:ignore="MissingConstraints" />
@@ -377,7 +391,8 @@
             android:layout_width="190dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerNutricio"
             tools:ignore="MissingConstraints" />
@@ -439,13 +454,13 @@
             android:id="@+id/textView20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="38dp"
             android:text="@string/menjar"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat3"
-            app:layout_constraintHorizontal_bias="0.814"
+            app:layout_constraintHorizontal_bias="0.24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewEmina2" />
 
@@ -459,7 +474,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat2"
-            app:layout_constraintHorizontal_bias="0.594"
+            app:layout_constraintHorizontal_bias="0.449"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
@@ -473,7 +488,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat4"
-            app:layout_constraintHorizontal_bias="0.762"
+            app:layout_constraintHorizontal_bias="0.235"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
@@ -487,7 +502,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat5"
-            app:layout_constraintHorizontal_bias="0.731"
+            app:layout_constraintHorizontal_bias="0.263"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
@@ -501,7 +516,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat6"
-            app:layout_constraintHorizontal_bias="0.751"
+            app:layout_constraintHorizontal_bias="0.243"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
@@ -515,7 +530,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat7"
-            app:layout_constraintHorizontal_bias="0.777"
+            app:layout_constraintHorizontal_bias="0.21"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
@@ -529,7 +544,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat8"
-            app:layout_constraintHorizontal_bias="0.632"
+            app:layout_constraintHorizontal_bias="0.322"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView25" />
 
@@ -543,7 +558,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat9"
-            app:layout_constraintHorizontal_bias="0.641"
+            app:layout_constraintHorizontal_bias="0.299"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
@@ -557,13 +572,13 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat11"
-            app:layout_constraintHorizontal_bias="0.635"
+            app:layout_constraintHorizontal_bias="0.287"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView28" />
 
         <TextView
             android:id="@+id/textView30"
-            android:layout_width="135dp"
+            android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:layout_marginTop="32dp"
             android:text="@string/pujar_baixar_escales"
@@ -571,7 +586,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/spinnerEstat10"
-            app:layout_constraintHorizontal_bias="0.409"
+            app:layout_constraintHorizontal_bias="0.37"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
@@ -601,6 +616,8 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"
+            android:backgroundTint="#757575"
+            android:textAlignment="center"
             android:hint="@string/regio_de_la_ferida"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -614,6 +631,8 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"
+            android:backgroundTint="#757575"
+            android:textAlignment="center"
             android:hint="@string/tractamentInput"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
